@@ -16,5 +16,7 @@ module.exports = {
     "no-param-reassign": 0,// for redux
     "no-shadow": 0,
     "arrow-body-style": ["error", "as-needed"],
+    // for next.js
+    "react/react-in-jsx-scope": 0,
   },
 };
