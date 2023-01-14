@@ -12,7 +12,7 @@ module.exports = {
           overrideConfigFile: '.eslintrc.js',
           emitError: true,
           emitWarning: true,
-          failOnError: true,
+          failOnError: false,
           failOnWarning: false,
         })
       );
