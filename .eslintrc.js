@@ -1,24 +1,9 @@
 module.exports = {
-  env: {
-    browser: true,
-    es2021: true,
-  },
   extends: [
     'next',
     'plugin:react/recommended',
     'airbnb',
     "plugin:prettier/recommended"
-  ],
-  parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-  },
-  plugins: [
-    'react',
-    'prettier',
   ],
   rules: {
     "no-console": [1, { allow: ["warn", "error"] }],
