@@ -6,7 +6,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "prod": "next build && next export",
     "lint": "next lint",
     "fix": "next lint --fix"
   },
