@@ -18,5 +18,6 @@ module.exports = {
     "arrow-body-style": ["error", "as-needed"],
     // for next.js
     "react/react-in-jsx-scope": 0,
+    "@next/next/no-img-element": 0,
   },
 };
