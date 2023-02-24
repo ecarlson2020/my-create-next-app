@@ -7,7 +7,7 @@ module.exports = {
     if (!isServer) {
       config.plugins.push(
         new ESLintPlugin({
-          files: 'pages/**/*.(js|jsx|ts|tsx)',
+          files: 'src/**/*.(js|jsx|ts|tsx)',
           extensions: ['.js', '.jsx', '.ts', '.tsx'],
           overrideConfigFile: '.eslintrc.js',
           emitError: true,
@@ -18,6 +18,6 @@ module.exports = {
       );
     }
     // Important: return the modified config
-    return config
+    return config;
   },
 }

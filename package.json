@@ -5,10 +5,12 @@
     "react-dom": "^18.2.0"
   },
   "scripts": {
-    "dev": "next dev",
-    "prod": "next build && next export",
+    "dev": "npm i;next dev",
+    "build": "npm i;next build && next export",
     "lint": "next lint",
-    "fix": "next lint --fix"
+    "fix": "next lint --fix",
+     "up": "npm run build;qscp -u out",
+     "down": "website_location='/home/ecarlson10/webapps/test1.evrocamedia'; rm -rf $website_location; mv ~/out $website_location;"
   },
   "devDependencies": {
     "eslint": "8.34.0",
@@ -17,6 +19,7 @@
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-webpack-plugin": "^4.0.0",
-    "prettier": "^2.8.4"
+    "prettier": "^2.8.4",
+    "unimported": "^1.24.0"
   }
 }
