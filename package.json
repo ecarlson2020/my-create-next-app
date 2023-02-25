@@ -5,11 +5,11 @@
     "react-dom": "^18.2.0"
   },
   "scripts": {
-    "dev": "npm i;next dev",
-    "build": "npm i;next build && next export",
+    "dev": "yarn;next dev",
+    "build": "yarn;next build && next export",
     "lint": "next lint",
     "fix": "next lint --fix",
-     "up": "npm run build;qscp -u out",
+     "up": "yarn build;qscp -u out",
      "down": "website_location='/home/ecarlson10/webapps/test1.evrocamedia'; rm -rf $website_location; mv ~/out $website_location;"
   },
   "devDependencies": {
