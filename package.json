@@ -9,8 +9,8 @@
     "build": "yarn;next build && next export",
     "lint": "next lint",
     "fix": "next lint --fix",
-     "up": "yarn build;qscp -u out",
-     "down": "website_location='/home/ecarlson10/webapps/test1.evrocamedia'; rm -rf $website_location; mv ~/out $website_location;"
+    "up": "yarn build;qscp -u out",
+    "down": "website_location='/home/ecarlson10/webapps/test1.evrocamedia'; rm -rf $website_location; mv ~/out $website_location;"
   },
   "devDependencies": {
     "eslint": "8.34.0",
