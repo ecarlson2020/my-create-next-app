@@ -1,7 +1,5 @@
 module.exports = {
   extends: [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
     "next",
     "plugin:react/recommended",
     "airbnb",
@@ -10,7 +8,6 @@ module.exports = {
   rules: {
     "no-console": [1, { allow: ["warn", "error"] }],
     "no-unused-vars": 1,
-    "react/prop-types": 1,
     "prettier/prettier": 1,
     "react/jsx-filename-extension": 0,
     "react/jsx-props-no-spreading": 0,
