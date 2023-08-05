@@ -13,6 +13,7 @@
     "down": "website_location='/home/ecarlson10/webapps/test1.evrocamedia'; rm -rf $website_location; mv ~/out $website_location;"
   },
   "devDependencies": {
+    "@types/react": "18.2.18",
     "eslint": "8.39.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-next": "13.3.1",
@@ -20,6 +21,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-webpack-plugin": "^4.0.0",
     "prettier": "^2.8.4",
+    "typescript": "^5.1.6",
     "unimported": "^1.24.0"
   }
 }
