@@ -1,7 +1,12 @@
+# node
 node_modules/
+
+# next
 .next/
+next-env.d.ts
 out/
 
+# yarn
 yarn-error.log
 
 # ts
