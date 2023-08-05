@@ -1,9 +1,11 @@
 module.exports = {
   extends: [
-    'next',
-    'plugin:react/recommended',
-    'airbnb',
-    "plugin:prettier/recommended"
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "next",
+    "plugin:react/recommended",
+    "airbnb",
+    "plugin:prettier/recommended",
   ],
   rules: {
     "no-console": [1, { allow: ["warn", "error"] }],
@@ -13,11 +15,24 @@ module.exports = {
     "react/jsx-filename-extension": 0,
     "react/jsx-props-no-spreading": 0,
     "react/no-array-index-key": 0,
-    "no-param-reassign": 0,// for redux
+    "no-param-reassign": 0, // for redux
     "no-shadow": 0,
     "arrow-body-style": ["error", "as-needed"],
     // for next.js
     "react/react-in-jsx-scope": 0,
     "@next/next/no-img-element": 0,
   },
+  settings: {
+    react: {
+      version: "detect",
+    },
+    "import/resolver": {
+      node: {
+        extensions: [".ts", ".tsx"],
+      },
+    },
+  },
+  parser: "@typescript-eslint/parser",
+  plugins: ["@typescript-eslint"],
+  root: true,
 };
