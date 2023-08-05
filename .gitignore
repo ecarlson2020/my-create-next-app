@@ -3,3 +3,6 @@ node_modules/
 out/
 
 yarn-error.log
+
+# ts
+tsconfig.tsbuildinfo

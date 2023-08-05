@@ -5,7 +5,7 @@
     "react-dom": "^18.2.0"
   },
   "scripts": {
-    "dev": "yarn;next dev -p 5001",
+    "dev": "yarn;next dev -p 5001 & yarn tsc --watch && fg",
     "build": "yarn;next build && next export",
     "lint": "next lint",
     "fix": "next lint --fix",
