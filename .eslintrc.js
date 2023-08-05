@@ -21,16 +21,15 @@ module.exports = {
     // for next.js
     "react/react-in-jsx-scope": 0,
     "@next/next/no-img-element": 0,
-  },
-  settings: {
-    react: {
-      version: "detect",
-    },
-    "import/resolver": {
-      node: {
-        extensions: [".ts", ".tsx"],
+    // ts
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        ts: "never",
+        tsx: "never",
       },
-    },
+    ],
   },
   parser: "@typescript-eslint/parser",
   plugins: ["@typescript-eslint"],
