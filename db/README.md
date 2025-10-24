@@ -17,8 +17,7 @@ db/
 
 ## Prerequisites
 
-- Docker installed and running
-- Docker Compose installed
+- Install Docker GUI
 
 ## Quick Start
 
