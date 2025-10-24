@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_dev
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: app_db
+      MYSQL_USER: app_user
+      MYSQL_PASSWORD: app_password
+    ports:
+      - "3306:3306"
+    volumes:
+      # Persist MySQL data
+      - mysql_data:/var/lib/mysql
+      # Mount initialization scripts
+      - ./db/init:/docker-entrypoint-initdb.d
+      # Mount migrations for manual execution
+      - ./db/migrations:/migrations
+    command: --default-authentication-plugin=mysql_native_password
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot_password"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - app_network
+
+  # Optional: phpMyAdmin for database management
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: phpmyadmin_dev
+    restart: unless-stopped
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: root
+      PMA_PASSWORD: root_password
+      UPLOAD_LIMIT: 100M
+    ports:
+      - "8080:80"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - app_network
+
+volumes:
+  mysql_data:
+    driver: local
+
+networks:
+  app_network:
+    driver: bridge
