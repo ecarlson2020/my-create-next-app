@@ -12,12 +12,6 @@ export const webUrl =
     ? `https://${productionDomain}.com`
     : `https://${testDomain}.com`;
 
-/**
- * Execute a SQL query
- * @param {string} query - SQL query string
- * @param {any[]} [fields] - Query parameters
- * @returns {Promise<any>} Query results
- */
 export const sql = async (query, fields) => {
   const connection = await mysql.createConnection({
     host: "localhost",
