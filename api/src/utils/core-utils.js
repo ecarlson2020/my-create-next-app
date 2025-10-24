@@ -2,15 +2,19 @@ import fs from "fs";
 import mysql from "mysql2/promise";
 import process from "process";
 
-const dbPassword = fs.readFileSync("/home/ecarlson10/pw/0", "utf8").trim();
-export const productionDomain = "listacart"
-export const testDomain ="test4.evrocamedia" 
+const stagingDomain = "test2.evrocamedia";
+const prodPort = 5006;
+const devPort = 5003;
+const isProd = process.env.NODE_ENV === "production";
+const dbPassword = isProd ? fs.readFileSync("/home/ecarlson10/pw/0", "utf8").trim() : "123";
+const productionDomain = "listacart";
 
-export const isProd = process.env.NODE_ENV === "production";
-export const webUrl =
+export const PORT = isProd ? prodPort : devPort;
+export const DOMAIN = isProd ? productionDomain : stagingDomain;
+export const WEB_URL =
   process.env.NODE_ENV === "production"
     ? `https://${productionDomain}.com`
-    : `https://${testDomain}.com`;
+    : `https://${stagingDomain}.com`;
 
 export const sql = async (query, fields) => {
   const connection = await mysql.createConnection({
