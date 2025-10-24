@@ -1,0 +1,4 @@
+- TODO
+  - test axios connection on frontend
+  - test if we can close docker and open it and still have the existing db
+  - merge branch
