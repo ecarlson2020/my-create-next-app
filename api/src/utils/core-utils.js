@@ -17,10 +17,9 @@ export const WEB_URL =
     ? `https://${productionDomain}.com`
     : `https://${stagingDomain}.com`;
 
-const dbPassword =
-  IS_PROD || IS_STAGING
-    ? fs.readFileSync("/home/ecarlson10/pw/0", "utf8").trim()
-    : "app_password";
+const dbPassword = IS_DEV
+  ? "app_password"
+  : fs.readFileSync("/home/ecarlson10/pw/0", "utf8").trim();
 
 // Database connection pool
 let pool = null;

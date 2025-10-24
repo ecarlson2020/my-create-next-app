@@ -4,7 +4,10 @@ import { sql } from "../utils/core-utils.js";
 export const testRoute = async (req, res) => {
   try {
     // Test query to get all users from the database
-    const rows = await sql(`SELECT id, email, username, first_name, last_name, created_at FROM users`, []);
+    const rows = await sql(
+      `SELECT id, email, username, first_name, last_name, created_at FROM users`,
+      [],
+    );
 
     res.status(200).json({
       success: true,
