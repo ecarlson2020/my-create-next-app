@@ -6,7 +6,11 @@ const stagingDomain = "test2.evrocamedia";
 const prodPort = 5006;
 const devPort = 5003;
 const isProd = process.env.NODE_ENV === "production";
-const dbPassword = isProd ? fs.readFileSync("/home/ecarlson10/pw/0", "utf8").trim() : "123";
+const isStaging = process.env.NODE_ENV === "staging";
+const dbPassword =
+  isProd || isStaging
+    ? fs.readFileSync("/home/ecarlson10/pw/0", "utf8").trim()
+    : "123";
 const productionDomain = "listacart";
 
 export const PORT = isProd ? prodPort : devPort;
