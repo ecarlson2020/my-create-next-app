@@ -1,9 +1,11 @@
+import http from "http";
 import https from "https";
 import express from "express";
 import fs from "fs";
 import cors from "cors";
+
 // utils
-import { DOMAIN, PORT } from "./utils/core-utils.js";
+import { DOMAIN, IS_DEV, PORT, initDB } from "./utils/core-utils.js";
 // end points
 import { testRoute } from "./routes/test.js";
 
@@ -15,23 +17,8 @@ import { testRoute } from "./routes/test.js";
 
 const app = express();
 
-const privateKeyPath = `/home/ecarlson10/cert/${DOMAIN}-key.pem`;
-const getCredentials = () => {
-  const privateKey = fs.readFileSync(privateKeyPath, "utf8");
-  const certificate = fs.readFileSync(
-    `/home/ecarlson10/cert/${DOMAIN}-cert.pem`,
-    "utf8",
-  );
-  const fullchain = fs.readFileSync(
-    `/home/ecarlson10/cert/${DOMAIN}-fullchain.pem`,
-    "utf8",
-  );
-  return {
-    key: privateKey,
-    cert: certificate,
-    ca: fullchain,
-  };
-};
+// Initialize database connection pool
+initDB();
 
 app.use(express.json());
 app.use(cors());
@@ -39,17 +26,46 @@ app.use(cors());
 // protected endpoints
 app.get("/test/list", testRoute);
 
-const httpsServer = https.createServer(getCredentials(), app);
 const port = PORT;
-httpsServer.listen(port, () => {
-  // eslint-disable-next-line no-console
-  console.log(`Listening on port ${port}`);
-});
 
-fs.watchFile(privateKeyPath, () => {
-  try {
-    httpsServer.setSecureContext(getCredentials());
-  } catch (e) {
-    console.error(e);
-  }
-});
+if (IS_DEV) {
+  // Use HTTP for local development
+  const httpServer = http.createServer(app);
+  httpServer.listen(port, () => {
+    // eslint-disable-next-line no-console
+    console.log(`HTTP server listening on port ${port}`);
+  });
+} else {
+  // Use HTTPS for production/staging
+  const privateKeyPath = `/home/ecarlson10/cert/${DOMAIN}-key.pem`;
+  const getCredentials = () => {
+    const privateKey = fs.readFileSync(privateKeyPath, "utf8");
+    const certificate = fs.readFileSync(
+      `/home/ecarlson10/cert/${DOMAIN}-cert.pem`,
+      "utf8",
+    );
+    const fullchain = fs.readFileSync(
+      `/home/ecarlson10/cert/${DOMAIN}-fullchain.pem`,
+      "utf8",
+    );
+    return {
+      key: privateKey,
+      cert: certificate,
+      ca: fullchain,
+    };
+  };
+
+  const httpsServer = https.createServer(getCredentials(), app);
+  httpsServer.listen(port, () => {
+    // eslint-disable-next-line no-console
+    console.log(`HTTPS server listening on port ${port}`);
+  });
+
+  fs.watchFile(privateKeyPath, () => {
+    try {
+      httpsServer.setSecureContext(getCredentials());
+    } catch (e) {
+      console.error(e);
+    }
+  });
+}

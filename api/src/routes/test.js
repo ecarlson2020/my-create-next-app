@@ -3,11 +3,19 @@ import { sql } from "../utils/core-utils.js";
 
 export const testRoute = async (req, res) => {
   try {
-    const id = 5;
-    const rows = await sql(`select * from some_table where id = ?`, [id]);
+    // Test query to get all users from the database
+    const rows = await sql(`SELECT id, email, username, first_name, last_name, created_at FROM users`, []);
 
-    res.status(200).json(rows);
+    res.status(200).json({
+      success: true,
+      count: rows.length,
+      data: rows,
+    });
   } catch (e) {
-    res.status(500).send(e);
+    console.error("Test route error:", e);
+    res.status(500).json({
+      success: false,
+      error: e.message,
+    });
   }
 };
