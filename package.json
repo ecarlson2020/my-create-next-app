@@ -6,11 +6,13 @@
   },
   "scripts": {
     "dev": "yarn;next dev -p 5001 & yarn tsc --watch && fg",
-    "build": "yarn;next build && next export",
-    "lint": "next lint",
-    "fix": "next lint --fix",
-    "up": "yarn build;qscp -u out",
-    "down": "website_location='/home/ecarlson10/webapps/test1.evrocamedia'; rm -rf $website_location; mv ~/out $website_location;"
+    "build": "yarn && yarn pretty && yarn lint && next build",
+    "lint": "next lint --max-warnings 0",
+    "fix": "next lint --fix && yarn pretty-fix",
+    "pretty": "prettier --check \"**/*.{js,jsx,ts,tsx}\"",
+    "pretty-fix": "prettier --write \"**/*.{js,jsx,ts,tsx}\"",
+    "up": "yarn build && qscp -u out",
+    "down": "website_location='/home/ecarlson10/webapps/test2.evrocamedia' && rm -rf $website_location && mv ~/out $website_location"
   },
   "devDependencies": {
     "@types/react": "19.2.2",
