@@ -1,0 +1,35 @@
+export default [
+  {
+    files: ["**/*.js"],
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: "module",
+      globals: {
+        console: "readonly",
+        process: "readonly",
+        Buffer: "readonly",
+        setTimeout: "readonly",
+        clearTimeout: "readonly",
+        setInterval: "readonly",
+        clearInterval: "readonly",
+      },
+    },
+    rules: {
+      "no-console": ["warn", { allow: ["warn", "error"] }],
+      "no-unused-vars": "error",
+      "no-undef": "error",
+      semi: ["error", "always"],
+      indent: ["error", 2],
+      "comma-dangle": ["error", "always-multiline"],
+      "no-trailing-spaces": "error",
+      "eol-last": ["error", "always"],
+      "no-multiple-empty-lines": ["error", { max: 1, maxEOF: 0 }],
+      "object-curly-spacing": ["error", "always"],
+      "arrow-spacing": "error",
+      "keyword-spacing": "error",
+      "space-before-blocks": "error",
+      "no-var": "error",
+      "prefer-const": "error",
+    },
+  },
+];

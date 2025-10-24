@@ -1,0 +1,21 @@
+{
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "nodemon ./src/server.js",
+    "prod": "npm i; NODE_ENV=production node ./src/server.js",
+    "kill": "fuser -k 5006/tcp",
+    "lint": "npx eslint --fix ./src"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "multer": "^2.0.2",
+    "mysql2": "^3.7.0",
+    "nodemailer": "^6.9.8"
+  },
+  "devDependencies": {
+    "eslint": "^9.37.0",
+    "nodemon": "^3.0.3"
+  }
+}
