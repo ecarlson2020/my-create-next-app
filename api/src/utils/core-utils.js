@@ -3,8 +3,8 @@ import mysql from "mysql2/promise";
 import process from "process";
 
 const dbPassword = fs.readFileSync("/home/ecarlson10/pw/0", "utf8").trim();
-const productionDomain = "listacart"
-const testDomain ="test4.evrocamedia" 
+export const productionDomain = "listacart"
+export const testDomain ="test4.evrocamedia" 
 
 export const isProd = process.env.NODE_ENV === "production";
 export const webUrl =
