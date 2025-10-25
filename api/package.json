@@ -3,6 +3,7 @@
   "main": "src/server.js",
   "scripts": {
     "dev": "nodemon ./src/server.js",
+    "staging": "NODE_ENV=staging nodemon ./src/server.js",
     "prod": "npm i; NODE_ENV=production node ./src/server.js",
     "kill": "fuser -k 5006/tcp",
     "lint": "npx eslint --fix ./src"
