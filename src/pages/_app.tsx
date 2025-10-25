@@ -1,7 +1,7 @@
+import type { AppProps } from "next/app";
 // styles
-// import "../style.css";
+import "../style.css";
 
-// eslint-disable-next-line
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps }: AppProps) {
   return <Component {...pageProps} />;
 }
