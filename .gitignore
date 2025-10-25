@@ -11,3 +11,10 @@ yarn-error.log
 
 # ts
 tsconfig.tsbuildinfo
+
+# environment variables
+.env
+.env.local
+
+# docker
+docker-compose.override.yml
