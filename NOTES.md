@@ -1,4 +1,5 @@
 - TODO
-  - test axios connection on frontend
+  - [x] test fetch connection on frontend
   - test if we can close docker and open it and still have the existing db
+  - test staging environment
   - merge branch
