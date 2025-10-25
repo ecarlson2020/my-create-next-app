@@ -26,14 +26,12 @@ app.use(cors());
 // protected endpoints
 app.get("/test/list", testRoute);
 
-const port = PORT;
-
 if (IS_DEV) {
   // Use HTTP for local development
   const httpServer = http.createServer(app);
-  httpServer.listen(port, () => {
+  httpServer.listen(PORT, () => {
     // eslint-disable-next-line no-console
-    console.log(`HTTP server listening on port ${port}`);
+    console.log(`HTTP server listening on port ${PORT}`);
   });
 } else {
   // Use HTTPS for production/staging
@@ -56,9 +54,9 @@ if (IS_DEV) {
   };
 
   const httpsServer = https.createServer(getCredentials(), app);
-  httpsServer.listen(port, () => {
+  httpsServer.listen(PORT, () => {
     // eslint-disable-next-line no-console
-    console.log(`HTTPS server listening on port ${port}`);
+    console.log(`HTTPS server listening on port ${PORT}`);
   });
 
   fs.watchFile(privateKeyPath, () => {

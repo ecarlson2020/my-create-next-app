@@ -12,7 +12,7 @@
     "pretty": "prettier --check \"**/*.{js,jsx,ts,tsx}\"",
     "pretty-fix": "prettier --write \"**/*.{js,jsx,ts,tsx}\"",
     "up-staging": "yarn build-staging && qscp -u out",
-    "up-prod": "yarn build-staging && qscp -u out",
+    "up-prod": "yarn build-prod && qscp -u out",
     "down": "website_location='/home/ecarlson10/webapps/test2.evrocamedia' && rm -rf $website_location && mv ~/out $website_location",
     "ui": "yarn && next dev -p 5001 & yarn tsc --watch && fg",
     "api": "cd api && npm i && npm run dev",
