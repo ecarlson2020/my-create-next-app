@@ -11,7 +11,7 @@ import { testRoute } from "./routes/test.js";
 
 /**
  *
- * IMPORTANT: dont forget to enable port forwarding on the router
+ * IMPORTANT: don't forget to enable port forwarding on the router
  *
  */
 
