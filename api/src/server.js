@@ -23,7 +23,7 @@ initDB();
 app.use(express.json());
 app.use(cors());
 
-// protected endpoints
+// endpoints
 app.get("/test/list", testRoute);
 
 if (IS_DEV) {
