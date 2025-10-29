@@ -5,8 +5,9 @@
     "dev": "nodemon ./src/server.js",
     "staging": "NODE_ENV=staging nodemon ./src/server.js",
     "prod": "npm i; NODE_ENV=production node ./src/server.js",
-    "kill": "fuser -k 5006/tcp",
-    "lint": "npx eslint --fix ./src"
+    "kill": "fuser -k 500/tcp",
+    "lint": "npx eslint --fix ./src",
+    "test": "node ./src/test-server.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
