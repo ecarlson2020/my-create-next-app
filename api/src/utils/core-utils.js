@@ -31,24 +31,24 @@ export const initDB = () => {
 
   const dbConfig = IS_DEV
     ? {
-      host: "localhost",
-      port: 3306,
-      user: "app_user",
-      database: "app_db",
-      password: "app_password",
-      waitForConnections: true,
-      connectionLimit: 10,
-      queueLimit: 0,
-    }
+        host: "localhost",
+        port: 3306,
+        user: "app_user",
+        database: "app_db",
+        password: "app_password",
+        waitForConnections: true,
+        connectionLimit: 10,
+        queueLimit: 0,
+      }
     : {
-      host: "localhost",
-      user: "evroca_user",
-      database: `evroca_db${IS_PROD ? "" : "_test"}`,
-      password: dbPassword,
-      waitForConnections: true,
-      connectionLimit: 10,
-      queueLimit: 0,
-    };
+        host: "localhost",
+        user: "evroca_user",
+        database: `evroca_db${IS_PROD ? "" : "_test"}`,
+        password: dbPassword,
+        waitForConnections: true,
+        connectionLimit: 10,
+        queueLimit: 0,
+      };
 
   pool = mysql.createPool(dbConfig);
 
@@ -56,7 +56,6 @@ export const initDB = () => {
   pool
     .getConnection()
     .then((connection) => {
-      // eslint-disable-next-line no-console
       console.log("Database connected successfully");
       connection.release();
     })

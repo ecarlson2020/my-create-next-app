@@ -30,7 +30,6 @@ if (IS_DEV) {
   // Use HTTP for local development
   const httpServer = http.createServer(app);
   httpServer.listen(PORT, () => {
-    // eslint-disable-next-line no-console
     console.log(`HTTP server listening on port ${PORT}`);
   });
 } else {
@@ -55,7 +54,6 @@ if (IS_DEV) {
 
   const httpsServer = https.createServer(getCredentials(), app);
   httpsServer.listen(PORT, () => {
-    // eslint-disable-next-line no-console
     console.log(`HTTPS server listening on port ${PORT}`);
   });
 
