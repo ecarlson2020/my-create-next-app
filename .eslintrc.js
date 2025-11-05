@@ -10,7 +10,7 @@ module.exports = {
       "error",
       { max: 300, skipBlankLines: false, skipComments: false },
     ],
-    "no-console": [1, { allow: ["warn", "error"] }],
+    "no-console": ["error", { allow: ["warn", "error"] }],
     "no-nested-ternary": 0,
     "prettier/prettier": 1,
     "import/prefer-default-export": 0,
