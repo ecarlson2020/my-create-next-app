@@ -8,7 +8,7 @@
     "build-staging": "NODE_ENV=staging yarn && yarn pretty && yarn lint && next build",
     "build-prod": "NODE_ENV=production yarn && yarn pretty && yarn lint && next build",
     "lint": "next lint --max-warnings 0",
-    "fix": "next lint --fix && yarn pretty-fix && yarn tsc && cd api && npm run lint && npm run test",
+    "fix": "yarn pretty-fix && next lint --fix && yarn tsc && cd api && npm run lint && npm run test",
     "pretty": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\" \"api/src/**/*.{js,jsx,ts,tsx}\" \"*.{js,jsx,ts,tsx}\"",
     "pretty-fix": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\" \"api/src/**/*.{js,jsx,ts,tsx}\" \"*.{js,jsx,ts,tsx}\"",
     "up-staging": "yarn build-staging && qscp -u out",
