@@ -1,7 +1,11 @@
+import tsPlugin from "@typescript-eslint/eslint-plugin";
+import tsParser from "@typescript-eslint/parser";
+
 export default [
   {
-    files: ["**/*.js"],
+    files: ["**/*.ts", "**/*.js"],
     languageOptions: {
+      parser: tsParser,
       ecmaVersion: 2022,
       sourceType: "module",
       globals: {
@@ -14,12 +18,19 @@ export default [
         clearInterval: "readonly",
       },
     },
+    plugins: {
+      "@typescript-eslint": tsPlugin,
+    },
     rules: {
       "no-console": ["error", { allow: ["warn", "error"] }],
-      "no-unused-vars": "error",
-      "no-undef": "error",
+      "no-unused-vars": "off",
+      "no-undef": "off",
       "no-var": "error",
       "prefer-const": "error",
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        { argsIgnorePattern: "^_" },
+      ],
     },
   },
 ];

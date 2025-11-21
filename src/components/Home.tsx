@@ -1,9 +1,5 @@
+import { NODE_ENV } from "@shared/constants/sharedTypes";
 import { useEffect } from "react";
-
-const NODE_ENV = process.env.NODE_ENV as
-  | "development"
-  | "production"
-  | "staging";
 
 const BACKEND_URL =
   NODE_ENV === "development"

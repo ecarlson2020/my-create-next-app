@@ -12,7 +12,10 @@ interface User extends RowDataPacket {
   created_at: Date;
 }
 
-export const testRoute = async (_req: Request, res: Response): Promise<void> => {
+export const testRoute = async (
+  _req: Request,
+  res: Response,
+): Promise<void> => {
   try {
     // Test query to get all users from the database
     const rows = await sql<User>(
