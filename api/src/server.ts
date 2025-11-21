@@ -5,9 +5,9 @@ import fs from "fs";
 import cors from "cors";
 
 // utils
-import { DOMAIN, IS_DEV, PORT, initDB } from "./utils/core-utils.js";
+import { DOMAIN, IS_DEV, PORT, initDB } from "./utils/coreUtils";
 // end points
-import { testRoute } from "./routes/test.js";
+import { testRoute } from "./routes/test";
 
 /**
  *
@@ -30,12 +30,13 @@ if (IS_DEV) {
   // Use HTTP for local development
   const httpServer = http.createServer(app);
   httpServer.listen(PORT, () => {
+    // eslint-disable-next-line no-console
     console.log(`HTTP server listening on port ${PORT}`);
   });
 } else {
   // Use HTTPS for production/staging
   const privateKeyPath = `/home/ecarlson10/cert/${DOMAIN}-key.pem`;
-  const getCredentials = () => {
+  const getCredentials = (): https.ServerOptions => {
     const privateKey = fs.readFileSync(privateKeyPath, "utf8");
     const certificate = fs.readFileSync(
       `/home/ecarlson10/cert/${DOMAIN}-cert.pem`,
@@ -54,6 +55,7 @@ if (IS_DEV) {
 
   const httpsServer = https.createServer(getCredentials(), app);
   httpsServer.listen(PORT, () => {
+    // eslint-disable-next-line no-console
     console.log(`HTTPS server listening on port ${PORT}`);
   });
 

@@ -1,5 +1,5 @@
 import fs from "fs";
-import mysql from "mysql2/promise";
+import mysql, { Pool, RowDataPacket } from "mysql2/promise";
 import process from "process";
 
 const stagingDomain = "test2.evrocamedia";
@@ -22,9 +22,9 @@ const dbPassword = IS_DEV
   : fs.readFileSync("/home/ecarlson10/pw/0", "utf8").trim();
 
 // Database connection pool
-let pool = null;
+let pool: Pool | null = null;
 
-export const initDB = () => {
+export const initDB = (): Pool => {
   if (pool) {
     return pool;
   }
@@ -34,7 +34,7 @@ export const initDB = () => {
         host: "localhost",
         port: 3306,
         user: "app_user",
-        database: "app_db",
+        database: "evroca_db_dev",
         password: "app_password",
         waitForConnections: true,
         connectionLimit: 10,
@@ -56,6 +56,7 @@ export const initDB = () => {
   pool
     .getConnection()
     .then((connection) => {
+      // eslint-disable-next-line no-console
       console.log("Database connected successfully");
       connection.release();
     })
@@ -66,10 +67,13 @@ export const initDB = () => {
   return pool;
 };
 
-export const sql = async (query, fields) => {
+export const sql = async <T extends RowDataPacket>(
+  query: string,
+  fields?: unknown[],
+): Promise<T[]> => {
   if (!pool) {
     initDB();
   }
-  const [rows] = await pool.execute(query, fields);
+  const [rows] = await pool!.execute<T[]>(query, fields);
   return rows;
 };

@@ -1,13 +1,14 @@
 {
   "type": "module",
-  "main": "src/server.js",
+  "main": "dist/server.js",
   "scripts": {
-    "dev": "nodemon ./src/server.js",
-    "staging": "NODE_ENV=staging nodemon ./src/server.js",
-    "prod": "npm i; NODE_ENV=production node ./src/server.js",
+    "dev": "tsx watch ./src/server.ts",
+    "staging": "NODE_ENV=staging tsx watch ./src/server.ts",
+    "prod": "npm i; NODE_ENV=production node ./dist/server.js",
+    "build": "tsc",
     "kill": "fuser -k 500/tcp",
     "lint": "npx eslint --fix ./src",
-    "test": "node ./src/test-server.js"
+    "test": "tsx ./src/testServer.ts"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -17,7 +18,13 @@
     "nodemailer": "^6.9.8"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.5",
+    "@types/node": "^24.10.1",
+    "@types/nodemailer": "^7.0.4",
     "eslint": "^9.37.0",
-    "nodemon": "^3.0.3"
+    "nodemon": "^3.0.3",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
   }
 }

@@ -54,7 +54,7 @@ docker exec -it mysql_dev mysql -u root -p
 
 ### Run a specific migration
 ```bash
-docker exec -i mysql_dev mysql -u root -proot_password app_db < db/migrations/001_create_users_table.sql
+docker exec -i mysql_dev mysql -u root -proot_password evroca_db_dev < db/migrations/001_create_users_table.sql
 ```
 
 ## phpMyAdmin (Optional)

@@ -11,6 +11,10 @@ yarn-error.log
 
 # ts
 tsconfig.tsbuildinfo
+dist/
+*.d.ts
+*.d.ts.map
+*.js.map
 
 # environment variables
 .env
