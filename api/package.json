@@ -1,7 +1,7 @@
 {
   "main": "dist/server.js",
   "scripts": {
-    "dev": "tsx watch ./src/server.ts",
+    "dev": "NODE_ENV=development tsx watch ./src/server.ts",
     "staging": "NODE_ENV=staging tsx watch ./src/server.ts",
     "prod": "npm i; NODE_ENV=production node ./dist/server.js",
     "build": "tsc",
