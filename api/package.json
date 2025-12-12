@@ -1,13 +1,15 @@
 {
-  "main": "dist/server.js",
+  "main": "dist/api/src/server.js",
   "scripts": {
-    "dev": "NODE_ENV=development tsx watch ./src/server.ts",
-    "staging": "NODE_ENV=staging tsx watch ./src/server.ts",
-    "prod": "npm i; NODE_ENV=production node ./dist/server.js",
-    "build": "tsc",
-    "kill": "fuser -k 500/tcp",
-    "lint": "npx eslint --fix ./src",
-    "test": "tsx ./src/testServer.ts"
+    "dev": "./scripts.sh dev",
+    "staging-watch": "./scripts.sh staging-watch",
+    "staging": "./scripts.sh staging",
+    "prod": "./scripts.sh prod",
+    "build": "./scripts.sh build",
+    "kill-staging": "./scripts.sh kill-staging",
+    "kill-prod": "./scripts.sh kill-prod",
+    "lint": "./scripts.sh lint",
+    "test": "./scripts.sh test"
   },
   "dependencies": {
     "cors": "^2.8.5",
