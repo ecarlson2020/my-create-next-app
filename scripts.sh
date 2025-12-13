@@ -1,10 +1,7 @@
 #!/bin/bash
 set -e
 
-# TODO
-echo SET PRODUCTION_WEBSITE
-exit 1
-PRODUCTION_WEBSITE=foothillspicnics
+PRODUCTION_WEBSITE=test
 
 function lint {
   next lint --max-warnings 0

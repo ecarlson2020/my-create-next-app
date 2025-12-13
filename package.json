@@ -33,6 +33,7 @@
     "eslint-plugin-prettier": "^5.5.4",
     "eslint-webpack-plugin": "^5.0.2",
     "prettier": "^3.6.2",
+    "tsc-alias": "^1.8.16",
     "typescript": "^5.9.3",
     "unimported": "^1.31.1"
   }

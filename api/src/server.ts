@@ -5,9 +5,10 @@ import fs from "fs";
 import cors from "cors";
 
 // utils
-import { DOMAIN, IS_DEV, PORT, initDB } from "./utils/coreUtils";
+import { initDB } from "./utils/coreUtils";
 // end points
 import { testRoute } from "./routes/test";
+import { DOMAIN, IS_DEV, PORT } from "@shared/constants/sharedConstants";
 
 /**
  *

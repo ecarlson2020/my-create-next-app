@@ -1,21 +1,6 @@
-import { NODE_ENV } from "@shared/constants/sharedTypes";
+import { IS_DEV, IS_PROD } from "@shared/constants/sharedConstants";
 import fs from "fs";
 import mysql, { Pool, RowDataPacket } from "mysql2/promise";
-
-const stagingDomain = "test2.evrocamedia";
-const productionDomain = "listacart";
-const prodPort = 5006;
-const devPort = 5003;
-
-export const IS_PROD = NODE_ENV === "production";
-export const IS_STAGING = NODE_ENV === "staging";
-export const IS_DEV = !IS_PROD && !IS_STAGING;
-export const PORT = IS_PROD ? prodPort : devPort;
-export const DOMAIN = IS_PROD ? productionDomain : stagingDomain;
-export const WEB_URL =
-  NODE_ENV === "production"
-    ? `https://${productionDomain}.com`
-    : `https://${stagingDomain}.com`;
 
 const dbPassword = IS_DEV
   ? "app_password"
