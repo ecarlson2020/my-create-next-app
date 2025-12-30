@@ -1,7 +1,9 @@
 #!/bin/bash
 set -e
 
-PRODUCTION_WEBSITE=test
+echo This needs to be updated to the production website
+exit 1
+PRODUCTION_WEBSITE=something
 
 function lint {
   next lint --max-warnings 0
