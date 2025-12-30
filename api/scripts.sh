@@ -3,8 +3,7 @@ set -e
 
 echo This needs to be updated to the production website
 exit 1
-STAGING_PORT=5003
-PROD_PORT=5008
+PROD_PORT=5006
 
 function dev {
   MY_ENV=development tsx watch ./src/server.ts
@@ -30,7 +29,7 @@ function build {
 }
 
 function kill-staging {
-  fuser -k $STAGING_PORT/tcp
+  fuser -k 5003/tcp
 }
 
 function kill-prod {
