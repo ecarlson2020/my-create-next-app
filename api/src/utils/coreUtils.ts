@@ -16,7 +16,7 @@ export const initDB = (): Pool => {
 
   const dbConfig = IS_DEV
     ? {
-        host: "localhost",
+        host: "127.0.0.1",
         port: 3306,
         user: "app_user",
         database: "evroca_db_dev",
@@ -26,7 +26,7 @@ export const initDB = (): Pool => {
         queueLimit: 0,
       }
     : {
-        host: "localhost",
+        host: "127.0.0.1",
         user: "evroca_user",
         database: `evroca_db${IS_PROD ? "" : "_test"}`,
         password: dbPassword,
