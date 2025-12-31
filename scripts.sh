@@ -108,7 +108,7 @@ function grab-images-staging {
 }
 
 function grab-images-prod {
-  rsync -aE --delete /home/ecarlson10/webapps/foothillspicnics/images/ /home/ecarlson10/projects/$PRODUCTION_WEBSITE/react/public/images
+  rsync -aE --delete /home/ecarlson10/webapps/$PRODUCTION_WEBSITE/images/ /home/ecarlson10/projects/$PRODUCTION_WEBSITE/react/public/images
 }
 
 "$@"
