@@ -96,7 +96,9 @@ function down-staging {
 }
 
 function down-prod {
-  echo "make sure to run npm run grab-images-prod first then press ENTER"
+  echo "make sure to do the following, then press ENTER"
+  echo "1. npm run grab-images-prod"
+  echo "2. manually run db migrations"
   read
   website_location="/home/ecarlson10/webapps/$PRODUCTION_WEBSITE"
   rm -rf "$website_location"
