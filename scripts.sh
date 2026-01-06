@@ -99,6 +99,8 @@ function down-prod {
   echo "make sure to do the following, then press ENTER"
   echo "1. npm run grab-images-prod"
   echo "2. manually run db migrations"
+  echo "3. In the api: npm run kill-prod"
+  echo "4. In the api: npm run prod &"
   read
   website_location="/home/ecarlson10/webapps/$PRODUCTION_WEBSITE"
   rm -rf "$website_location"
