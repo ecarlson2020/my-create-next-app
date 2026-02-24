@@ -1,8 +1,6 @@
 #!/bin/bash
 set -e
 
-echo This needs to be updated to the production website
-exit 1
 PRODUCTION_WEBSITE=something
 
 function lint {
@@ -10,12 +8,11 @@ function lint {
 }
 
 function fix {
-  yarn pretty-fix
+  npm run pretty-fix
   next lint --fix
-  yarn tsc
+  npx tsc
   npx unimported
   cd api
-  yarn tsc
   npm run lint
   npm run test
   npm run build
@@ -30,7 +27,7 @@ function pretty-fix {
 }
 
 function ui {
-  yarn
+  npm i
   MY_ENV=development next dev -p 5001
 }
 
@@ -65,25 +62,25 @@ EOSQL
 
 function build-staging {
   yarn
-  yarn pretty
-  yarn lint
+  npm run pretty
+  npm run lint
   MY_ENV=staging next build
 }
 
 function build-prod {
   yarn
-  yarn pretty
-  yarn lint
+  npm run pretty
+  npm run lint
   MY_ENV=production next build
 }
 
 function up-staging {
-  yarn build-staging
+  npm run build-staging
   qscp -u out
 }
 
 function up-prod {
-  yarn build-prod
+  npm run build-prod
   qscp -u out
 }
 

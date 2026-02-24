@@ -1,10 +1,5 @@
 module.exports = {
-  extends: [
-    "next",
-    "plugin:react/recommended",
-    "airbnb",
-    "plugin:prettier/recommended",
-  ],
+  extends: ["next", "plugin:react/recommended", "plugin:prettier/recommended"],
   rules: {
     "max-lines": [
       "error",

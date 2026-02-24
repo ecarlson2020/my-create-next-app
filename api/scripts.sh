@@ -1,8 +1,6 @@
 #!/bin/bash
 set -e
 
-echo This needs to be updated to the production website
-exit 1
 PROD_PORT=5006
 
 function dev {

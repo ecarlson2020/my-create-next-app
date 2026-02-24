@@ -5,10 +5,7 @@ module.exports = {
     MY_ENV: process.env.MY_ENV,
   },
   transpilePackages: ["@mui/x-data-grid", "@mui/x-date-pickers"],
-  webpack: (
-    config,
-    { buildId, dev, isServer, defaultLoaders, nextRuntime, webpack },
-  ) => {
+  webpack: (config, { isServer }) => {
     if (!isServer) {
       config.plugins.push(
         new ESLintPlugin({
