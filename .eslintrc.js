@@ -21,6 +21,13 @@ module.exports = {
     "no-param-reassign": 0,
     "no-shadow": 0,
     "arrow-body-style": ["warn", "as-needed"],
+    "react/self-closing-comp": [
+      "error",
+      {
+        component: true,
+        html: true,
+      },
+    ],
     // for next.js
     "react/react-in-jsx-scope": 0,
     "@next/next/no-img-element": 0,
