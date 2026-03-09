@@ -61,14 +61,14 @@ EOSQL
 }
 
 function build-staging {
-  yarn
+  npm i
   npm run pretty
   npm run lint
   MY_ENV=staging next build
 }
 
 function build-prod {
-  yarn
+  npm i
   npm run pretty
   npm run lint
   MY_ENV=production next build
