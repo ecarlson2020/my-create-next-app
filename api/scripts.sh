@@ -22,6 +22,7 @@ function prod {
 }
 
 function build {
+  npm i
   tsc
   tsc-alias
 }
