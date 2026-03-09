@@ -10,6 +10,7 @@ module.exports = {
     "prettier/prettier": 1,
     "import/prefer-default-export": 0,
     "react/require-default-props": 0,
+    "prefer-template": "error",
     "jsx-a11y/no-autofocus": 0,
     "react-hooks/exhaustive-deps": 0,
     "jsx-a11y/no-noninteractive-element-interactions": 0,
@@ -21,6 +22,13 @@ module.exports = {
     "no-param-reassign": 0,
     "no-shadow": 0,
     "arrow-body-style": ["warn", "as-needed"],
+    "react/function-component-definition": [
+      "error",
+      {
+        namedComponents: "function-declaration",
+        unnamedComponents: "function-expression",
+      },
+    ],
     "react/self-closing-comp": [
       "error",
       {
