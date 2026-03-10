@@ -11,6 +11,7 @@ module.exports = {
     "import/prefer-default-export": 0,
     "react/require-default-props": 0,
     "prefer-template": "error",
+    "import/newline-after-import": "error",
     "jsx-a11y/no-autofocus": 0,
     "react-hooks/exhaustive-deps": 0,
     "jsx-a11y/no-noninteractive-element-interactions": 0,
