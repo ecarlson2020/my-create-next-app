@@ -6,6 +6,7 @@ module.exports = {
       { max: 300, skipBlankLines: false, skipComments: false },
     ],
     "no-console": ["error", { allow: ["warn", "error"] }],
+    "object-shorthand": ["error", "always"],
     "no-nested-ternary": 0,
     "prettier/prettier": 1,
     "import/prefer-default-export": 0,
