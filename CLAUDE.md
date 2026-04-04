@@ -16,6 +16,7 @@
 - **Admin Authentication:** Secure admin routes using a robust session-based `requireAuth` middleware and implement rate-limiting/lockout logic for failed login attempts to prevent brute-force attacks.
 - **Consistent UI Feedback:** Use Framer Motion for smooth, consistent animations and interactive feedback (e.g., hover effects, page transitions) across the application.
 - **Data Transformation Layer:** Transform complex database results into frontend-friendly formats within the API layer to keep the client-side logic lean and focused on presentation.
+- **Colocated Styles with Shared Extraction:** All styles use MUI `sx` props (no CSS modules). Style objects are plain inferred objects (no `SxProps<Theme>` annotation) exported from `.styles.ts` files. Three rules govern placement: (1) styles used by exactly one component live in `ComponentName.styles.ts` alongside that component; (2) styles used by 2+ components in the same folder live in `shared.styles.ts` at that folder level — no component may import from another component's `.styles.ts`, only from its own and `shared.styles.ts`; (3) if a component only uses shared styles and has none of its own, no dedicated `.styles.ts` is created for it.
 
 ## Component Structure
 
