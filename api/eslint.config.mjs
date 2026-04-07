@@ -29,6 +29,7 @@ export default [
       "prefer-const": "error",
       "func-style": ["error", "expression", { allowArrowFunctions: true }],
       "max-lines": ["error", { max: 400, skipBlankLines: false, skipComments: false }],
+      "prefer-template": "error",
       "@typescript-eslint/no-unused-vars": [
         "error",
         { varsIgnorePattern: "^_", argsIgnorePattern: "^_" },
