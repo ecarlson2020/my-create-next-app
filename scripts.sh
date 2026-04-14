@@ -3,15 +3,20 @@ set -e
 
 PRODUCTION_WEBSITE=something
 
+pretty='"src/**/*.{js,jsx,ts,tsx}" "shared/**/*.{js,jsx,ts,tsx}" "api/src/**/*.{js,jsx,ts,tsx}" "e2e/**/*.{js,jsx,ts,tsx}" "*.{js,jsx,ts,tsx}"'
+
+lint_dirs="--dir src --dir e2e"
+
 function lint {
-  next lint --max-warnings 0
+  next lint --max-warnings 0 $lint_dirs
 }
 
 function fix {
   npm run pretty-fix
-  next lint --fix
+  next lint --fix $lint_dirs
   npx tsc
   npx unimported
+  npm run e2e
   cd api
   npm run lint
   npm run test
@@ -19,11 +24,11 @@ function fix {
 }
 
 function pretty {
-  prettier --check "src/**/*.{js,jsx,ts,tsx}" "shared/**/*.{js,jsx,ts,tsx}" "api/src/**/*.{js,jsx,ts,tsx}" "*.{js,jsx,ts,tsx}"
+  prettier --check $pretty
 }
 
 function pretty-fix {
-  prettier --write "src/**/*.{js,jsx,ts,tsx}" "shared/**/*.{js,jsx,ts,tsx}" "api/src/**/*.{js,jsx,ts,tsx}" "*.{js,jsx,ts,tsx}"
+  prettier --write $pretty
 }
 
 function ui {
