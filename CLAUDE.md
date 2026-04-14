@@ -31,6 +31,20 @@ The React components are structured in a modular and hierarchical way within `sr
 - **Common Components:** Shared components used across multiple features are located in `src/components/common/`. These also follow the directory-based structure when complex (e.g., `src/components/common/BookingPage/`).
 - **Page-Component Separation:** Files in `src/pages/` are thin wrappers responsible for routing, SEO metadata, and rendering a single top-level component from `src/components/`.
 
+## E2E Testing
+
+This project uses [Playwright](https://playwright.dev/) for end-to-end tests. Tests live in `e2e/`, helpers in `e2e/helpers/`, and the config is `playwright.config.ts`.
+
+**When adding a new feature, add a few e2e tests for it** in a new or existing spec file under `e2e/`. Keep the total number of e2e tests at or under 100. If adding new tests would push the count over 100, remove less important tests first (e.g. redundant coverage, narrow edge cases already covered by other tests, or tests for deprecated flows).
+
+Run tests with:
+
+```bash
+npm run e2e
+```
+
+The test suite targets `http://localhost:5001`, which should be running locally whenever you interact with this repo.
+
 ## Code Formatting
 
 After making any code modifications, run:

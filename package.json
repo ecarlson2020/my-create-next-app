@@ -20,9 +20,11 @@
     "down-staging": "./scripts.sh down-staging",
     "down-prod": "./scripts.sh down-prod",
     "grab-images-staging": "./scripts.sh grab-images-staging",
-    "grab-images-prod": "./scripts.sh grab-images-prod"
+    "grab-images-prod": "./scripts.sh grab-images-prod",
+    "e2e": "playwright test"
   },
   "devDependencies": {
+    "@playwright/test": "^1.59.1",
     "@types/react": "19.2.2",
     "@typescript-eslint/eslint-plugin": "^8.47.0",
     "@typescript-eslint/parser": "^8.47.0",

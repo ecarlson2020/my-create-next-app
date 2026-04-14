@@ -19,3 +19,7 @@ dist/
 
 # docker
 docker-compose.override.yml
+
+# playwright
+playwright-report
+test-results
