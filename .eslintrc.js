@@ -7,6 +7,7 @@ module.exports = {
     ],
     "no-console": ["error", { allow: ["warn", "error"] }],
     "object-shorthand": ["error", "always"],
+    "no-useless-rename": "error",
     "no-nested-ternary": 0,
     "prettier/prettier": 1,
     "import/prefer-default-export": 0,
