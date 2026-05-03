@@ -25,6 +25,7 @@ export default [
       "no-console": ["error", { allow: ["warn", "error"] }],
       "no-unused-vars": "off",
       "no-undef": "off",
+      "prefer-template": "error",
       "no-var": "error",
       "prefer-const": "error",
       "func-style": ["error", "expression", { allowArrowFunctions: true }],
