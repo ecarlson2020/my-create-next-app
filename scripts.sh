@@ -51,20 +51,6 @@ function db-down {
   docker-compose down -v
 }
 
-function db-truncate {
-  docker exec -i mysql_dev mysql -uroot -proot_password evroca_db_dev <<-EOSQL
-    TRUNCATE TABLE picnic_potential_booking;
-    TRUNCATE TABLE picnic_gift;
-    TRUNCATE TABLE picnic_gallery;
-    TRUNCATE TABLE picnic_earliest_possible;
-    TRUNCATE TABLE picnic_coupons;
-    TRUNCATE TABLE picnic_cart;
-    TRUNCATE TABLE picnic_block;
-    TRUNCATE TABLE picnic_appointment;
-EOSQL
-  echo "✓ All tables truncated successfully"
-}
-
 function build-staging {
   npm i
   npm run pretty
