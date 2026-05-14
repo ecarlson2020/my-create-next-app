@@ -16,11 +16,13 @@ function fix {
   next lint --fix $lint_dirs
   npx tsc
   npx unimported
-  npm run e2e
   cd api
   npm run lint
   npm run test
   npm run build
+
+  cd ..
+  npm run e2e
 }
 
 function pretty {
