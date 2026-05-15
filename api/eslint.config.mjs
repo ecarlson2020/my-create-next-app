@@ -29,6 +29,7 @@ export default [
       "no-undef": "off",
       "no-var": "error",
       "prefer-const": "error",
+      "no-useless-rename": "error",
       "import/newline-after-import": "error",
       "func-style": ["error", "expression", { allowArrowFunctions: true }],
       "max-lines": ["error", { max: 400, skipBlankLines: false, skipComments: false }],
