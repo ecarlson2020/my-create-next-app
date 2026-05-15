@@ -1,5 +1,6 @@
 import tsPlugin from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
+import importPlugin from "eslint-plugin-import";
 
 export default [
   {
@@ -20,14 +21,15 @@ export default [
     },
     plugins: {
       "@typescript-eslint": tsPlugin,
+      import: importPlugin,
     },
     rules: {
       "no-console": ["error", { allow: ["warn", "error"] }],
       "no-unused-vars": "off",
       "no-undef": "off",
-      "prefer-template": "error",
       "no-var": "error",
       "prefer-const": "error",
+      "import/newline-after-import": "error",
       "func-style": ["error", "expression", { allowArrowFunctions: true }],
       "max-lines": ["error", { max: 400, skipBlankLines: false, skipComments: false }],
       "prefer-template": "error",
