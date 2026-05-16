@@ -1,9 +1,4 @@
 {
-  "dependencies": {
-    "next": "^15.5.4",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0"
-  },
   "scripts": {
     "lint": "./scripts.sh lint",
     "fix": "./scripts.sh fix",
@@ -23,6 +18,11 @@
     "grab-images-prod": "./scripts.sh grab-images-prod",
     "e2e": "playwright test",
     "e2e-debug": "playwright test --ui"
+  },
+  "dependencies": {
+    "next": "^15.5.4",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.59.1",
