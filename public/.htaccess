@@ -1,3 +1,14 @@
 RewriteEngine  on
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([^\.]+)$ $1.html [NC,L]
+
+# HTML documents have stable URLs (/, /about, ...) so a cached copy goes
+# stale on deploy. Force the browser to revalidate them on every request.
+# Everything else is left untouched, so its caching is unchanged from before.
+# <IfModule> guard: if mod_headers is absent the site still works, just
+# without this header (i.e. exactly today's behavior).
+<IfModule mod_headers.c>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+</IfModule>
