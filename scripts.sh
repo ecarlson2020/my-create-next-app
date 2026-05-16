@@ -67,12 +67,21 @@ function build-prod {
   MY_ENV=production next build
 }
 
+function check_remote_out_absent {
+  if ssh ecarlson10@192.168.0.2 '[ -e ~/out ]'; then
+    echo "Error: ~/out already exists on the remote (192.168.0.2)." >&2
+    exit 1
+  fi
+}
+
 function up-staging {
+  check_remote_out_absent
   npm run build-staging
   qscp -u out
 }
 
 function up-prod {
+  check_remote_out_absent
   npm run build-prod
   qscp -u out
 }
