@@ -2,7 +2,13 @@ services:
   mysql:
     image: mysql:8.0
     container_name: mysql_dev
-    restart: unless-stopped
+    # `no` rather than `unless-stopped`: a failed init script (e.g. a broken
+    # migration) makes the entrypoint exit non-zero. With a restart policy,
+    # the container comes back up and skips init because /var/lib/mysql is
+    # already populated — the container ends up "healthy" with a half-
+    # migrated schema. `no` lets the failure stay visible. Tradeoff: a real
+    # crash during dev won't auto-recover; just run `npm run db` again.
+    restart: "no"
     environment:
       MYSQL_ROOT_PASSWORD: root_password
       MYSQL_DATABASE: evroca_db_dev
