@@ -1,6 +1,9 @@
 services:
   mysql:
-    image: mysql:8.0
+    # Match prod exactly: prod runs MariaDB 11.8.3 (see db/migrations dump
+    # header). Using MySQL here breaks on MariaDB-only collations such as
+    # utf8mb4_uca1400_ai_ci in the prod dump.
+    image: mariadb:11.8.3
     container_name: mysql_dev
     # `no` rather than `unless-stopped`: a failed init script (e.g. a broken
     # migration) makes the entrypoint exit non-zero. With a restart policy,
@@ -24,9 +27,8 @@ services:
       - ./db/init:/docker-entrypoint-initdb.d
       # Mount migrations for manual execution
       - ./db/migrations:/migrations
-    command: --default-authentication-plugin=mysql_native_password
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot_password"]
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
       interval: 10s
       timeout: 5s
       retries: 5

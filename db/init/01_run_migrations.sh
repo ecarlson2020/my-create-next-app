@@ -6,7 +6,7 @@ set -e
 echo "Running database migrations..."
 
 # Wait for MySQL to be fully ready
-until mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "SELECT 1" &> /dev/null; do
+until mariadb -u root -p"$MYSQL_ROOT_PASSWORD" -e "SELECT 1" &> /dev/null; do
   echo "Waiting for MySQL to be ready..."
   sleep 2
 done
@@ -15,7 +15,7 @@ done
 for migration in /migrations/*.sql; do
   if [ -f "$migration" ]; then
     echo "Applying migration: $(basename "$migration")"
-    mysql -u root -p"$MYSQL_ROOT_PASSWORD" "$MYSQL_DATABASE" < "$migration"
+    mariadb -u root -p"$MYSQL_ROOT_PASSWORD" "$MYSQL_DATABASE" < "$migration"
   fi
 done
 
