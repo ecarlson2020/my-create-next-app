@@ -2,12 +2,24 @@ RewriteEngine  on
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([^\.]+)$ $1.html [NC,L]
 
-# HTML documents have stable URLs (/, /about, ...) so a cached copy goes
-# stale on deploy. Force the browser to revalidate them on every request.
-# Everything else is left untouched, so its caching is unchanged from before.
-# <IfModule> guard: if mod_headers is absent the site still works, just
-# without this header (i.e. exactly today's behavior).
+# Cache-Control for static assets. <IfModule> guard: if mod_headers is absent
+# the site still works, just without these headers (i.e. today's behavior).
 <IfModule mod_headers.c>
+  # Build-hashed assets (JS/CSS/fonts live under /_next/static with
+  # content-hashed filenames, so a new build always produces a new URL).
+  # Safe to cache forever and mark immutable.
+  <FilesMatch "\.(js|mjs|css|woff2?|ttf|otf|eot)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # Images aren't build-hashed, but they change rarely and most have unique
+  # (upload-<hash>) names. Cache a year; an explicit reload still revalidates.
+  <FilesMatch "\.(jpe?g|png|gif|webp|avif|svg|ico)$">
+    Header set Cache-Control "public, max-age=31536000"
+  </FilesMatch>
+
+  # HTML documents have stable URLs (/, /about, ...) so a cached copy goes
+  # stale on deploy. Force the browser to revalidate them on every request.
   <FilesMatch "\.html$">
     Header set Cache-Control "no-cache, must-revalidate"
   </FilesMatch>
