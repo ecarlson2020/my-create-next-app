@@ -4,7 +4,7 @@
   - check and deploy all repos
     - [x] carlsonlawncare
     - [x] evrocamedia
-    - [] foothillspicnics
+    - [x] foothillspicnics
     - [x] ivysevents
     - [] listacart
     - [] my-create-next-app
