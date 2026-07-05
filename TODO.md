@@ -7,8 +7,9 @@
     - [x] foothillspicnics
     - [x] ivysevents
     - [x] listacart
-    - [] my-create-next-app
+    - [x] my-create-next-app
     - [] rock-solid
+      - add GIT_COMMIT
     - [] sealdeals-app
     - [] sealdeals-website
     - [] touchofbalanceloveland
