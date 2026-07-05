@@ -11,8 +11,6 @@
     - [x] rock-solid
     - [x] sealdeals-app
     - [] sealdeals-website
-      - GIT_COMMIT
-      - npm run fix
     - [] touchofbalanceloveland
       - GIT_COMMIT
       - npm run fix
