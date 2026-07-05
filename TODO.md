@@ -6,7 +6,7 @@
     - [x] evrocamedia
     - [x] foothillspicnics
     - [x] ivysevents
-    - [] listacart
+    - [x] listacart
     - [] my-create-next-app
     - [] rock-solid
     - [] sealdeals-app
