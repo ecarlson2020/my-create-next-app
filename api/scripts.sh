@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-PROD_PORT=5006
+PROD_PORT=4999 # TODO: UPDATE THIS BEFORE DEPLOYING
 
 function dev {
   MY_ENV=development tsx watch ./src/server.ts
