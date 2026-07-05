@@ -11,10 +11,7 @@
     - [x] rock-solid
     - [x] sealdeals-app
     - [x] sealdeals-website
-    - [] touchofbalanceloveland
-      - GIT_COMMIT
-      - need to remove db?
-      - npm run fix
+    - [x] touchofbalanceloveland
     - [] wedding
       - GIT_COMMIT
       - npm run fix
