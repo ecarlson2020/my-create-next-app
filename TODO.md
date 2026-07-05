@@ -1,12 +1,12 @@
 # To Do
 
 - update ivysevents and remaining repos to the new architecture
-  - remove app/routes in sealdeals-website?
   - check and deploy all repos
     - [] carlsonlawncare
+      - add GIT_COMMIT to UI
     - [] evrocamedia
     - [] foothillspicnics
-    - [] ivysevents
+    - [x] ivysevents
     - [] listacart
     - [] my-create-next-app
     - [] rock-solid
