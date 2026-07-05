@@ -13,9 +13,11 @@
     - [x] sealdeals-website
     - [] touchofbalanceloveland
       - GIT_COMMIT
+      - need to remove db?
       - npm run fix
     - [] wedding
       - GIT_COMMIT
       - npm run fix
+- unimported for both ui and api
 - move away from pi ~/pw and towards .env
   - concern: when running `npm run deploy`, are we pulling .env from ~/out or from ~/projects/<project>?
