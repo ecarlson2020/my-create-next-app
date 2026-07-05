@@ -1,4 +1,15 @@
 # To Do
 
 - update ivysevents and remaining repos to the new architecture
-- rename npm run fix to npm run verify or something
+  - check and deploy all repos
+    - [x] carlsonlawncare
+    - [x] evrocamedia
+    - [x] foothillspicnics
+    - [x] ivysevents
+    - [x] listacart
+    - [] my-create-next-app
+    - [] rock-solid
+    - [] sealdeals-app
+    - [] sealdeals-website
+    - [] touchofbalanceloveland
+    - [] wedding
