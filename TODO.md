@@ -2,8 +2,7 @@
 
 - update ivysevents and remaining repos to the new architecture
   - check and deploy all repos
-    - [] carlsonlawncare
-      - add GIT_COMMIT to UI
+    - [x] carlsonlawncare
     - [] evrocamedia
     - [] foothillspicnics
     - [x] ivysevents
