@@ -9,7 +9,7 @@
     - [x] listacart
     - [x] my-create-next-app
     - [] rock-solid
-      - add GIT_COMMIT
+      - npm run fix
     - [] sealdeals-app
     - [] sealdeals-website
     - [] touchofbalanceloveland
