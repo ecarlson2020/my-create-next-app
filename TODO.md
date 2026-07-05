@@ -19,3 +19,5 @@
     - [] wedding
       - GIT_COMMIT
       - npm run fix
+- move away from pi ~/pw and towards .env
+  - concern: when running `npm run deploy`, are we pulling .env from ~/out or from ~/projects/<project>?
