@@ -8,9 +8,16 @@
     - [x] ivysevents
     - [x] listacart
     - [x] my-create-next-app
-    - [] rock-solid
-      - npm run fix
+    - [x] rock-solid
     - [] sealdeals-app
+      - npm audit fix
+      - npm run fix
     - [] sealdeals-website
+      - GIT_COMMIT
+      - npm run fix
     - [] touchofbalanceloveland
+      - GIT_COMMIT
+      - npm run fix
     - [] wedding
+      - GIT_COMMIT
+      - npm run fix
