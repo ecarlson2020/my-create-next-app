@@ -10,7 +10,7 @@
     - [x] my-create-next-app
     - [x] rock-solid
     - [x] sealdeals-app
-    - [] sealdeals-website
+    - [x] sealdeals-website
     - [] touchofbalanceloveland
       - GIT_COMMIT
       - npm run fix
