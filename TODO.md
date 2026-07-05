@@ -9,9 +9,7 @@
     - [x] listacart
     - [x] my-create-next-app
     - [x] rock-solid
-    - [] sealdeals-app
-      - npm audit fix
-      - npm run fix
+    - [x] sealdeals-app
     - [] sealdeals-website
       - GIT_COMMIT
       - npm run fix
