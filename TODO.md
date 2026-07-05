@@ -18,7 +18,6 @@
     - [] wedding
       - GIT_COMMIT
       - npm run fix
-- my-create-next-app shouldn't have prod port 5006, nor any other repo but listacart
 - unimported for both ui and api
 - move away from pi ~/pw and towards .env
   - concern: when running `npm run deploy`, are we pulling .env from ~/out or from ~/projects/<project>?
