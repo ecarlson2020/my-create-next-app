@@ -1,6 +1,5 @@
 # To Do
 
-- unimported for both ui and api
 - no more npm run up-prod
   - pi5 branch created, test on pi5
 - move away from pi ~/pw and towards .env (see below)
