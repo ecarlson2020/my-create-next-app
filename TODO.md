@@ -11,7 +11,7 @@
 
 I deploy the majority of the repos in my current working directory (e.g. foothillspicnics, listcart, etc.) to my Raspberry Pi, which serves as my web server at home. I currently store important production keys and passwords in ~/pw on my Pi. I am wanting to transition towards using .env files in their respective repos, which I have already started doing in some of the repos.
 
-Important Note: Claude Code is running on my Pi. YOU ARE ON A PRODUCTION SYSTEM WITH LIVE WEBSITES RUNNING ON IT.
+Important Note: YOU ARE CURRENTLY ON MY RASPBERRY PI, A PRODUCTION SYSTEM WITH LIVE WEBSITES RUNNING ON IT.
 
 ### Goal
 
