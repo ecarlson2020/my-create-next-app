@@ -84,7 +84,7 @@ function build-prod {
 # Guard the local rm -rf / mv in the deploy steps below: these repos also live
 # on the laptop, so a deploy accidentally run off the Pi 5 should fail fast
 # instead of clobbering a bogus path.
-function require_pi5 {
+function require_pi {
   if [ ! -d /home/ecarlson10/webapps ]; then
     echo "Error: run this on the Pi 5 (missing /home/ecarlson10/webapps)." >&2
     exit 1
@@ -131,9 +131,9 @@ function deploy-api {
 
 # Build the static frontend on the Pi 5 and swap it into place. grab-images-prod
 # runs first so live user-uploaded images are folded into public/ before
-# `next build` exports them; require_pi5 guards the local rm -rf / mv.
+# `next build` exports them; require_pi guards the local rm -rf / mv.
 function deploy-ui {
-  require_pi5
+  require_pi
   npm run grab-images-prod
   npm run build-prod
   website_location="/home/ecarlson10/webapps/$PRODUCTION_WEBSITE"
@@ -143,7 +143,7 @@ function deploy-ui {
 }
 
 function deploy-staging {
-  require_pi5
+  require_pi
   npm run grab-images-staging
   npm run build-staging
   website_location='/home/ecarlson10/webapps/test2.evrocamedia'
