@@ -20,6 +20,5 @@ Important Note: YOU ARE CURRENTLY ON MY RASPBERRY PI, A PRODUCTION SYSTEM WITH L
 
 ### Concerns
 
-- On my Pi, I have the same ~/projects directory as you can observe locally on my laptop. When running `npm run deploy` on my Pi, are we pulling .env from ~/out or from ~/projects/<project>?
 - Most of my repos have a UI (`src`) as well an `api` directory. Ideally, I would prefer to have a single `.env` file at the root of each respective repository, accessible by both the UI and API, opposed to both <repo>/.env and <repo>/api/.env. However, this may not be an industry best practive, so I am wanting you feedback here.
 - On my Pi, I could set `chmod 400` on any of the files within ~/pw. On .env, I am not sure if I can do that, so I don't want to introduce a security risk there.
