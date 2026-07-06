@@ -23,6 +23,7 @@ function fix {
   npx unimported
   cd api
   npm run lint
+  npx unimported
   npm run test
   npm run build
 
