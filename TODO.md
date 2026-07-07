@@ -1,6 +1,5 @@
 # To Do
 
-- rsync: [sender] change_dir "/home/ecarlson10/webapps/evrocamedia/images" failed: No such file or directory (2)
 - pi headless Google Chrome
 - move away from pi ~/pw and towards .env (see below)
 
