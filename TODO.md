@@ -1,5 +1,6 @@
 # To Do
 
+- all-websites should maintain separate list
 - pi headless Google Chrome
 - move away from pi ~/pw and towards .env (see below)
 
