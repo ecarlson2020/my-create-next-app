@@ -1,6 +1,5 @@
 # To Do
 
-- bash script to run a command in all repos
 - rsync: [sender] change_dir "/home/ecarlson10/webapps/evrocamedia/images" failed: No such file or directory (2)
 - make sure daily db backup email fired
 - pi headless Google Chrome
