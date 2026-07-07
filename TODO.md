@@ -2,7 +2,6 @@
 
 - rsync: [sender] change_dir "/home/ecarlson10/webapps/evrocamedia/images" failed: No such file or directory (2)
 - pi headless Google Chrome
-- i somehow clobbered listacart when running deploy, i think it was just because i had `main` checked out when i ran `npm run deploy ui` and `~/out` didn't exist
 - no more npm run up-prod
   - pi5 branch created, test on pi5
 - move away from pi ~/pw and towards .env (see below)
