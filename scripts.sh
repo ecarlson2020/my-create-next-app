@@ -194,7 +194,12 @@ function grab-images-staging {
 }
 
 function grab-images-prod {
-  rsync -aE --delete /home/ecarlson10/webapps/$PRODUCTION_WEBSITE/images/ /home/ecarlson10/projects/$PRODUCTION_WEBSITE/public/images
+  src="/home/ecarlson10/webapps/$PRODUCTION_WEBSITE/images"
+  if [ ! -d "$src" ]; then
+    echo "grab-images-prod: $src not found, skipping image sync." >&2
+    return 0
+  fi
+  rsync -aE --delete "$src/" /home/ecarlson10/projects/$PRODUCTION_WEBSITE/public/images
 }
 
 "$@"
