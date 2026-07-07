@@ -1,7 +1,6 @@
 # To Do
 
 - rsync: [sender] change_dir "/home/ecarlson10/webapps/evrocamedia/images" failed: No such file or directory (2)
-- make sure daily db backup email fired
 - pi headless Google Chrome
 - i somehow clobbered listacart when running deploy, i think it was just because i had `main` checked out when i ran `npm run deploy ui` and `~/out` didn't exist
 - no more npm run up-prod
