@@ -120,6 +120,7 @@ function deploy-db {
 function deploy-api {
   mkdir -p ~/logs
   cd api
+  npm i
   npm run kill-prod
   # Pipe stdout+stderr through a read-loop that stamps each line with the local
   # time. The whole pipeline is wrapped in `nohup bash -c` so both the server and
