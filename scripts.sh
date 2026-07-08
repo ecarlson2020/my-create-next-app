@@ -146,7 +146,6 @@ function deploy-ui {
 
 function deploy-staging {
   require_pi
-  npm run grab-images-staging
   npm run build-staging
   website_location='/home/ecarlson10/webapps/test2.evrocamedia'
   rm -rf "$website_location"
@@ -188,10 +187,6 @@ function deploy {
   if [ ${#migrations[@]} -gt 0 ]; then deploy-db "${migrations[@]}"; fi
   if $do_api; then deploy-api; fi
   if $do_ui;  then deploy-ui;  fi
-}
-
-function grab-images-staging {
-  rsync -aE --delete /home/ecarlson10/webapps/test2.evrocamedia/images/ /home/ecarlson10/projects/$PRODUCTION_WEBSITE/public/images
 }
 
 function grab-images-prod {
