@@ -131,13 +131,12 @@ function deploy-api {
   cd ..
 }
 
-# Build the static frontend on the Pi 5 and swap it into place. grab-images-prod
-# runs first so live user-uploaded images are folded into public/ before
-# `next build` exports them; require_pi guards the local rm -rf / mv.
+# Build the static frontend on the Pi 5, sync live user-uploaded images, and
+# swap the bundle into place; require_pi guards the local rm -rf / mv.
 function deploy-ui {
   require_pi
-  npm run grab-images-prod
   npm run build-prod
+  npm run grab-images-prod
   website_location="/home/ecarlson10/webapps/$PRODUCTION_WEBSITE"
   rm -rf "$website_location"
   mv out "$website_location"
