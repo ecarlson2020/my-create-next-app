@@ -39,7 +39,12 @@ function pretty-fix {
   prettier --write $pretty
 }
 
+function validate-env {
+  node scripts/validate-env.mjs "$1"
+}
+
 function ui {
+  validate-env development
   npm i
   MY_ENV=development next dev -p 5001
 }
@@ -134,6 +139,7 @@ function deploy-api {
 # Build the static frontend on the Pi 5, sync live user-uploaded images, and
 # swap the bundle into place; require_pi guards the local rm -rf / mv.
 function deploy-ui {
+  validate-env production
   require_pi
   npm run build-prod
   npm run grab-images-prod
