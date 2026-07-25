@@ -12,7 +12,7 @@
     "build-prod": "./scripts.sh build-prod",
     "deploy-staging": "./scripts.sh deploy-staging",
     "grab-images-prod": "./scripts.sh grab-images-prod",
-    "e2e": "playwright test",
+    "e2e": "./scripts.sh e2e",
     "e2e-debug": "playwright test --ui"
   },
   "dependencies": {

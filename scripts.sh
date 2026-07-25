@@ -43,6 +43,13 @@ function validate-env {
   node scripts/validate-env.mjs "$1"
 }
 
+# Fail before Playwright spins up a browser if the test environment is not
+# configured. Args pass through, so `npm run e2e -- --grep foo` still works.
+function e2e {
+  validate-env test
+  playwright test "$@"
+}
+
 function ui {
   validate-env development
   npm i
