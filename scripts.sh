@@ -31,7 +31,19 @@ function fix {
   npm run build
 
   cd ..
-  npm run e2e
+  # This Pi is the production web server. A full Playwright run competes with
+  # the live sites for CPU and memory, so skip it here and run e2e on a dev
+  # machine instead. FORCE_E2E=1 npm run fix overrides.
+  #
+  # Read the model via tr rather than grep: /proc/device-tree/model ends in a
+  # NUL byte, which makes grep treat it as binary and report no match.
+  pi_model=$( { tr -d '\0' < /proc/device-tree/model; } 2>/dev/null || true)
+  if [ "${FORCE_E2E:-}" != "1" ] && [[ $pi_model == *"Raspberry Pi"* ]]; then
+    echo "Skipping e2e: $pi_model detected (production web server)."
+    echo "Run e2e on a dev machine, or use FORCE_E2E=1 npm run fix to override."
+  else
+    npm run e2e
+  fi
 }
 
 function pretty {

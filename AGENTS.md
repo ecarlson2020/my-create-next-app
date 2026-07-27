@@ -176,6 +176,20 @@ npm run e2e
 
 The test suite targets `http://localhost:5001`, which should be running locally whenever you interact with this repo.
 
+**e2e does not run on the Raspberry Pi.** That Pi is the production web server,
+and a full Playwright run competes with the live sites for CPU and memory. The
+`fix` function in `scripts.sh` detects it by reading `/proc/device-tree/model`
+and skips the suite, printing a notice instead. Run e2e on a dev machine, or
+override deliberately with:
+
+```bash
+FORCE_E2E=1 npm run fix
+```
+
+Calling `npm run e2e` directly is never skipped — the guard lives only in `fix`.
+So a change made on the Pi has *not* been e2e-tested unless you say so
+explicitly; verify it somewhere else before treating it as covered.
+
 ## Code Formatting
 
 After making any code modifications, run:
@@ -184,4 +198,4 @@ After making any code modifications, run:
 npm run fix
 ```
 
-This ensures all code is properly formatted and linted according to the project's standards.
+This ensures all code is properly formatted and linted according to the project's standards. It runs prettier, `next lint --fix`, `tsc`, `unimported`, the API lint/test/build, and then the e2e suite — except on the Pi, where e2e is skipped (see "E2E Testing" above).
