@@ -32,6 +32,65 @@ The React components are structured in a modular and hierarchical way within `sr
 - **Common Components:** Shared components used across multiple features are located in `src/components/common/`. These also follow the directory-based structure when complex (e.g., `src/components/common/BookingPage/`).
 - **Page-Component Separation:** Files in `src/pages/` are thin wrappers responsible for routing, SEO metadata, and rendering a single top-level component from `src/components/`.
 
+## API Endpoints
+
+The backend is an Express app under `api/src/`. Follow these conventions when adding or modifying endpoints.
+
+### File & Route Organization
+
+This layout is required, not a suggestion. Follow it for every new endpoint.
+
+- **One route handler per file.** Each endpoint gets its own file exporting exactly one handler. Never put two handlers in one file — a `GET` and a `PUT` on the same path are two files, not one.
+- **Directory structure mirrors the URL.** `admin/blockedDay/add.ts` serves `POST /api/admin/blocked-days`. Directories are camelCase; the URL segments they map to are kebab-case.
+- **The filename is the HTTP verb** when a path has one obvious action: `gallery/picnic/get.ts`, `inquiry/glamping/post.ts`, `admin/appointment/delete.ts`. When a path family has several actions, the filename becomes the action instead: `admin/coupon/create.ts` + `admin/coupon/delete.ts`, or `admin/gallery/upload.ts` + `admin/gallery/delete.ts` + `admin/gallery/updateCategory.ts`.
+- **Singular vs plural separates item from collection**, as sibling directories. `admin/coupons/get.ts` serves the list (`GET /api/admin/coupons`); `admin/coupon/create.ts` and `admin/coupon/delete.ts` serve the single-resource writes. Same split for `appointments/` vs `appointment/` and `inquiries/` vs `inquiry/`.
+- **The export name is the file path flattened to camelCase.** `admin/coupon/create.ts` exports `adminCouponCreate`; `gallery/picnic/get.ts` exports `galleryPicnicGet`. Always a named `export const` — no default exports. A handler's name should tell you its file and its URL without looking either up.
+- **Helpers sit beside the routes they serve, named for their feature:** `<feature>.utils.ts`, `<feature>.types.ts`, `<feature>.middleware.ts` — e.g. `booking/booking.utils.ts`, `admin/admin.middleware.ts`. Split further when one file gets broad: `checkout/success/` holds a single route (`get.ts`) beside `checkoutSuccess.database.ts`, `checkoutSuccess.email.ts`, `checkoutSuccess.types.ts`, and `checkoutSuccess.utils.ts`. Helper files may export as many symbols as they need — the one-per-file rule applies to route handlers only.
+- **Central registration in `server.ts`:** Every route is wired up in `api/src/server.ts` (imported at the top, registered with `app.<method>(path, ...middleware, handler)`). Keep the registrations grouped with the existing comment banners (`// API endpoints`, `// Admin endpoints`).
+- **Protected routes use `requireAuth`:** Admin endpoints take the session-based `requireAuth` middleware before the handler (e.g. `app.get("/api/admin/coupons", requireAuth, adminCouponsGet)`).
+- **Path naming:** All routes are prefixed with `/api`. Use `/api/<feature>/<action>` and `:id` params (e.g. `/api/inquiry/glamping`, `/api/admin/appointment/:id`). The HTTP verb conveys intent: `GET` to read, `POST` to create, `PATCH`/`PUT` to update, `DELETE` to remove.
+
+A representative slice:
+
+```
+api/src/routes/
+  admin/
+    admin.middleware.ts          requireAuth and friends
+    admin.types.ts
+    admin.utils.ts
+    appointment/delete.ts        DELETE /api/admin/appointment/:id
+    appointment/update.ts        PATCH  /api/admin/appointment
+    appointments/get.ts          GET    /api/admin/appointments
+    coupon/create.ts             POST   /api/admin/coupon
+    coupon/delete.ts             DELETE /api/admin/coupon
+    coupons/get.ts               GET    /api/admin/coupons
+    blockedDay/add.ts            POST   /api/admin/blocked-days
+  booking/
+    booking.types.ts
+    booking.utils.ts
+    applyCoupon.ts               POST   /api/booking/apply-coupon
+    availableTimes/date.ts       GET    /api/booking/available-times/date
+    availableTimes/month.ts      GET    /api/booking/available-times/month
+  gallery/
+    picnic/get.ts                GET    /api/gallery/picnic
+    slumberParty/get.ts          GET    /api/gallery/slumber-party
+  inquiry/
+    glamping/post.ts             POST   /api/inquiry/glamping
+    potion-party/post.ts         POST   /api/inquiry/potion-party
+```
+
+### Handler Shape
+
+- **Signature:** `export const fooBar = async (req: Request, res: Response): Promise<void> => { ... }` using `Request`/`Response` from `express`.
+- **Wrap the whole body in `try/catch`.** On error, `console.error` the exception and respond with a `500` JSON error. The standard message-extraction idiom is:
+  ```ts
+  const message = e instanceof Error ? e.message : "Failed to <do thing>";
+  res.status(500).json({ error: message });
+  return;
+  ```
+- **Validate inputs up front** and return `400` with `{ error: "<field> is required" }` for missing/invalid params or body fields.
+- **Status codes:** `200` success, `201` resource created, `400` bad request, `401` unauthenticated, `403` forbidden, `404` not found, `500` server error.
+
 ## Environment Variables
 
 Secrets live in `.env` at the repository root (gitignored). Only secrets shared
