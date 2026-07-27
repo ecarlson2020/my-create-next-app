@@ -1,4 +1,5 @@
 {
   "entry": ["./src/server.ts", "./src/testServer.ts"],
-  "extensions": [".ts", ".js"]
+  "extensions": [".ts", ".js"],
+  "ignoreUnimported": ["src/utils/requireEnv.ts"]
 }

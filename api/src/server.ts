@@ -1,3 +1,6 @@
+// IMPORTANT: This must be the first import to ensure env vars load before any other module code
+import "./env";
+
 import http from "http";
 import https from "https";
 import express from "express";

@@ -12,12 +12,12 @@ import nextEnv from "@next/env";
 //   # @test-only         required only by the Playwright suite
 //   # @optional          documented, never required
 //
-// The @development-only scope exists because staging and prod read most secrets
-// from files under /home/ecarlson10/pw/ rather than from the environment (see
-// getStripeSecretKey, getEmailPassword, getGeminiApiKey). Marking those
-// development-only keeps deploys from demanding variables production never
-// reads. `test` implies development, since the e2e suite drives the local dev
-// stack.
+// Secrets live in .env rather than in files under /home/ecarlson10/pw/ — only
+// the genuinely cross-repo ones (the MariaDB password, the shared mailbox
+// passwords) remain there, read by path with no variable name. So prefer the
+// narrowest accurate scope: @production-only suits a secret prod needs but local
+// work does not, which keeps `npm run ui` from demanding a live key. `test`
+// implies development, since the e2e suite drives the local dev stack.
 const REQUIRED_SCOPES = {
   development: new Set(["all", "development-only"]),
   production: new Set(["all", "production-only"]),

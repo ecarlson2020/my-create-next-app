@@ -12,13 +12,16 @@ lint_dirs="--dir src --dir e2e"
 GIT_COMMIT=$(git rev-parse --short HEAD 2>/dev/null || echo unknown)
 export GIT_COMMIT
 
+# `next lint` loads next.config.js, which now refuses to run without a valid
+# MY_ENV. Linting is static analysis rather than a build, so the mode is
+# arbitrary — but it has to be set, same as every other command here.
 function lint {
-  next lint --max-warnings 0 $lint_dirs
+  MY_ENV=development next lint --max-warnings 0 $lint_dirs
 }
 
 function fix {
   npm run pretty-fix
-  next lint --fix $lint_dirs
+  MY_ENV=development next lint --fix $lint_dirs
   npx tsc
   npx unimported
   cd api
@@ -125,15 +128,77 @@ function deploy-db {
   done
 }
 
+# The API port lives in api/scripts.sh, but not always the same way: some repos
+# declare `PROD_PORT=<n>` and reference it from kill-prod, others hardcode the
+# number inside kill-prod. Read whichever form is present rather than duplicating
+# the port here, and fail loudly if neither is found — an empty port would make
+# the readiness check below hang for its full timeout and then report a healthy
+# deploy as broken.
+function prod-port {
+  port=$(grep -oP '^PROD_PORT=\K[0-9]+' api/scripts.sh || true)
+  if [ -z "$port" ]; then
+    port=$(sed -n '/function kill-prod/,/^}/p' api/scripts.sh \
+      | grep -oP 'fuser -k \K[0-9]+' || true)
+  fi
+  if [ -z "$port" ]; then
+    echo "Error: could not determine the API port from api/scripts.sh." >&2
+    exit 1
+  fi
+  echo "$port"
+}
+
+# `fuser -k` returns before the kernel has actually released the socket, so the
+# readiness check further down could otherwise match the *dying* old process and
+# report success for a replacement that never came up. Wait for the port to clear
+# first, which makes the later LISTEN unambiguously the new server.
+function wait-for-port-free {
+  port=$1
+  for _ in $(seq 30); do
+    ss -ltn "sport = :$port" | grep -q LISTEN || return 0
+    sleep 1
+  done
+  echo "Error: port $port was still held 30s after kill-prod." >&2
+  exit 1
+}
+
+# The API is daemonized, so nothing in the terminal would otherwise report a
+# server that dies during startup — a missing env var, a port still held, a
+# failed DB connect. Poll until it listens, and surface the log if it never does.
+function wait-for-api {
+  port=$1
+  # `npm run prod` builds (npm i + tsc + tsc-alias) before it starts listening,
+  # which is not fast on the Pi, hence the generous ceiling.
+  for _ in $(seq 180); do
+    if ss -ltn "sport = :$port" | grep -q LISTEN; then
+      echo "✓ API listening on port $port"
+      return 0
+    fi
+    sleep 1
+  done
+  echo "Error: API never started listening on port $port (waited 180s)." >&2
+  echo "Last 20 lines of ~/logs/$PRODUCTION_WEBSITE.log:" >&2
+  tail -20 ~/logs/$PRODUCTION_WEBSITE.log >&2
+  exit 1
+}
+
 # Restart the prod API, daemonized (nohup + disown) so it survives this script
 # exiting — important for an api-only deploy that returns immediately. kill-prod
 # already tolerates an empty port (|| true). Output goes to
 # ~/logs/$PRODUCTION_WEBSITE.log.
 function deploy-api {
+  # Validate BEFORE kill-prod, not after: the API reads its secrets from .env at
+  # boot (api/src/env.ts), so a deploy that cannot possibly start must not take
+  # the running API down first and report the reason afterwards in a log file.
+  # validate-env resolves @next/env from the root install, so ensure it exists —
+  # a no-op for any repo that has already been built on this box.
+  [ -d node_modules ] || npm i
+  validate-env production
   mkdir -p ~/logs
+  prod_port=$(prod-port)
   cd api
   npm i
   npm run kill-prod
+  wait-for-port-free "$prod_port"
   # Pipe stdout+stderr through a read-loop that stamps each line with the local
   # time. The whole pipeline is wrapped in `nohup bash -c` so both the server and
   # the timestamping reader survive this script (and any SSH session) exiting.
@@ -141,11 +206,18 @@ function deploy-api {
     > ~/logs/$PRODUCTION_WEBSITE.log 2>&1 &
   disown
   cd ..
+  # Blocks until the server is actually up, so a failed deploy exits non-zero
+  # here instead of looking like a success. This gives up the old overlap with
+  # the ui swap; a deploy that silently left the API down was the worse trade.
+  wait-for-api "$prod_port"
 }
 
 # Build the static frontend on the Pi 5, sync live user-uploaded images, and
 # swap the bundle into place; require_pi guards the local rm -rf / mv.
 function deploy-ui {
+  # Same root-deps guard as deploy-api: validate-env needs @next/env, and
+  # build-prod's own `npm i` happens after this point.
+  [ -d node_modules ] || npm i
   validate-env production
   require_pi
   npm run build-prod
@@ -168,8 +240,8 @@ function deploy-staging {
 # Dispatcher. With no args, runs the full default: api + ui (no migrations).
 # Otherwise selective — numbers are migration ids, `api`/`ui` select components,
 # and only the named parts run, always in db -> api -> ui order regardless of how
-# they were typed. deploy-api is non-blocking (daemonized), so it overlaps the ui
-# swap just as the old single-function deploy did.
+# they were typed. deploy-api now blocks until the API is confirmed listening, so
+# a failed api deploy aborts before the ui swap rather than overlapping it.
 #
 # Examples:
 #   npm run deploy            -> api + ui
