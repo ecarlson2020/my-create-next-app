@@ -1,8 +1,8 @@
 const stagingDomain = "test2.evrocamedia";
 // TODO: update the production domain
-const productionDomain = "adamselectric";
+const productionDomain = "something";
 // TODO: update the port
-const prodPort = 5009;
+const prodPort = 4999;
 const devPort = 5003;
 
 const isStaging = process.env.MY_ENV === "staging";
