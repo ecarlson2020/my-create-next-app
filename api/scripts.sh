@@ -23,6 +23,11 @@ function prod {
 
 function build {
   npm i
+  # tsc never removes output for deleted or renamed sources, so stale .js piles
+  # up in dist and reads as live code long after its source is gone — a compiled
+  # file from a route deleted months ago was still holding an old secret path.
+  # Deploys kill the API before building, so clearing dist here is safe.
+  rm -rf dist
   tsc
   tsc-alias
 }

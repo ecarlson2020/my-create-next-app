@@ -229,6 +229,10 @@ function deploy-ui {
 }
 
 function deploy-staging {
+  # Staging had no gate at all: a missing variable only surfaced once the built
+  # site was already swapped in. Same root-deps guard as the other deploy paths.
+  [ -d node_modules ] || npm i
+  validate-env staging
   require_pi
   npm run build-staging
   website_location='/home/ecarlson10/webapps/test2.evrocamedia'

@@ -76,8 +76,9 @@ Three pieces enforce this, and all three ship with the template:
    check for builds, since `MY_ENV` is inlined into the static export.
 
 3. **`.env.example`** — the manifest `scripts/validate-env.mjs` checks before
-   `ui`, `e2e`, `deploy-ui`, and `deploy-api`. A `# @marker` comment scopes every
-   variable below it until the next marker, so related variables can share one:
+   `ui`, `e2e`, `deploy-ui`, `deploy-api`, and `deploy-staging`. A `# @marker`
+   comment scopes every variable below it until the next marker, so related
+   variables can share one:
 
    ```
    # @production-only
@@ -88,8 +89,14 @@ Three pieces enforce this, and all three ship with the template:
    The leading `#` is required. Without it the line is silently ignored and the
    scope falls back to `@all`, which makes those variables required in *every*
    mode — production still works, but `npm run ui` starts demanding live
-   secrets. Pick the narrowest accurate marker: `@production-only` for a secret
-   prod needs and local work does not.
+   secrets.
+
+   Pick the narrowest accurate marker. The two `non-` scopes mirror the guards
+   the code uses, which is what lets staging be expressed at all:
+   `@non-development` matches `!IS_DEV` (a real secret rather than a dev
+   literal — session secrets, admin passwords, SMTP), and `@non-production`
+   matches `!IS_PROD` (a sandbox key rather than the live one). A live API key
+   is `@production-only`; its test counterpart is `@non-production`.
 
 `deploy-api` validates **before** `kill-prod`, so a deploy that cannot start
 never takes the running API down first, and then blocks until the port is

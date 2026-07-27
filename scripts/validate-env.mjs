@@ -7,26 +7,37 @@ import nextEnv from "@next/env";
 // comment scopes every variable after it, until the next marker:
 //
 //   # @all               required in every mode (the default before any marker)
-//   # @development-only  required for local work, not for a deploy
-//   # @production-only   required for a deploy, not locally
+//   # @development-only  local work only (development and test)
+//   # @non-production    everything except production (development, test, staging)
+//   # @non-development   every deployed mode (staging and production)
+//   # @production-only   production deploys only
 //   # @test-only         required only by the Playwright suite
 //   # @optional          documented, never required
 //
+// The two "non-" scopes exist because staging sits between the others and the
+// older vocabulary could not express it: ADMIN_PASSWORD and
+// STRIPE_LIVE_SECRET_KEY were both @production-only, yet staging needs the first
+// and not the second. They mirror the guards the code actually uses —
+// @non-development matches `!IS_DEV` (a real secret rather than a dev literal)
+// and @non-production matches `!IS_PROD` (the test key rather than the live one).
+//
 // Secrets live in .env rather than in files under /home/ecarlson10/pw/ — only
 // the genuinely cross-repo ones (the MariaDB password, the shared mailbox
-// passwords) remain there, read by path with no variable name. So prefer the
-// narrowest accurate scope: @production-only suits a secret prod needs but local
-// work does not, which keeps `npm run ui` from demanding a live key. `test`
-// implies development, since the e2e suite drives the local dev stack.
+// passwords) remain there, read by path with no variable name. Prefer the
+// narrowest accurate scope, so that `npm run ui` never demands a live key.
+// `test` implies development, since the e2e suite drives the local dev stack.
 const REQUIRED_SCOPES = {
-  development: new Set(["all", "development-only"]),
-  production: new Set(["all", "production-only"]),
-  test: new Set(["all", "development-only", "test-only"]),
+  development: new Set(["all", "development-only", "non-production"]),
+  test: new Set(["all", "development-only", "test-only", "non-production"]),
+  staging: new Set(["all", "non-development", "non-production"]),
+  production: new Set(["all", "non-development", "production-only"]),
 };
 
 const KNOWN_SCOPES = new Set([
   "all",
   "development-only",
+  "non-development",
+  "non-production",
   "production-only",
   "test-only",
   "optional",
@@ -94,7 +105,11 @@ if (required.size === 0) {
   process.exit(0);
 }
 
-nextEnv.loadEnvConfig(projectDirectory, mode !== "production");
+// Only the local modes should pick up .env.development; staging and production
+// are deploys and load the same files production does.
+const isLocalMode = mode === "development" || mode === "test";
+
+nextEnv.loadEnvConfig(projectDirectory, isLocalMode);
 
 const missingVariables = [...required].filter(
   (name) => !process.env[name]?.trim(),
