@@ -1,0 +1,87 @@
+export const styles = {
+  footer: {
+    bgcolor: "#0c2419",
+    color: "#ffffff",
+    pb: 3,
+    pt: { xs: 7, md: 9 },
+  },
+  grid: {
+    display: "grid",
+    gap: { xs: 5, md: 6 },
+    gridTemplateColumns: {
+      xs: "1fr",
+      sm: "1.3fr 0.7fr 0.8fr",
+      md: "1.6fr 0.7fr 0.9fr",
+    },
+    pb: { xs: 6, md: 8 },
+  },
+  brand: {
+    alignItems: "center",
+    display: "flex",
+    gap: 1.25,
+  },
+  logo: {
+    height: "58px",
+    objectFit: "contain",
+    width: "64px",
+  },
+  brandName: {
+    fontFamily: '"Iowan Old Style", "Baskerville", Georgia, serif',
+    fontSize: "1.45rem",
+    fontWeight: 700,
+  },
+  tagline: {
+    color: "rgba(255, 255, 255, 0.6)",
+    fontSize: "0.86rem",
+    lineHeight: 1.7,
+    maxWidth: "370px",
+    mt: 2,
+  },
+  social: {
+    alignItems: "center",
+    border: "1px solid rgba(255, 255, 255, 0.14)",
+    borderRadius: "50%",
+    color: "#ffffff",
+    display: "flex",
+    height: "40px",
+    justifyContent: "center",
+    mt: 2.5,
+    width: "40px",
+    "&:hover": {
+      bgcolor: "secondary.main",
+      color: "primary.dark",
+    },
+  },
+  columnTitle: {
+    color: "secondary.main",
+    fontSize: "0.67rem",
+    fontWeight: 800,
+    letterSpacing: "0.13em",
+    mb: 2,
+    textTransform: "uppercase",
+  },
+  links: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 1.2,
+  },
+  link: {
+    color: "rgba(255, 255, 255, 0.74)",
+    fontSize: "0.84rem",
+    textDecoration: "none",
+    "&:hover": {
+      color: "#ffffff",
+    },
+  },
+  bottom: {
+    alignItems: { xs: "flex-start", sm: "center" },
+    borderTop: "1px solid rgba(255, 255, 255, 0.11)",
+    color: "rgba(255, 255, 255, 0.42)",
+    display: "flex",
+    flexDirection: { xs: "column", sm: "row" },
+    fontSize: "0.68rem",
+    gap: 1,
+    justifyContent: "space-between",
+    pt: 3,
+  },
+};

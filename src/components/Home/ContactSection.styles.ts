@@ -1,0 +1,161 @@
+export const styles = {
+  section: {
+    bgcolor: "background.default",
+  },
+  panel: {
+    bgcolor: "#e9eee7",
+    borderRadius: { xs: "28px", md: "34px" },
+    display: "grid",
+    gridTemplateColumns: {
+      xs: "1fr",
+      md: "minmax(0, 0.78fr) minmax(0, 1.22fr)",
+    },
+    overflow: "hidden",
+  },
+  copy: {
+    bgcolor: "primary.main",
+    color: "#ffffff",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    minHeight: { md: "690px" },
+    p: { xs: 4, sm: 6, lg: 8 },
+    position: "relative",
+  },
+  copyDecor: {
+    border: "1px solid rgba(217, 170, 85, 0.26)",
+    borderRadius: "50%",
+    height: "340px",
+    left: "-190px",
+    position: "absolute",
+    top: "-190px",
+    width: "340px",
+  },
+  eyebrow: {
+    color: "secondary.main",
+  },
+  heading: {
+    color: "#ffffff",
+    fontSize: { xs: "3rem", sm: "4rem", lg: "4.7rem" },
+    maxWidth: "520px",
+  },
+  description: {
+    color: "rgba(255, 255, 255, 0.72)",
+    fontSize: "1rem",
+    lineHeight: 1.8,
+    mt: 3,
+    maxWidth: "460px",
+  },
+  contactLinks: {
+    borderTop: "1px solid rgba(255, 255, 255, 0.16)",
+    display: "flex",
+    flexDirection: "column",
+    gap: 2.25,
+    mt: 6,
+    pt: 3,
+    position: "relative",
+  },
+  contactLink: {
+    alignItems: "center",
+    color: "#ffffff",
+    display: "flex",
+    gap: 1.5,
+    textDecoration: "none",
+  },
+  contactIcon: {
+    alignItems: "center",
+    bgcolor: "rgba(255, 255, 255, 0.1)",
+    borderRadius: "50%",
+    color: "secondary.main",
+    display: "flex",
+    flex: "0 0 auto",
+    height: "42px",
+    justifyContent: "center",
+    width: "42px",
+    "& svg": {
+      fontSize: "1.1rem",
+    },
+  },
+  contactLabel: {
+    color: "rgba(255, 255, 255, 0.55)",
+    fontSize: "0.63rem",
+    fontWeight: 800,
+    letterSpacing: "0.11em",
+    textTransform: "uppercase",
+  },
+  contactValue: {
+    color: "#ffffff",
+    fontSize: "0.9rem",
+    fontWeight: 700,
+    mt: 0.25,
+  },
+  formWrap: {
+    alignItems: "center",
+    display: "flex",
+    p: { xs: 3, sm: 5, lg: 7 },
+  },
+  form: {
+    width: "100%",
+  },
+  formHeading: {
+    color: "text.primary",
+    fontSize: { xs: "2rem", md: "2.4rem" },
+    mb: 1,
+  },
+  formIntro: {
+    color: "text.secondary",
+    fontSize: "0.9rem",
+    lineHeight: 1.65,
+    mb: 3.5,
+  },
+  formGrid: {
+    display: "grid",
+    gap: 2,
+    gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr" },
+  },
+  fullWidth: {
+    gridColumn: { sm: "1 / -1" },
+  },
+  field: {
+    "& .MuiOutlinedInput-root": {
+      bgcolor: "rgba(255, 255, 255, 0.78)",
+      borderRadius: "14px",
+      "& fieldset": {
+        borderColor: "rgba(29, 75, 53, 0.16)",
+      },
+      "&:hover fieldset": {
+        borderColor: "primary.main",
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "primary.main",
+        borderWidth: "1px",
+      },
+    },
+    "& .MuiInputLabel-root": {
+      color: "text.secondary",
+    },
+  },
+  submit: {
+    justifySelf: "start",
+    mt: 1,
+  },
+  note: {
+    color: "text.secondary",
+    fontSize: "0.7rem",
+    lineHeight: 1.5,
+    mt: 2,
+  },
+  success: {
+    alignItems: "center",
+    bgcolor: "rgba(29, 75, 53, 0.08)",
+    border: "1px solid rgba(29, 75, 53, 0.16)",
+    borderRadius: "14px",
+    color: "primary.dark",
+    display: "flex",
+    fontSize: "0.85rem",
+    fontWeight: 700,
+    gap: 1,
+    mt: 2,
+    p: 1.5,
+  },
+};

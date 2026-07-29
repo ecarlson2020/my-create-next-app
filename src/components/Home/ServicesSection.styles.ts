@@ -1,0 +1,97 @@
+export const styles = {
+  section: {
+    bgcolor: "#ffffff",
+  },
+  headingRow: {
+    alignItems: { md: "end" },
+    display: "flex",
+    flexDirection: { xs: "column", md: "row" },
+    justifyContent: "space-between",
+    mb: { xs: 5, md: 7 },
+  },
+  intro: {
+    mt: { xs: 2.5, md: 0 },
+  },
+  grid: {
+    display: "grid",
+    gap: { xs: 2.5, md: 3 },
+    gridTemplateColumns: { xs: "1fr", sm: "repeat(2, 1fr)" },
+  },
+  card: {
+    bgcolor: "background.default",
+    border: "1px solid rgba(29, 75, 53, 0.08)",
+    borderRadius: "26px",
+    display: "grid",
+    gridTemplateColumns: { xs: "1fr", lg: "minmax(190px, 0.8fr) 1fr" },
+    height: "100%",
+    overflow: "hidden",
+    transition: "box-shadow 220ms ease, transform 220ms ease",
+    "&:hover": {
+      boxShadow: "0 22px 60px rgba(28, 62, 43, 0.12)",
+      transform: "translateY(-5px)",
+      "& img": {
+        transform: "scale(1.04)",
+      },
+    },
+  },
+  imageWrap: {
+    minHeight: { xs: "260px", lg: "100%" },
+    overflow: "hidden",
+    position: "relative",
+  },
+  image: {
+    height: "100%",
+    inset: 0,
+    objectFit: "cover",
+    position: "absolute",
+    transition: "transform 500ms ease",
+    width: "100%",
+  },
+  cardBody: {
+    display: "flex",
+    flexDirection: "column",
+    p: { xs: 3, lg: 3.5 },
+  },
+  icon: {
+    alignItems: "center",
+    bgcolor: "rgba(217, 170, 85, 0.22)",
+    borderRadius: "14px",
+    color: "primary.main",
+    display: "flex",
+    height: "48px",
+    justifyContent: "center",
+    mb: 2.5,
+    width: "48px",
+  },
+  title: {
+    color: "text.primary",
+    fontSize: { xs: "2rem", lg: "2.2rem" },
+  },
+  description: {
+    color: "text.secondary",
+    fontSize: "0.94rem",
+    lineHeight: 1.7,
+    mt: 1.25,
+  },
+  features: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 1,
+    listStyle: "none",
+    m: 0,
+    mt: 2.25,
+    p: 0,
+  },
+  feature: {
+    alignItems: "center",
+    color: "text.primary",
+    display: "flex",
+    fontSize: "0.82rem",
+    fontWeight: 700,
+    gap: 0.75,
+    "& svg": {
+      color: "secondary.dark",
+      fontSize: "1rem",
+    },
+  },
+};
