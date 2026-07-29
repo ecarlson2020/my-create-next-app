@@ -178,19 +178,42 @@ const GENERATED = [
 ];
 
 /**
- * The Knot "Best of Weddings" award badges, two consecutive years. These are
- * the awarding body's own artwork on a transparent background, so they take the
- * `transparent` path (PNG fallback, no JPEG) — flattening them would box each
- * badge in a solid rectangle against the cream page.
+ * Every award and press badge the client displays. All five sit together in one
+ * strip on their current home page.
+ *
+ * These are each awarding body's own artwork, mostly on a transparent
+ * background, so they take the `transparent` path (PNG fallback, no JPEG) —
+ * flattening the transparent ones would box each badge in a solid rectangle
+ * against the cream page. The WeddingWire certificate is a JPEG with its own
+ * white background and no alpha, but still gets a PNG fallback for consistency.
  */
 const BADGES = {
   "award-knot-2026": {
     id: "fab39b_264fc519b2f74f5aa93b6640a3c113d1",
+    ext: "png",
     maxW: 400,
   },
   "award-knot-2025": {
     id: "fab39b_175e37d499a5455fa9de9a31461b9e5f",
+    ext: "png",
     maxW: 400,
+  },
+  "award-weddingwire-2025": {
+    id: "fab39b_53a3b25a0b0541b6b8c1ad5e272d8e65",
+    ext: "jpg",
+    maxW: 400,
+  },
+  "award-utah-valley-bride-2025": {
+    id: "fab39b_a4bdef95198946a39b27923f809d6495",
+    ext: "png",
+    maxW: 400,
+  },
+  // Only 160x160 at source — the client's own upload. Capped so the pipeline
+  // never upscales it into softness.
+  "award-rocky-mountain-bride-2025": {
+    id: "fab39b_4e3a160f32cb486599d6fb9fe405b0ee",
+    ext: "png",
+    maxW: 160,
   },
 };
 
@@ -208,9 +231,9 @@ const CONTENT = [
     maxW,
     og: NEEDS_OG_CROP(key),
   })),
-  ...Object.entries(BADGES).map(([key, { id, maxW }]) => ({
+  ...Object.entries(BADGES).map(([key, { id, ext, maxW }]) => ({
     key,
-    url: media(id, "png"),
+    url: media(id, ext),
     maxW,
     transparent: true,
   })),

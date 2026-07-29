@@ -21,27 +21,35 @@ export const awardsStyles = {
     flexWrap: "wrap",
     justifyContent: "center",
     alignItems: "center",
-    gap: { xs: 4, md: 7 },
+    gap: { xs: 3.5, md: 6 },
   },
+  // The five badges are a square, a portrait certificate and a circle. Sizing
+  // by height with `contain` puts them on a common optical baseline instead of
+  // letting the certificate tower over the rest.
   badge: {
-    width: { xs: 96, md: 116 },
+    height: { xs: 62, md: 84 },
+    display: "flex",
+    alignItems: "center",
     flexShrink: 0,
-    "& picture, & img": { width: "100%", height: "auto" },
+    "& picture": { display: "block", height: "100%" },
   },
-  // The 2025 badge is black artwork on transparency and vanishes against the
-  // burgundy sections. It sits on a cream tile there rather than being
-  // colour-filtered — The Knot's badge artwork shouldn't be altered, and they
-  // ship the pink and black variants precisely so you can pick per background.
+  image: {
+    height: "100%",
+    width: "auto",
+    objectFit: "contain" as const,
+  },
+  // Most of this artwork is black or white line-work that disappears on
+  // burgundy. A cream tile behind every badge keeps the row legible and uniform
+  // without recolouring anyone's mark.
   badgeOnDark: {
     backgroundColor: CREAM,
-    p: 1.25,
+    p: 1,
   },
-  // Compact variant for the footer column.
   rowCompact: {
-    justifyContent: "flex-start",
-    gap: 2.5,
+    justifyContent: { xs: "flex-start", sm: "flex-end" },
+    gap: 1.5,
   },
   badgeCompact: {
-    width: 64,
+    height: 44,
   },
 } as const;

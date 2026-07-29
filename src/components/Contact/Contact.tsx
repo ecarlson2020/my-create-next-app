@@ -72,7 +72,7 @@ export default function Contact() {
       </Section>
 
       <Section bg="muted" tight>
-        <Awards eyebrow="Recognized by The Knot" />
+        <Awards eyebrow="Awards + recognition" />
       </Section>
     </>
   );

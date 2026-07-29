@@ -6,17 +6,20 @@ import { awardsStyles as s } from "./Awards.styles";
 
 interface AwardsProps {
   eyebrow?: string;
-  /** Lightens the eyebrow and tiles the dark badge for burgundy sections. */
+  /** Lightens the eyebrow and tiles each badge for burgundy sections. */
   onDark?: boolean;
-  /** Smaller, left-aligned badges without an eyebrow — used in the footer. */
+  /** Smaller, right-aligned badges without an eyebrow — used in the footer. */
   compact?: boolean;
 }
 
 /**
- * The Knot Best of Weddings badges the client has won, newest first. These are
- * the awarding body's own artwork and are rendered unmodified — the only
- * adaptation is a cream tile behind the black 2025 badge on dark sections.
- * The year is part of each badge, so no caption is added.
+ * Every award and press badge the client displays, in their own order.
+ *
+ * Two of the five are "featured in" press badges rather than awards, so the
+ * default eyebrow says "Recognition" — calling the row awards would overstate
+ * it. The artwork belongs to each awarding body and is rendered unmodified; the
+ * only adaptation is a cream tile on dark sections. The year is part of every
+ * badge, so no caption is added.
  */
 export default function Awards({
   eyebrow = "Recognition",
@@ -24,7 +27,7 @@ export default function Awards({
   compact = false,
 }: AwardsProps) {
   return (
-    <Box sx={{ ...s.root, ...(compact ? { alignItems: "flex-start" } : {}) }}>
+    <Box sx={{ ...s.root, ...(compact ? { alignItems: "stretch" } : {}) }}>
       {!compact && (
         <Typography
           component="p"
@@ -40,14 +43,15 @@ export default function Awards({
             sx={{
               ...s.badge,
               ...(compact ? s.badgeCompact : {}),
-              // Only the dark-artwork badge needs the tile; the pink one reads
-              // fine straight onto burgundy.
-              ...(onDark && award.image === "award-knot-2025"
-                ? s.badgeOnDark
-                : {}),
+              ...(onDark ? s.badgeOnDark : {}),
             }}
           >
-            <OptimizedImage name={award.image} alt={award.alt} sizes="120px" />
+            <OptimizedImage
+              name={award.image}
+              alt={award.alt}
+              sizes="120px"
+              style={s.image}
+            />
           </Box>
         ))}
       </Box>

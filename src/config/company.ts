@@ -39,11 +39,18 @@ export interface Award {
   /** Manifest key for the badge PNG (transparent — see optimize-images.mjs). */
   image: string;
   alt: string;
+  /**
+   * `award` was won; `feature` means the publication featured their work.
+   * Kept distinct so the section is never labelled as five awards when two of
+   * them are press features.
+   */
+  kind: "award" | "feature";
 }
 
 /**
- * Both badges the client displays, newest first. These are The Knot's own
- * artwork and wording — don't paraphrase the award name.
+ * Every badge the client displays, in the order they appear on their current
+ * home page. These are each body's own artwork and wording — don't paraphrase
+ * the names or promote a feature into an award.
  */
 export const awards: Award[] = [
   {
@@ -51,12 +58,35 @@ export const awards: Award[] = [
     year: "2026",
     image: "award-knot-2026",
     alt: "The Knot Best of Weddings 2026 award badge",
+    kind: "award",
   },
   {
     name: "The Knot Best of Weddings",
     year: "2025",
     image: "award-knot-2025",
     alt: "The Knot Best of Weddings 2025 award badge",
+    kind: "award",
+  },
+  {
+    name: "WeddingWire Couples' Choice Awards",
+    year: "2025",
+    image: "award-weddingwire-2025",
+    alt: "WeddingWire Couples' Choice Awards 2025 certificate",
+    kind: "award",
+  },
+  {
+    name: "Utah Valley Bride",
+    year: "2025",
+    image: "award-utah-valley-bride-2025",
+    alt: "Utah Valley Bride 2025 — as featured in",
+    kind: "feature",
+  },
+  {
+    name: "Rocky Mountain Bride",
+    year: "2025",
+    image: "award-rocky-mountain-bride-2025",
+    alt: "Rocky Mountain Bride 2025 featured vendor badge",
+    kind: "feature",
   },
 ];
 

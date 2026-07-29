@@ -28,7 +28,7 @@ export default function Home() {
         <Testimonials />
       </Section>
       <Section tight>
-        <Awards eyebrow="Recognized by The Knot" />
+        <Awards eyebrow="Awards + recognition" />
       </Section>
       <Section bg="muted">
         <CtaBanner />

@@ -62,20 +62,25 @@ test("gallery renders the full set and opens a lightbox", async ({ page }) => {
   await expect(dialog).toBeHidden();
 });
 
-test("both Knot award badges render on the home page and load", async ({
-  page,
-}) => {
+// Every badge the client displays — all five must survive the migration.
+const BADGES = [
+  "The Knot Best of Weddings 2026 award badge",
+  "The Knot Best of Weddings 2025 award badge",
+  "WeddingWire Couples' Choice Awards 2025 certificate",
+  "Utah Valley Bride 2025 — as featured in",
+  "Rocky Mountain Bride 2025 featured vendor badge",
+];
+
+test("all five award and press badges render and load", async ({ page }) => {
   await page.goto("/");
-  for (const year of ["2025", "2026"]) {
-    const badge = page
-      .getByRole("img", {
-        name: `The Knot Best of Weddings ${year} award badge`,
-      })
-      .first();
+  for (const alt of BADGES) {
+    const badge = page.getByRole("img", { name: alt }).first();
     await badge.scrollIntoViewIfNeeded();
-    await expect(badge).toBeVisible();
+    await expect(badge, alt).toBeVisible();
     await expect
-      .poll(() => badge.evaluate((i: HTMLImageElement) => i.naturalWidth))
+      .poll(() => badge.evaluate((i: HTMLImageElement) => i.naturalWidth), {
+        message: alt,
+      })
       .toBeGreaterThan(50);
   }
 });

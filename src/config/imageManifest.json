@@ -2138,5 +2138,56 @@
       }
     ],
     "fallback": "/images/gallery-46-1200.jpg"
+  },
+  "award-weddingwire-2025": {
+    "width": 400,
+    "height": 516,
+    "avif": [
+      {
+        "w": 400,
+        "src": "/images/award-weddingwire-2025-400.avif"
+      }
+    ],
+    "webp": [
+      {
+        "w": 400,
+        "src": "/images/award-weddingwire-2025-400.webp"
+      }
+    ],
+    "fallback": "/images/award-weddingwire-2025-400.png"
+  },
+  "award-utah-valley-bride-2025": {
+    "width": 400,
+    "height": 400,
+    "avif": [
+      {
+        "w": 400,
+        "src": "/images/award-utah-valley-bride-2025-400.avif"
+      }
+    ],
+    "webp": [
+      {
+        "w": 400,
+        "src": "/images/award-utah-valley-bride-2025-400.webp"
+      }
+    ],
+    "fallback": "/images/award-utah-valley-bride-2025-400.png"
+  },
+  "award-rocky-mountain-bride-2025": {
+    "width": 160,
+    "height": 160,
+    "avif": [
+      {
+        "w": 160,
+        "src": "/images/award-rocky-mountain-bride-2025-160.avif"
+      }
+    ],
+    "webp": [
+      {
+        "w": 160,
+        "src": "/images/award-rocky-mountain-bride-2025-160.webp"
+      }
+    ],
+    "fallback": "/images/award-rocky-mountain-bride-2025-160.png"
   }
 }
