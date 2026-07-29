@@ -1,0 +1,81 @@
+export const footerStyles = {
+  footer: {
+    pt: { xs: 7, md: 9 },
+    pb: 3,
+    bgcolor: "#102C24",
+    color: "#FFF9EE",
+  },
+  grid: {
+    pb: { xs: 6, md: 8 },
+    display: "grid",
+    gridTemplateColumns: { xs: "1fr", sm: "1.2fr 0.7fr 0.8fr" },
+    gap: { xs: 5, md: 8 },
+  },
+  brand: {
+    display: "flex",
+    alignItems: "center",
+    gap: 1.5,
+  },
+  mark: {
+    width: 48,
+    height: 48,
+    display: "grid",
+    placeItems: "center",
+    border: "1px solid rgba(255,249,238,0.45)",
+    borderRadius: "50%",
+    color: "#E8A27A",
+  },
+  brandName: {
+    fontFamily: '"Bitter", Georgia, serif',
+    fontSize: "1.12rem",
+    fontWeight: 700,
+    lineHeight: 1.25,
+  },
+  mission: {
+    mt: 2.5,
+    maxWidth: 440,
+    color: "rgba(255,249,238,0.58)",
+    fontSize: "0.9rem",
+    lineHeight: 1.75,
+  },
+  heading: {
+    mb: 2,
+    color: "#E8A27A",
+    fontSize: "0.72rem",
+    fontWeight: 800,
+    letterSpacing: "0.13em",
+    textTransform: "uppercase",
+  },
+  links: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    gap: 1.25,
+  },
+  link: {
+    color: "rgba(255,249,238,0.78)",
+    fontSize: "0.9rem",
+    textDecoration: "none",
+    "&:hover": {
+      color: "white",
+    },
+  },
+  contact: {
+    mb: 1.5,
+    color: "rgba(255,249,238,0.7)",
+    fontSize: "0.88rem",
+    lineHeight: 1.65,
+  },
+  bottom: {
+    pt: 3,
+    display: "flex",
+    flexDirection: { xs: "column", sm: "row" },
+    justifyContent: "space-between",
+    gap: 1,
+    borderTop: "1px solid rgba(255,249,238,0.12)",
+  },
+  legal: {
+    color: "rgba(255,249,238,0.42)",
+    fontSize: "0.72rem",
+  },
+} as const;

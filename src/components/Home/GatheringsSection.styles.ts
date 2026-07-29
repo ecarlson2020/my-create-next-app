@@ -1,0 +1,86 @@
+export const gatheringsStyles = {
+  section: {
+    py: { xs: 9, md: 14 },
+    bgcolor: "background.paper",
+  },
+  layout: {
+    display: "grid",
+    gridTemplateColumns: { xs: "1fr", md: "0.78fr 1.22fr" },
+    gap: { xs: 4, md: 9 },
+    alignItems: "start",
+  },
+  intro: {
+    position: { md: "sticky" },
+    top: { md: 135 },
+  },
+  introTitle: {
+    mb: 2.5,
+    fontSize: { xs: "2.5rem", sm: "3.2rem", md: "3.8rem" },
+    lineHeight: 1.06,
+  },
+  introBody: {
+    mb: 3.5,
+    maxWidth: 510,
+    color: "text.secondary",
+    lineHeight: 1.8,
+  },
+  visitLink: {
+    color: "secondary.main",
+    fontWeight: 800,
+  },
+  schedule: {
+    borderTop: "1px solid",
+    borderColor: "divider",
+  },
+  item: {
+    py: { xs: 3, sm: 3.5 },
+    px: { xs: 0, sm: 2 },
+    display: "grid",
+    gridTemplateColumns: { xs: "1fr auto", sm: "125px 1fr auto" },
+    columnGap: { xs: 2, sm: 3 },
+    rowGap: 1,
+    alignItems: "center",
+    borderBottom: "1px solid",
+    borderColor: "divider",
+    transition: "background-color 180ms ease, padding 180ms ease",
+    "&:hover": {
+      px: { xs: 1.5, sm: 3 },
+      bgcolor: "rgba(36, 69, 58, 0.045)",
+    },
+  },
+  day: {
+    gridColumn: { xs: "1 / -1", sm: "auto" },
+    color: "secondary.main",
+    fontSize: "0.72rem",
+    fontWeight: 800,
+    letterSpacing: "0.1em",
+    textTransform: "uppercase",
+  },
+  itemTitle: {
+    color: "primary.dark",
+    fontFamily: '"Bitter", Georgia, serif',
+    fontSize: { xs: "1.2rem", sm: "1.35rem" },
+    fontWeight: 600,
+  },
+  detail: {
+    gridColumn: { xs: "1 / -1", sm: "2 / -1" },
+    color: "text.secondary",
+    fontSize: "0.86rem",
+    lineHeight: 1.6,
+  },
+  time: {
+    color: "primary.main",
+    fontSize: "0.86rem",
+    fontWeight: 800,
+    whiteSpace: "nowrap",
+  },
+  note: {
+    mt: 3,
+    display: "flex",
+    alignItems: "center",
+    gap: 1,
+    color: "text.secondary",
+    fontSize: "0.8rem",
+    fontStyle: "italic",
+  },
+} as const;
