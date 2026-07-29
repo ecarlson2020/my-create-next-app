@@ -15,6 +15,8 @@ export default function Team() {
         title="Our Team"
         description="Meet Peter Ktestakis, owner and lead planner, and Emily Twohig, lead designer — the two people behind every Planned by Peter celebration."
         image="hero-team"
+        imageAlt="A couple photographed in the Utah mountains at golden hour"
+        breadcrumbs={[{ name: "Our Team", path: "/team" }]}
       />
       <PageHero
         eyebrow="Our Team"

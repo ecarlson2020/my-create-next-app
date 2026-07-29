@@ -100,6 +100,10 @@ function build-staging {
   npm run pretty
   npm run lint
   MY_ENV=staging next build
+  # public/robots.txt advertises /sitemap.xml, so it has to exist in every
+  # export. Reads its base URL back out of the build, so staging emits staging
+  # URLs rather than production ones.
+  node scripts/generate-sitemap.mjs
 }
 
 function build-prod {
@@ -107,6 +111,7 @@ function build-prod {
   npm run pretty
   npm run lint
   MY_ENV=production next build
+  node scripts/generate-sitemap.mjs
 }
 
 # Guard the local rm -rf / mv in the deploy steps below: these repos also live

@@ -20,7 +20,12 @@ export default function BlogPost({ post }: BlogPostProps) {
         title={post.title}
         description={post.excerpt}
         image={post.image}
-        article={{ publishedTime: post.isoDate }}
+        imageAlt={post.imageAlt}
+        article={{ publishedTime: post.isoDate, title: post.title }}
+        breadcrumbs={[
+          { name: "Journal", path: "/blog" },
+          { name: post.title, path: `/blog/${post.slug}` },
+        ]}
       />
       <PageHero
         eyebrow={`${post.date} · ${post.readingTime}`}

@@ -17,6 +17,8 @@ export default function Contact() {
         title="Contact"
         description={`Tell us about your wedding. Planned by Peter replies to every inquiry within ${company.responseWindow} — ${company.email} or ${company.phone}.`}
         image="hero-contact"
+        imageAlt="A reception table set with white florals overlooking the Utah mountains"
+        breadcrumbs={[{ name: "Contact", path: "/contact" }]}
       />
       <PageHero
         eyebrow="Contact"

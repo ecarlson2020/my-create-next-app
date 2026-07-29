@@ -11,6 +11,8 @@ export default function Gallery() {
         title="Gallery"
         description="A look at weddings planned and designed by Planned by Peter across Utah, Park City, Deer Valley, Moab and beyond."
         image="hero-gallery"
+        imageAlt="A draped ivory reception space with soft floral arrangements"
+        breadcrumbs={[{ name: "Gallery", path: "/gallery" }]}
       />
       <PageHero
         eyebrow="Gallery"

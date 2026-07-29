@@ -15,6 +15,8 @@ export default function Process() {
         title="Our Process"
         description="From first conversation to final send-off — the five stages of planning a wedding with Planned by Peter, from discovery and design through vendor sourcing and wedding-day execution."
         image="hero-process"
+        imageAlt="A reception table set with gold chairs and white florals"
+        breadcrumbs={[{ name: "Our Process", path: "/process" }]}
       />
       <PageHero
         eyebrow="Our Process"

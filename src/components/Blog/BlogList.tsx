@@ -18,6 +18,8 @@ export default function BlogList() {
         title="Journal"
         description="Real Utah weddings, planning timelines, and notes from behind the scenes — from the team at Planned by Peter."
         image="hero-blog"
+        imageAlt="A sweetheart table set with florals overlooking the Utah mountains"
+        breadcrumbs={[{ name: "Journal", path: "/blog" }]}
       />
       <PageHero
         eyebrow="Journal"

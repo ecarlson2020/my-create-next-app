@@ -18,7 +18,13 @@ export interface ImageManifestEntry {
   webp: ImageVariant[];
   /** Root-relative JPEG at the largest generated size. */
   fallback: string;
+  /** Root-relative 1200x630 JPEG for social cards, on share images only. */
+  og?: string;
 }
+
+/** Every social card is this size — see NEEDS_OG_CROP in optimize-images.mjs. */
+export const OG_IMAGE_WIDTH = 1200;
+export const OG_IMAGE_HEIGHT = 630;
 
 export const imageManifest = manifestJson as Record<string, ImageManifestEntry>;
 

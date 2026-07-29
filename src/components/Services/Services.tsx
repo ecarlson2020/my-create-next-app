@@ -15,6 +15,8 @@ export default function Services() {
         title="Services + Investment"
         description="Full wedding planning from $5,000, month-of coordination from $2,300, and day-of coordination from $1,900 — three levels of support from Planned by Peter."
         image="hero-services"
+        imageAlt="A long outdoor reception table set with greenery and candlelight"
+        breadcrumbs={[{ name: "Services", path: "/services" }]}
       />
       <PageHero
         eyebrow="Services"

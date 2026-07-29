@@ -21,9 +21,13 @@ export default defineConfig({
     timeout: 120_000,
   },
   projects: [
+    // Compiles every route once, serially, before the suite fans out — see
+    // e2e/warmup.setup.ts.
+    { name: "setup", testMatch: /warmup\.setup\.ts/ },
     {
       name: "chromium",
       use: { ...devices["Desktop Chrome"] },
+      dependencies: ["setup"],
     },
   ],
 });

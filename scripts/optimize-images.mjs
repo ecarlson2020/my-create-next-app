@@ -194,11 +194,19 @@ const BADGES = {
   },
 };
 
+// Keys used as a page's social share image. Social cards are 1.91:1 landscape,
+// but most of these heroes are 2:3 portrait — handing the full-size original to
+// a crawler gets it hard-cropped or shrunk to a square thumbnail. Each of these
+// gets a dedicated 1200x630 crop instead.
+const NEEDS_OG_CROP = (key) =>
+  key.startsWith("hero-") || key.startsWith("blog-");
+
 const CONTENT = [
   ...Object.entries(FEATURES).map(([key, { id, maxW }]) => ({
     key,
     url: media(id),
     maxW,
+    og: NEEDS_OG_CROP(key),
   })),
   ...Object.entries(BADGES).map(([key, { id, maxW }]) => ({
     key,
@@ -223,7 +231,10 @@ async function download(url) {
   return Buffer.from(await res.arrayBuffer());
 }
 
-async function processImage({ key, url, file, maxW, transparent }, cache) {
+const OG_WIDTH = 1200;
+const OG_HEIGHT = 630;
+
+async function processImage({ key, url, file, maxW, transparent, og }, cache) {
   let buf;
   if (file) {
     const abs = path.join(root, file);
@@ -268,12 +279,27 @@ async function processImage({ key, url, file, maxW, transparent }, cache) {
     : fallback.jpeg({ quality: 78, mozjpeg: true })
   ).toFile(path.join(imagesDir, `${key}-${largest}.${ext}`));
 
+  // Centre crop, not sharp's "attention" heuristic. On these 2:3 portraits
+  // attention chases contrast rather than subject — it framed the team hero on
+  // treetops with the couple cropped out entirely, and picked empty sky over the
+  // tablescape on three others. Wedding photographers centre their subject, so
+  // the geometric centre is both better and predictable.
+  let ogPath;
+  if (og) {
+    ogPath = `/images/og-${key}.jpg`;
+    await sharp(buf)
+      .resize(OG_WIDTH, OG_HEIGHT, { fit: "cover", position: "centre" })
+      .jpeg({ quality: 82, mozjpeg: true })
+      .toFile(path.join(imagesDir, `og-${key}.jpg`));
+  }
+
   return {
     width: largest,
     height: Math.round(largest * aspect),
     avif,
     webp,
     fallback: `/images/${key}-${largest}.${ext}`,
+    ...(ogPath ? { og: ogPath } : {}),
   };
 }
 
