@@ -4,6 +4,8 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { company } from "@/config/company";
 import { navItems } from "@/config/nav";
+import Awards from "@/components/common/Awards/Awards";
+import SocialLinks from "@/components/common/SocialLinks/SocialLinks";
 import { footerStyles as s } from "./Footer.styles";
 
 export default function Footer() {
@@ -54,17 +56,11 @@ export default function Footer() {
               <Box component="a" href={company.phoneHref} sx={s.link}>
                 {company.phone}
               </Box>
-              <Box
-                component="a"
-                href={company.instagramUrl}
-                target="_blank"
-                rel="noreferrer"
-                sx={s.link}
-              >
-                {company.instagram}
-              </Box>
               <Box component="span" sx={{ ...s.link, opacity: 0.7 }}>
                 {company.serviceAreas.slice(0, 4).join(" · ")}
+              </Box>
+              <Box sx={{ mt: 1.5 }}>
+                <SocialLinks showHandle onDark />
               </Box>
             </Box>
           </Box>
@@ -74,14 +70,7 @@ export default function Footer() {
           <Box component="span" sx={s.fineprint}>
             © {year} {company.legalName}
           </Box>
-          <Box sx={s.award}>
-            <Box component="span" sx={s.awardMark}>
-              {company.award}
-            </Box>
-            <Box component="span" sx={s.fineprint}>
-              {company.awardYear} · {company.region}
-            </Box>
-          </Box>
+          <Awards compact onDark />
         </Box>
       </Container>
     </Box>

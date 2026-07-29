@@ -2,6 +2,7 @@ import Section from "@/components/common/Section/Section";
 import Seo from "@/components/common/Seo/Seo";
 import Testimonials from "@/components/common/Testimonials/Testimonials";
 import CtaBanner from "@/components/common/CtaBanner/CtaBanner";
+import Awards from "@/components/common/Awards/Awards";
 import HomeHero from "./HomeHero";
 import HomeWelcome from "./HomeWelcome";
 import HomeStatement from "./HomeStatement";
@@ -25,6 +26,9 @@ export default function Home() {
       <HomeServices />
       <Section bg="dark">
         <Testimonials />
+      </Section>
+      <Section tight>
+        <Awards eyebrow="Recognized by The Knot" />
       </Section>
       <Section bg="muted">
         <CtaBanner />

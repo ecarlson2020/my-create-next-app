@@ -65,16 +65,4 @@ export const footerStyles = {
     fontSize: "0.62rem",
     color: alpha(CREAM, 0.5),
   },
-  award: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: { xs: "flex-start", sm: "flex-end" },
-    gap: 0.5,
-  },
-  awardMark: {
-    fontFamily: "var(--font-display), Georgia, serif",
-    fontStyle: "italic",
-    fontSize: "1.1rem",
-    color: alpha(CREAM, 0.9),
-  },
 } as const;

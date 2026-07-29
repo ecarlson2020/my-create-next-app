@@ -27,6 +27,11 @@ const media = (id, ext = "jpg") => `${WIX}/${id}~mv2.${ext}`;
 
 const LOGO = media("591962_a52a5ec0bdf144ee98f5470ca1e3ed6a", "png");
 
+// The client's existing favicon: a photograph of a couple that Wix square-crops
+// on the fly. Kept deliberately so the browser-tab icon doesn't change from what
+// visitors and the client already recognise.
+const FAVICON = media("fab39b_a8e9e6ba62104eeeb584a563626ccd1b", "jpg");
+
 /**
  * Every wedding photo from the client's gallery, in display order. These are the
  * portfolio — real weddings the team planned. Nothing generated goes in here.
@@ -172,11 +177,34 @@ const GENERATED = [
   { key: "team-emily", file: "scripts/sources/team-emily.jpg", maxW: 1000 },
 ];
 
+/**
+ * The Knot "Best of Weddings" award badges, two consecutive years. These are
+ * the awarding body's own artwork on a transparent background, so they take the
+ * `transparent` path (PNG fallback, no JPEG) — flattening them would box each
+ * badge in a solid rectangle against the cream page.
+ */
+const BADGES = {
+  "award-knot-2026": {
+    id: "fab39b_264fc519b2f74f5aa93b6640a3c113d1",
+    maxW: 400,
+  },
+  "award-knot-2025": {
+    id: "fab39b_175e37d499a5455fa9de9a31461b9e5f",
+    maxW: 400,
+  },
+};
+
 const CONTENT = [
   ...Object.entries(FEATURES).map(([key, { id, maxW }]) => ({
     key,
     url: media(id),
     maxW,
+  })),
+  ...Object.entries(BADGES).map(([key, { id, maxW }]) => ({
+    key,
+    url: media(id, "png"),
+    maxW,
+    transparent: true,
   })),
   ...GALLERY.map((id, i) => ({
     key: `gallery-${String(i + 1).padStart(2, "0")}`,
@@ -195,7 +223,7 @@ async function download(url) {
   return Buffer.from(await res.arrayBuffer());
 }
 
-async function processImage({ key, url, file, maxW }, cache) {
+async function processImage({ key, url, file, maxW, transparent }, cache) {
   let buf;
   if (file) {
     const abs = path.join(root, file);
@@ -231,17 +259,21 @@ async function processImage({ key, url, file, maxW }, cache) {
     avif.push({ w, src: `/images/${key}-${w}.avif` });
     webp.push({ w, src: `/images/${key}-${w}.webp` });
   }
-  await sharp(buf)
-    .resize({ width: largest, withoutEnlargement: true })
-    .jpeg({ quality: 78, mozjpeg: true })
-    .toFile(path.join(imagesDir, `${key}-${largest}.jpg`));
+  // JPEG has no alpha channel, so anything transparent gets a PNG fallback
+  // instead — a JPEG would render the badge inside a solid rectangle.
+  const ext = transparent ? "png" : "jpg";
+  const fallback = sharp(buf).resize({ width: largest, withoutEnlargement: true });
+  await (transparent
+    ? fallback.png({ compressionLevel: 9 })
+    : fallback.jpeg({ quality: 78, mozjpeg: true })
+  ).toFile(path.join(imagesDir, `${key}-${largest}.${ext}`));
 
   return {
     width: largest,
     height: Math.round(largest * aspect),
     avif,
     webp,
-    fallback: `/images/${key}-${largest}.jpg`,
+    fallback: `/images/${key}-${largest}.${ext}`,
   };
 }
 
@@ -269,7 +301,9 @@ async function makeLogo() {
 }
 
 async function makeFavicons() {
-  const svg = await fs.readFile(path.join(publicDir, "favicon.svg"));
+  // Square-cropped from the centre, matching how Wix renders the same source
+  // today (`/v1/fill/w_32,h_32`).
+  const src = await download(FAVICON);
   const sizes = [
     [180, "apple-touch-icon.png"],
     [192, "icon-192.png"],
@@ -277,8 +311,8 @@ async function makeFavicons() {
     [32, "favicon-32.png"],
   ];
   for (const [size, name] of sizes) {
-    await sharp(svg, { density: 384 })
-      .resize(size, size)
+    await sharp(src)
+      .resize(size, size, { fit: "cover", position: "centre" })
       .png()
       .toFile(path.join(publicDir, name));
   }

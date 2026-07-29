@@ -88,6 +88,16 @@ test("typing a long message key-by-key does not break the form", async ({
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
 
+  // Wait for React to hydrate before typing. Keystrokes delivered to the
+  // server-rendered HTML are discarded when hydration resets the controlled
+  // input, which under a loaded dev server left this field empty.
+  await message.click();
+  await expect(async () => {
+    await message.pressSequentially("x");
+    await expect(message).toHaveValue(/x/);
+  }).toPass({ timeout: 15_000 });
+  await message.fill("");
+
   // Per-keystroke input events, the path a real visitor takes. Guards the
   // controlled-input wiring in setField against re-render churn.
   await message.pressSequentially(text, { delay: 10 });

@@ -5,6 +5,8 @@ import SectionHeading from "@/components/common/SectionHeading/SectionHeading";
 import PageHero from "@/components/common/PageHero/PageHero";
 import Seo from "@/components/common/Seo/Seo";
 import { company } from "@/config/company";
+import SocialLinks from "@/components/common/SocialLinks/SocialLinks";
+import Awards from "@/components/common/Awards/Awards";
 import ContactForm from "./ContactForm";
 import { contactStyles as s } from "./Contact.styles";
 
@@ -46,16 +48,10 @@ export default function Contact() {
             </Box>
             <Box sx={s.group}>
               <Typography component="span" sx={s.label}>
-                Instagram
+                Follow along
               </Typography>
-              <Box
-                component="a"
-                href={company.instagramUrl}
-                target="_blank"
-                rel="noreferrer"
-                sx={s.value}
-              >
-                {company.instagram}
+              <Box sx={{ mt: 1 }}>
+                <SocialLinks showHandle />
               </Box>
             </Box>
             <Box sx={s.divider} />
@@ -71,6 +67,10 @@ export default function Contact() {
 
           <ContactForm />
         </Box>
+      </Section>
+
+      <Section bg="muted" tight>
+        <Awards eyebrow="Recognized by The Knot" />
       </Section>
     </>
   );

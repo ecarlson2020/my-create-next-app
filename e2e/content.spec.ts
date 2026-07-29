@@ -62,6 +62,46 @@ test("gallery renders the full set and opens a lightbox", async ({ page }) => {
   await expect(dialog).toBeHidden();
 });
 
+test("both Knot award badges render on the home page and load", async ({
+  page,
+}) => {
+  await page.goto("/");
+  for (const year of ["2025", "2026"]) {
+    const badge = page
+      .getByRole("img", {
+        name: `The Knot Best of Weddings ${year} award badge`,
+      })
+      .first();
+    await badge.scrollIntoViewIfNeeded();
+    await expect(badge).toBeVisible();
+    await expect
+      .poll(() => badge.evaluate((i: HTMLImageElement) => i.naturalWidth))
+      .toBeGreaterThan(50);
+  }
+});
+
+test("Instagram is linked from the footer and the contact page", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const footerSocial = page
+    .getByRole("contentinfo")
+    .getByRole("link", { name: /Instagram — @plannedbypeter/i });
+  await expect(footerSocial).toBeVisible();
+  await expect(footerSocial).toHaveAttribute(
+    "href",
+    "https://www.instagram.com/plannedbypeter",
+  );
+
+  // Scoped to <main>: the footer carries the same link on every page.
+  await page.goto("/contact");
+  await expect(
+    page
+      .getByRole("main")
+      .getByRole("link", { name: /Instagram — @plannedbypeter/i }),
+  ).toBeVisible();
+});
+
 test("footer carries the real contact details", async ({ page }) => {
   await page.goto("/");
   const footer = page.getByRole("contentinfo");

@@ -27,12 +27,53 @@ export const company = {
     "Southern Utah",
     "Destination",
   ],
-  award: "Best of the Beehive",
-  awardYear: "2025",
   responseWindow: "72 hours",
   /** Used for canonical URLs and JSON-LD. */
   siteUrl: "https://www.plannedbypeter.com",
 } as const;
+
+export interface Award {
+  /** Awarding body, as it appears on the badge artwork. */
+  name: string;
+  year: string;
+  /** Manifest key for the badge PNG (transparent — see optimize-images.mjs). */
+  image: string;
+  alt: string;
+}
+
+/**
+ * Both badges the client displays, newest first. These are The Knot's own
+ * artwork and wording — don't paraphrase the award name.
+ */
+export const awards: Award[] = [
+  {
+    name: "The Knot Best of Weddings",
+    year: "2026",
+    image: "award-knot-2026",
+    alt: "The Knot Best of Weddings 2026 award badge",
+  },
+  {
+    name: "The Knot Best of Weddings",
+    year: "2025",
+    image: "award-knot-2025",
+    alt: "The Knot Best of Weddings 2025 award badge",
+  },
+];
+
+export interface SocialLink {
+  label: string;
+  handle: string;
+  url: string;
+}
+
+/** Instagram is the only profile the client currently links anywhere. */
+export const socialLinks: SocialLink[] = [
+  {
+    label: "Instagram",
+    handle: company.instagram,
+    url: company.instagramUrl,
+  },
+];
 
 export const homeIntro = [
   "Welcome to Planned by Peter Weddings & Events! We're a Utah based wedding + event planning company that creates full-service refined, unforgettable wedding experiences defined by intentional design and flawless execution.",

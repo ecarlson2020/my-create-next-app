@@ -2095,5 +2095,39 @@
       }
     ],
     "fallback": "/images/gallery-46-1200.jpg"
+  },
+  "award-knot-2026": {
+    "width": 400,
+    "height": 400,
+    "avif": [
+      {
+        "w": 400,
+        "src": "/images/award-knot-2026-400.avif"
+      }
+    ],
+    "webp": [
+      {
+        "w": 400,
+        "src": "/images/award-knot-2026-400.webp"
+      }
+    ],
+    "fallback": "/images/award-knot-2026-400.png"
+  },
+  "award-knot-2025": {
+    "width": 400,
+    "height": 400,
+    "avif": [
+      {
+        "w": 400,
+        "src": "/images/award-knot-2025-400.avif"
+      }
+    ],
+    "webp": [
+      {
+        "w": 400,
+        "src": "/images/award-knot-2025-400.webp"
+      }
+    ],
+    "fallback": "/images/award-knot-2025-400.png"
   }
 }

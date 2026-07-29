@@ -24,8 +24,15 @@ export default function MyDocument({ emotionStyleTags }: MyDocumentProps) {
       <Head>
         <meta charSet="utf-8" />
         <meta name="theme-color" content={THEME_COLOR} />
+        {/* The client's existing favicon is a photograph, so there is no vector
+            variant to offer — .ico plus the PNG sizes in site.webmanifest. */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="192x192"
+          href="/icon-192.png"
+        />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
         {/* Emotion critical CSS, inlined at build so there's no FOUC. */}
