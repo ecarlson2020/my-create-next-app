@@ -6,12 +6,12 @@ import SectionHeading from "@/components/common/SectionHeading/SectionHeading";
 import Reveal from "@/components/common/Reveal/Reveal";
 import { processSteps } from "@/config/process";
 import { homeShared as sh } from "./shared.styles";
-import { homeProcessStyles as s } from "./HomeProcess.styles";
+import { homeProcessStyles as s, STEP_COLORS } from "./HomeProcess.styles";
 
-/** Five-column teaser for /process — the full copy lives on that page. */
+/** Five-colour teaser for /process — the full copy lives on that page. */
 export default function HomeProcess() {
   return (
-    <Section bg="muted">
+    <Section bg="blueSoft" roundedTop roundedBottom>
       <SectionHeading
         eyebrow="Process"
         title="From first conversation to final send-off"
@@ -22,9 +22,12 @@ export default function HomeProcess() {
         {processSteps.map((step, i) => (
           <Reveal key={step.number} delay={i * 80}>
             <Box sx={s.cell}>
-              <Typography component="span" sx={s.number}>
+              <Box
+                sx={{ ...s.disc, backgroundColor: STEP_COLORS[i] }}
+                aria-hidden
+              >
                 {step.number}
-              </Typography>
+              </Box>
               <Typography component="h3" sx={s.short}>
                 {step.short}
               </Typography>
@@ -36,8 +39,8 @@ export default function HomeProcess() {
         ))}
       </Box>
       <Box sx={s.action}>
-        <Box component={Link} href="/process" sx={sh.linkCaps}>
-          See the full process —
+        <Box component={Link} href="/process" sx={sh.linkPill}>
+          See the full process
         </Box>
       </Box>
     </Section>

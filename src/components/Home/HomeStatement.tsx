@@ -8,7 +8,7 @@ import { homeStatementStyles as s } from "./HomeStatement.styles";
 /** The brand's thesis, set large on burgundy — the site's one full-stop moment. */
 export default function HomeStatement() {
   return (
-    <Section bg="dark">
+    <Section bg="terracotta" roundedTop roundedBottom>
       <Reveal>
         <Box sx={s.root}>
           <Typography component="p" sx={s.eyebrow}>

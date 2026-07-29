@@ -6,7 +6,7 @@ import SectionHeading from "@/components/common/SectionHeading/SectionHeading";
 import OptimizedImage from "@/components/common/OptimizedImage/OptimizedImage";
 import Reveal from "@/components/common/Reveal/Reveal";
 import { services } from "@/config/services";
-import { homeServicesStyles as s } from "./HomeServices.styles";
+import { homeServicesStyles as s, SERVICE_TINTS } from "./HomeServices.styles";
 
 export default function HomeServices() {
   return (
@@ -23,7 +23,7 @@ export default function HomeServices() {
             <Box
               component={Link}
               href={`/services#${service.slug}`}
-              sx={s.card}
+              sx={{ ...s.card, backgroundColor: SERVICE_TINTS[i] }}
             >
               <Box className="service-media" sx={s.media}>
                 <OptimizedImage
@@ -44,7 +44,7 @@ export default function HomeServices() {
                   {service.summary}
                 </Typography>
                 <Typography component="span" sx={s.more}>
-                  Learn more —
+                  Learn more
                 </Typography>
               </Box>
             </Box>

@@ -30,6 +30,13 @@ export default function Reveal({ children, delay = 0 }: RevealProps) {
       return undefined;
     }
 
+    // Reduced motion: there's no animation to stagger, so gating the content on
+    // a scroll observer only risks leaving it invisible. Show it straight away.
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
+      setShown(true);
+      return undefined;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {

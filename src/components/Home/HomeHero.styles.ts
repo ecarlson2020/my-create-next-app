@@ -1,15 +1,32 @@
 import { alpha } from "@mui/material/styles";
-import { BURGUNDY, CREAM, TRACKED_CAPS } from "@/theme";
+import {
+  ARCH,
+  BURGUNDY,
+  CREAM,
+  OCHRE,
+  RADIUS_CARD,
+  TERRACOTTA,
+  TRACKED_CAPS,
+} from "@/theme";
 
 export const homeHeroStyles = {
+  // The hero is an inset rounded panel rather than a full-bleed rectangle, so
+  // the very first thing on the page states the shape language.
   root: {
     position: "relative",
-    // Fills the viewport but never taller than a phone's browser chrome allows.
-    minHeight: { xs: "88svh", md: "100svh" },
+    px: { xs: 1.5, md: 3 },
+    pt: { xs: "76px", md: "104px" },
+    pb: { xs: 2, md: 3 },
+    backgroundColor: CREAM,
+  },
+  panel: {
+    position: "relative",
+    minHeight: { xs: "76svh", md: "84svh" },
+    borderRadius: { xs: `${RADIUS_CARD}px`, md: `${RADIUS_CARD * 1.5}px` },
+    overflow: "hidden",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    overflow: "hidden",
     backgroundColor: BURGUNDY,
   },
   media: {
@@ -18,75 +35,78 @@ export const homeHeroStyles = {
     animation: "slowDrift 24s ease-in-out infinite alternate",
     "& picture, & img": { width: "100%", height: "100%", objectFit: "cover" },
   },
-  // Two stacked washes. The photography here is bright and high-key — white
-  // florals, snow, candlelight — so a light gradient alone leaves the cream
-  // headline unreadable. A flat tint carries the baseline contrast and the
-  // gradient darkens the top and bottom edges where the nav and scroll cue sit.
   scrim: {
     position: "absolute",
     inset: 0,
-    backgroundColor: alpha(BURGUNDY, 0.42),
+    backgroundColor: alpha(BURGUNDY, 0.38),
   },
   scrimGradient: {
     position: "absolute",
     inset: 0,
-    background: `linear-gradient(to bottom, ${alpha(BURGUNDY, 0.55)} 0%, ${alpha(
+    background: `linear-gradient(to bottom, ${alpha(BURGUNDY, 0.5)} 0%, ${alpha(
       BURGUNDY,
-      0.3,
-    )} 40%, ${alpha(BURGUNDY, 0.72)} 100%)`,
+      0.22,
+    )} 40%, ${alpha(BURGUNDY, 0.66)} 100%)`,
   },
   content: {
     position: "relative",
     textAlign: "center",
     color: CREAM,
     px: 3,
-    maxWidth: 1000,
+    maxWidth: 940,
     animation: "fadeIn 1400ms ease-out both",
   },
   eyebrow: {
     ...TRACKED_CAPS,
-    fontSize: { xs: "0.62rem", md: "0.7rem" },
-    color: alpha(CREAM, 0.82),
+    fontSize: { xs: "0.6rem", md: "0.68rem" },
+    color: CREAM,
+    backgroundColor: alpha(TERRACOTTA, 0.9),
+    borderRadius: 999,
+    px: 2.5,
+    py: 1,
+    display: "inline-block",
     mb: { xs: 3, md: 4 },
   },
   title: {
     color: CREAM,
-    // Deliberately not the theme h1 clamp — the hero runs larger than any other
-    // heading on the site.
-    fontSize: { xs: "2.9rem", sm: "4rem", md: "5.6rem" },
+    fontSize: { xs: "2.8rem", sm: "3.9rem", md: "5.4rem" },
     lineHeight: 1.02,
   },
   tagline: {
     mt: { xs: 3, md: 4 },
     mx: "auto",
-    maxWidth: "48ch",
-    color: alpha(CREAM, 0.88),
+    maxWidth: "46ch",
+    color: alpha(CREAM, 0.9),
     fontSize: { xs: "0.95rem", md: "1.05rem" },
     lineHeight: 1.8,
   },
   cta: {
-    mt: { xs: 5, md: 6 },
-    border: `1px solid ${alpha(CREAM, 0.6)}`,
-    color: CREAM,
+    mt: { xs: 4, md: 5 },
+    backgroundColor: CREAM,
+    color: BURGUNDY,
     px: 5,
-    "&:hover": { backgroundColor: CREAM, color: BURGUNDY, borderColor: CREAM },
+    "&:hover": { backgroundColor: OCHRE, color: BURGUNDY },
   },
-  scrollHint: {
-    position: "absolute",
-    bottom: { xs: 24, md: 36 },
-    left: "50%",
-    transform: "translateX(-50%)",
-    ...TRACKED_CAPS,
-    fontSize: "0.58rem",
-    color: alpha(CREAM, 0.7),
+  // Two small arch-topped photographs peeking above the panel's lower edge,
+  // overlapping into the section below.
+  peekRow: {
+    position: "relative",
+    zIndex: 2,
+    mt: { xs: -6, md: -9 },
     display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: 1.5,
+    justifyContent: "center",
+    gap: { xs: 2, md: 3 },
+    pointerEvents: "none",
   },
-  scrollLine: {
-    width: "1px",
-    height: 46,
-    backgroundColor: alpha(CREAM, 0.45),
+  peek: {
+    width: { xs: 92, md: 132 },
+    borderRadius: ARCH,
+    overflow: "hidden",
+    border: `4px solid ${CREAM}`,
+    aspectRatio: "3 / 4",
+    "& picture, & img": { width: "100%", height: "100%", objectFit: "cover" },
+  },
+  peekOffset: {
+    mt: { xs: 3, md: 5 },
   },
 } as const;

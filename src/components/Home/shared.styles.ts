@@ -1,12 +1,11 @@
 import { alpha } from "@mui/material/styles";
-import { BURGUNDY, TRACKED_CAPS } from "@/theme";
+import { BURGUNDY, CREAM, OCHRE, TRACKED_CAPS } from "@/theme";
 
 /**
  * Styles used by two or more of the Home sub-sections. Per AGENTS.md, a
  * component may import only its own `.styles.ts` and this file.
  */
 export const homeShared = {
-  // The alternating image/text pair used by the welcome and approach blocks.
   split: {
     display: "grid",
     gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
@@ -16,18 +15,6 @@ export const homeShared = {
   splitReverse: {
     "& > :first-of-type": { order: { xs: 0, md: 2 } },
   },
-  // Photographs sit in a fixed-ratio frame so a portrait and a landscape source
-  // can occupy the same slot without the grid jumping.
-  frame: {
-    position: "relative",
-    width: "100%",
-    aspectRatio: "4 / 5",
-    overflow: "hidden",
-    "& picture, & img": { width: "100%", height: "100%", objectFit: "cover" },
-  },
-  frameWide: {
-    aspectRatio: "3 / 2",
-  },
   bodyStack: {
     display: "flex",
     flexDirection: "column",
@@ -36,18 +23,34 @@ export const homeShared = {
   body: {
     color: alpha(BURGUNDY, 0.8),
   },
-  linkCaps: {
+  bodyOnDark: {
+    color: alpha(CREAM, 0.88),
+  },
+  // Pill link — the small-scale echo of the rounded button shape.
+  linkPill: {
     ...TRACKED_CAPS,
-    fontSize: "0.7rem",
+    fontSize: "0.68rem",
     color: BURGUNDY,
     display: "inline-flex",
     alignItems: "center",
     gap: 1.5,
     mt: 2,
-    pb: 0.75,
-    borderBottom: `1px solid ${alpha(BURGUNDY, 0.4)}`,
+    px: 3,
+    py: 1.75,
+    borderRadius: 999,
+    border: `1px solid ${alpha(BURGUNDY, 0.3)}`,
     width: "fit-content",
-    transition: "gap 260ms ease, border-color 260ms ease",
-    "&:hover": { gap: 2.5, borderColor: BURGUNDY },
+    transition: "background-color 280ms ease, color 280ms ease, gap 280ms ease",
+    "&:hover": { gap: 2.5, backgroundColor: OCHRE, borderColor: OCHRE },
+  },
+  linkPillOnDark: {
+    color: CREAM,
+    borderColor: alpha(CREAM, 0.45),
+    "&:hover": {
+      gap: 2.5,
+      backgroundColor: CREAM,
+      color: BURGUNDY,
+      borderColor: CREAM,
+    },
   },
 } as const;

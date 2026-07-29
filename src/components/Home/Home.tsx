@@ -17,20 +17,24 @@ export default function Home() {
         title="Utah Wedding Planner"
         description="Planned by Peter is a Utah-based full-service and destination wedding planning team crafting unforgettable celebrations through curated design and seamless coordination."
         image="hero-home"
+        imageAlt="A candlelit winter reception beneath crystal chandeliers"
       />
       <HomeHero />
       <HomeWelcome />
+      {/* Terracotta → blue → sand → cream → sage: the page steps through the
+          accent palette rather than alternating one colour with cream. */}
       <HomeStatement />
       <HomeProcess />
       <HomeGalleryStrip />
       <HomeServices />
-      <Section bg="dark">
+      {/* Sage is dark enough that Testimonials' cream-on-dark styling holds. */}
+      <Section bg="sage" roundedTop roundedBottom>
         <Testimonials />
       </Section>
       <Section tight>
         <Awards eyebrow="Awards + recognition" />
       </Section>
-      <Section bg="muted">
+      <Section bg="ochreSoft" roundedTop>
         <CtaBanner />
       </Section>
     </>

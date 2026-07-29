@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Section from "@/components/common/Section/Section";
 import SectionHeading from "@/components/common/SectionHeading/SectionHeading";
-import OptimizedImage from "@/components/common/OptimizedImage/OptimizedImage";
+import ShapeFrame from "@/components/common/Shape/ShapeFrame";
 import Reveal from "@/components/common/Reveal/Reveal";
 import { homeIntro } from "@/config/company";
 import { homeShared as sh } from "./shared.styles";
@@ -13,14 +13,15 @@ export default function HomeWelcome() {
     <Section>
       <Box sx={sh.split}>
         <Reveal>
-          <Box sx={sh.frame}>
-            <OptimizedImage
-              name="home-welcome"
-              alt="A reception table set with white florals overlooking the Utah mountains"
-              cover
-              sizes="(max-width: 900px) 92vw, 46vw"
-            />
-          </Box>
+          {/* Arch-topped, so the first content photo on the page carries the
+              same motif as the hero's peeking frames. */}
+          <ShapeFrame
+            name="home-welcome"
+            alt="A reception table set with white florals overlooking the Utah mountains"
+            shape="arch"
+            ratio="arch"
+            sizes="(max-width: 900px) 92vw, 46vw"
+          />
         </Reveal>
         <Reveal delay={120}>
           <Box sx={sh.bodyStack}>
@@ -33,8 +34,8 @@ export default function HomeWelcome() {
                 {text}
               </Typography>
             ))}
-            <Box component={Link} href="/team" sx={sh.linkCaps}>
-              Meet the team —
+            <Box component={Link} href="/team" sx={sh.linkPill}>
+              Meet the team
             </Box>
           </Box>
         </Reveal>

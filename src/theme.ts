@@ -15,6 +15,33 @@ export const BURGUNDY_LIGHT = "#5A2529";
 export const INK = "#2A1C1D";
 export const INK_MUTED = "#6B5B57";
 
+/**
+ * Accent palette. Cream and burgundy still carry the brand; these are the
+ * colour-blocked sections layered on top. Every hue is sampled from the
+ * client's own photography — the terracotta from the Moab red rock, sage from
+ * the eucalyptus runners, dusty blue from the winter tent, ochre from the
+ * candlelight — so saturated blocks still sit next to the photos without
+ * clashing.
+ */
+export const TERRACOTTA = "#C97B5A";
+export const TERRACOTTA_SOFT = "#E8C3B1";
+export const SAGE = "#7C8B6F";
+export const SAGE_SOFT = "#C9D2C0";
+export const DUSTY_BLUE = "#8FA3B0";
+export const DUSTY_BLUE_SOFT = "#CBD8DF";
+export const OCHRE = "#D9A441";
+export const OCHRE_SOFT = "#F0DCB4";
+
+/**
+ * Shape language: generous radii, arch-topped photographs and circular crops.
+ * `ARCH` is a fully-rounded top with a square base — the motif the whole layout
+ * hangs off, so it lives here rather than being re-typed per component.
+ */
+export const RADIUS_CARD = 32;
+export const RADIUS_TILE = 20;
+export const ARCH = "999px 999px 0 0";
+export const CIRCLE = "50%";
+
 // Bare RGB channels for rgba() overlays and shadows in `.styles.ts` files. Use
 // these rather than hand-written triples so tints stay on-brand.
 export const BURGUNDY_RGB = "59,21,24";
@@ -56,7 +83,7 @@ const theme = createTheme({
     divider: alpha(BURGUNDY, 0.14),
   },
   shape: {
-    borderRadius: 0,
+    borderRadius: RADIUS_TILE,
   },
   typography: {
     fontFamily: "var(--font-body), system-ui, Arial, sans-serif",
@@ -126,9 +153,13 @@ const theme = createTheme({
       defaultProps: { disableElevation: true, disableRipple: true },
       styleOverrides: {
         root: {
-          borderRadius: 0,
-          padding: "16px 34px",
-          transition: "background-color 300ms ease, color 300ms ease",
+          // Pill buttons — the smallest piece of the rounded shape language,
+          // and the one that appears on every page.
+          borderRadius: 999,
+          padding: "16px 36px",
+          transition:
+            "background-color 300ms ease, color 300ms ease, transform 300ms ease",
+          "&:hover": { transform: "translateY(-2px)" },
         },
         outlined: { borderWidth: 1 },
       },
