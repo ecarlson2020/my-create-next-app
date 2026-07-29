@@ -247,7 +247,7 @@ function deploy-staging {
   validate-env staging
   require_pi
   npm run build-staging
-  website_location='/home/ecarlson10/webapps/test2.evrocamedia'
+  website_location='/home/ecarlson10/webapps/test5.evrocamedia'
   rm -rf "$website_location"
   mv out "$website_location"
   git status
