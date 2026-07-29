@@ -4,16 +4,16 @@ import { alpha, createTheme } from "@mui/material/styles";
 // with a deep burgundy for type and dark sections, and a muted mauve as the one
 // real accent. Exported as named consts so `.styles.ts` files can reference them
 // without reaching into the theme object.
-export const CREAM = "#FBF9F6";
-export const TAUPE = "#EFE9E1";
-export const TAUPE_DEEP = "#E4DDD3";
-export const SAND = "#CFC5B8";
-export const MAUVE = "#8C6F6B";
-export const MAUVE_DEEP = "#6E5450";
-export const BURGUNDY = "#3B1518";
-export const BURGUNDY_LIGHT = "#5A2529";
-export const INK = "#2A1C1D";
-export const INK_MUTED = "#6B5B57";
+export const CREAM = "#F6F2EA";
+export const TAUPE = "#E9E1D6";
+export const TAUPE_DEEP = "#D9CFC2";
+export const SAND = "#C8BAA7";
+export const MAUVE = "#8E7067";
+export const MAUVE_DEEP = "#74574F";
+export const BURGUNDY = "#3A1823";
+export const BURGUNDY_LIGHT = "#5B2937";
+export const INK = "#241E1D";
+export const INK_MUTED = "#675B56";
 
 /**
  * Accent palette. Cream and burgundy still carry the brand; these are the
@@ -23,24 +23,18 @@ export const INK_MUTED = "#6B5B57";
  * candlelight — so saturated blocks still sit next to the photos without
  * clashing.
  */
-export const TERRACOTTA = "#C97B5A";
-export const TERRACOTTA_SOFT = "#E8C3B1";
-export const SAGE = "#7C8B6F";
-export const SAGE_SOFT = "#C9D2C0";
-export const DUSTY_BLUE = "#8FA3B0";
-export const DUSTY_BLUE_SOFT = "#CBD8DF";
-export const OCHRE = "#D9A441";
-export const OCHRE_SOFT = "#F0DCB4";
+export const TERRACOTTA = "#B76D4F";
+export const TERRACOTTA_SOFT = "#E6C1AE";
+export const SAGE = "#616D5C";
+export const SAGE_SOFT = "#CDD5C6";
+export const DUSTY_BLUE = "#829A9B";
+export const DUSTY_BLUE_SOFT = "#D1DDDC";
+export const OCHRE = "#A9962E";
+export const OCHRE_SOFT = "#E8DDAA";
 
-/**
- * Shape language: generous radii, arch-topped photographs and circular crops.
- * `ARCH` is a fully-rounded top with a square base — the motif the whole layout
- * hangs off, so it lives here rather than being re-typed per component.
- */
+/** Shared radii for the editorial cards and image frames. */
 export const RADIUS_CARD = 32;
 export const RADIUS_TILE = 20;
-export const ARCH = "999px 999px 0 0";
-export const CIRCLE = "50%";
 
 // Bare RGB channels for rgba() overlays and shadows in `.styles.ts` files. Use
 // these rather than hand-written triples so tints stay on-brand.
@@ -153,9 +147,7 @@ const theme = createTheme({
       defaultProps: { disableElevation: true, disableRipple: true },
       styleOverrides: {
         root: {
-          // Pill buttons — the smallest piece of the rounded shape language,
-          // and the one that appears on every page.
-          borderRadius: 999,
+          borderRadius: 6,
           padding: "16px 36px",
           transition:
             "background-color 300ms ease, color 300ms ease, transform 300ms ease",

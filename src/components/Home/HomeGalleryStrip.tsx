@@ -11,18 +11,11 @@ import {
 } from "./HomeGalleryStrip.styles";
 
 /** Six frames from the portfolio; the rest live on /gallery. */
-const PREVIEW = [
-  "gallery-02",
-  "gallery-10",
-  "gallery-06",
-  "gallery-20",
-  "gallery-27",
-  "gallery-32",
-];
+const PREVIEW = ["gallery-35", "gallery-28", "gallery-43", "gallery-42"];
 
 export default function HomeGalleryStrip() {
   return (
-    <Section bg="sand">
+    <Section>
       <Box sx={s.head}>
         <SectionHeading
           eyebrow="Gallery"

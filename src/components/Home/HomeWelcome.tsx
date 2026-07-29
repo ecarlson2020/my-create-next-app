@@ -1,45 +1,84 @@
 import Link from "next/link";
 import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import Section from "@/components/common/Section/Section";
 import SectionHeading from "@/components/common/SectionHeading/SectionHeading";
-import ShapeFrame from "@/components/common/Shape/ShapeFrame";
+import OptimizedImage from "@/components/common/OptimizedImage/OptimizedImage";
 import Reveal from "@/components/common/Reveal/Reveal";
 import { homeIntro } from "@/config/company";
-import { homeShared as sh } from "./shared.styles";
+import { homeWelcomeStyles as s } from "./HomeWelcome.styles";
 
 export default function HomeWelcome() {
   return (
-    <Section>
-      <Box sx={sh.split}>
-        <Reveal>
-          {/* Arch-topped, so the first content photo on the page carries the
-              same motif as the hero's peeking frames. */}
-          <ShapeFrame
-            name="home-welcome"
-            alt="A reception table set with white florals overlooking the Utah mountains"
-            shape="arch"
-            ratio="arch"
-            sizes="(max-width: 900px) 92vw, 46vw"
-          />
-        </Reveal>
-        <Reveal delay={120}>
-          <Box sx={sh.bodyStack}>
-            <SectionHeading
-              eyebrow="Welcome"
-              title="A Utah wedding + event planning company"
-            />
-            {homeIntro.map((text) => (
-              <Typography key={text.slice(0, 30)} variant="body1" sx={sh.body}>
-                {text}
-              </Typography>
-            ))}
-            <Box component={Link} href="/team" sx={sh.linkPill}>
-              Meet the team
-            </Box>
+    <Box component="section" sx={s.root}>
+      <Container maxWidth="lg">
+        <Box sx={s.ribbon}>
+          <Box component="span">Full-service planning</Box>
+          <Box component="span" sx={s.ribbonMark} aria-hidden>
+            ✦
           </Box>
-        </Reveal>
-      </Box>
-    </Section>
+          <Box component="span">Intentional design</Box>
+          <Box component="span" sx={s.ribbonMark} aria-hidden>
+            ✦
+          </Box>
+          <Box component="span">Seamless coordination</Box>
+        </Box>
+
+        <Box sx={s.grid}>
+          <Reveal>
+            <Box sx={s.collage}>
+              <Box sx={s.mainImage}>
+                <OptimizedImage
+                  name="home-welcome"
+                  alt="A reception table set with white florals overlooking the Utah mountains"
+                  cover
+                  eager
+                  sizes="(max-width: 900px) 88vw, 42vw"
+                />
+              </Box>
+              <Box sx={s.accentImage}>
+                <OptimizedImage
+                  name="gallery-43"
+                  alt="A wedding invitation suite with flowers and heirloom details"
+                  cover
+                  sizes="(max-width: 900px) 42vw, 19vw"
+                />
+              </Box>
+              <Box sx={s.locationSeal}>
+                <Box component="span">Based in</Box>
+                <strong>Utah</strong>
+                <Box component="span">Traveling everywhere</Box>
+              </Box>
+            </Box>
+          </Reveal>
+
+          <Reveal delay={120}>
+            <Box sx={s.bodyStack}>
+              <SectionHeading
+                eyebrow="Welcome"
+                title={
+                  <>
+                    You bring the love.
+                    <br />
+                    We&apos;ll bring the calm.
+                  </>
+                }
+              />
+              {homeIntro.map((text) => (
+                <Typography key={text.slice(0, 30)} variant="body1" sx={s.body}>
+                  {text}
+                </Typography>
+              ))}
+              <Box component={Link} href="/team" sx={s.link}>
+                Meet Planned by Peter
+                <Box component="span" aria-hidden>
+                  →
+                </Box>
+              </Box>
+            </Box>
+          </Reveal>
+        </Box>
+      </Container>
+    </Box>
   );
 }

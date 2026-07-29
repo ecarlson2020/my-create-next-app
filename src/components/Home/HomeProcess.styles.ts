@@ -1,62 +1,45 @@
 import { alpha } from "@mui/material/styles";
-import {
-  BURGUNDY,
-  CREAM,
-  DUSTY_BLUE,
-  OCHRE,
-  RADIUS_CARD,
-  SAGE,
-  TERRACOTTA,
-} from "@/theme";
-
-/** One accent per step, cycled so the row reads as a sequence of colours. */
-export const STEP_COLORS = [TERRACOTTA, SAGE, DUSTY_BLUE, OCHRE, BURGUNDY];
+import { CREAM, OCHRE, TRACKED_CAPS } from "@/theme";
 
 export const homeProcessStyles = {
   grid: {
-    mt: { xs: 6, md: 9 },
+    mt: { xs: 7, md: 11 },
     display: "grid",
     gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr", md: "repeat(5, 1fr)" },
-    gap: { xs: 2.5, md: 2 },
+    columnGap: { xs: 3, md: 2.5 },
   },
   cell: {
     height: "100%",
-    backgroundColor: CREAM,
-    borderRadius: `${RADIUS_CARD}px`,
-    p: { xs: 3, md: 3 },
+    color: CREAM,
+    borderTop: `1px solid ${alpha(CREAM, 0.28)}`,
+    py: { xs: 3.5, md: 4 },
     display: "flex",
     flexDirection: "column",
-    alignItems: { xs: "flex-start", md: "center" },
-    textAlign: { xs: "left", md: "center" },
-    gap: 1.5,
-    transition: "transform 320ms ease",
-    "&:hover": { transform: "translateY(-6px)" },
+    alignItems: "flex-start",
+    gap: 1.25,
+    transition: "border-color 280ms ease, transform 280ms ease",
+    "&:hover": { borderColor: OCHRE, transform: "translateY(-5px)" },
   },
-  // Numbered disc — the circle in the shape vocabulary, and the element
-  // carrying each step's colour.
-  disc: {
-    width: 54,
-    height: 54,
-    borderRadius: "50%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    color: CREAM,
+  number: {
     fontFamily: "var(--font-display), Georgia, serif",
     fontStyle: "italic",
-    fontSize: "1.35rem",
-    mb: 1,
+    fontWeight: 300,
+    fontSize: { xs: "3.2rem", md: "3.8rem" },
+    lineHeight: 1,
+    color: alpha(CREAM, 0.22),
+    mb: 2,
   },
   short: {
     fontFamily: "var(--font-display), Georgia, serif",
     fontStyle: "italic",
     fontWeight: 300,
-    fontSize: { xs: "1.5rem", md: "1.6rem" },
-    color: BURGUNDY,
+    fontSize: { xs: "1.6rem", md: "1.65rem" },
+    color: CREAM,
   },
   title: {
-    color: alpha(BURGUNDY, 0.7),
-    fontSize: "0.85rem",
+    ...TRACKED_CAPS,
+    color: alpha(CREAM, 0.62),
+    fontSize: "0.55rem",
     lineHeight: 1.6,
   },
   action: {

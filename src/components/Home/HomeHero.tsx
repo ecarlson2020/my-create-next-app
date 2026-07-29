@@ -3,17 +3,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import OptimizedImage from "@/components/common/OptimizedImage/OptimizedImage";
-import { company } from "@/config/company";
 import { homeHeroStyles as s } from "./HomeHero.styles";
-
-/** Two arch-topped frames that overlap the hero panel into the section below. */
-const PEEK = [
-  { name: "gallery-06", alt: "A couple with a horse in the autumn light" },
-  {
-    name: "gallery-20",
-    alt: "A vintage china place setting with gold flatware",
-  },
-];
 
 export default function HomeHero() {
   return (
@@ -29,41 +19,30 @@ export default function HomeHero() {
           />
         </Box>
         <Box sx={s.scrim} />
-        <Box sx={s.scrimGradient} />
-
         <Box sx={s.content}>
           <Typography component="p" sx={s.eyebrow}>
-            {company.region} &nbsp;·&nbsp; Destination Weddings
+            Utah wedding planning &nbsp;·&nbsp; Near + far
           </Typography>
           <Typography variant="h1" component="h1" sx={s.title}>
-            Artfully planned,
-            <br />
-            beautifully lived.
+            <Box component="span" sx={s.titleScript}>
+              Artfully planned.
+            </Box>{" "}
+            <Box component="span" sx={s.titleRoman}>
+              Beautifully lived.
+            </Box>
           </Typography>
           <Typography component="p" sx={s.tagline}>
-            {company.tagline}
+            Full-service planning, intentional design, and the calm confidence
+            to enjoy every second.
           </Typography>
           <Button component={Link} href="/contact" sx={s.cta}>
-            Inquire
+            Work with us
           </Button>
         </Box>
-      </Box>
-
-      <Box sx={s.peekRow} aria-hidden>
-        {PEEK.map((frame, i) => (
-          <Box
-            key={frame.name}
-            sx={{ ...s.peek, ...(i === 1 ? s.peekOffset : {}) }}
-          >
-            <OptimizedImage
-              name={frame.name}
-              alt={frame.alt}
-              cover
-              eager
-              sizes="140px"
-            />
-          </Box>
-        ))}
+        <Box sx={s.scrollCue} aria-hidden>
+          <Box component="span" sx={s.scrollLine} />
+          Scroll to discover
+        </Box>
       </Box>
     </Box>
   );

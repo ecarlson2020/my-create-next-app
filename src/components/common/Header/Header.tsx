@@ -13,7 +13,7 @@ import { navItems } from "@/config/nav";
 import { headerStyles as s } from "./Header.styles";
 
 interface HeaderProps {
-  /** True on pages whose hero sits under a transparent bar (the home page). */
+  /** True on pages whose photographic hero sits under a transparent bar. */
   overHero?: boolean;
 }
 
@@ -39,6 +39,26 @@ export default function Header({ overHero = false }: HeaderProps) {
   const solid = !overHero || scrolled;
   const isActive = (href: string) =>
     href === "/" ? router.pathname === "/" : router.pathname.startsWith(href);
+  const desktopItems = navItems.filter(
+    (item) => item.href !== "/" && item.href !== "/contact",
+  );
+  const leftItems = desktopItems.slice(0, 3);
+  const rightItems = desktopItems.slice(3);
+
+  const renderDesktopLink = (item: (typeof navItems)[number]) => (
+    <Box
+      key={item.href}
+      component={Link}
+      href={item.href}
+      sx={{
+        ...s.navLink,
+        ...(isActive(item.href) ? s.navLinkActive : {}),
+      }}
+      aria-current={isActive(item.href) ? "page" : undefined}
+    >
+      {item.label}
+    </Box>
+  );
 
   return (
     <Box
@@ -47,6 +67,25 @@ export default function Header({ overHero = false }: HeaderProps) {
     >
       <Container maxWidth="lg">
         <Box sx={s.inner}>
+          <Box component="nav" sx={s.navList} aria-label="Primary">
+            <Box sx={s.navGroup}>{leftItems.map(renderDesktopLink)}</Box>
+            <Box sx={s.navSpacer} aria-hidden />
+            <Box sx={s.navGroup}>
+              {rightItems.map(renderDesktopLink)}
+              <Box
+                component={Link}
+                href="/contact"
+                sx={{
+                  ...s.navLink,
+                  ...s.inquire,
+                  ...(solid ? s.inquireOnLight : s.inquireOnDark),
+                }}
+              >
+                Inquire
+              </Box>
+            </Box>
+          </Box>
+
           <Box
             component={Link}
             href="/"
@@ -59,35 +98,6 @@ export default function Header({ overHero = false }: HeaderProps) {
             <Box component="span" sx={s.wordmarkBottom}>
               {company.wordmarkBottom}
             </Box>
-          </Box>
-
-          <Box component="nav" sx={s.navList} aria-label="Primary">
-            {navItems.map((item) => (
-              <Box
-                key={item.href}
-                component={Link}
-                href={item.href}
-                sx={{
-                  ...s.navLink,
-                  ...(isActive(item.href) ? s.navLinkActive : {}),
-                }}
-                aria-current={isActive(item.href) ? "page" : undefined}
-              >
-                {item.label}
-              </Box>
-            ))}
-          </Box>
-
-          <Box
-            component={Link}
-            href="/contact"
-            sx={{
-              ...s.navLink,
-              ...s.inquire,
-              ...(solid ? s.inquireOnLight : s.inquireOnDark),
-            }}
-          >
-            Inquire
           </Box>
 
           <IconButton

@@ -1,5 +1,5 @@
 import { alpha } from "@mui/material/styles";
-import { BURGUNDY, CREAM, SAND, TRACKED_CAPS } from "@/theme";
+import { BURGUNDY, CREAM, OCHRE, SAND, TRACKED_CAPS } from "@/theme";
 
 export const ctaBannerStyles = {
   root: {
@@ -28,9 +28,9 @@ export const ctaBannerStyles = {
     gap: 2,
   },
   primary: {
-    backgroundColor: BURGUNDY,
+    backgroundColor: OCHRE,
     color: CREAM,
-    "&:hover": { backgroundColor: alpha(BURGUNDY, 0.86) },
+    "&:hover": { backgroundColor: BURGUNDY },
   },
   secondary: {
     borderColor: alpha(BURGUNDY, 0.35),

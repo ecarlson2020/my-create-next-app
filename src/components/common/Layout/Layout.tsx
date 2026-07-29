@@ -10,24 +10,31 @@ interface LayoutProps {
 }
 
 /**
- * App shell. The home page is the only route whose hero runs under a
- * transparent header, so the offset and the header treatment are both keyed off
- * it here rather than threaded through every page as a prop.
+ * App shell. Marketing pages open with a photographic hero beneath the
+ * transparent navigation; article and utility pages retain the solid bar.
  */
 export default function Layout({ children }: LayoutProps) {
   const router = useRouter();
-  const isHome = router.pathname === "/";
+  const hasPageHero = [
+    "/",
+    "/process",
+    "/team",
+    "/services",
+    "/gallery",
+    "/blog",
+    "/contact",
+  ].includes(router.pathname);
 
   return (
     <Box sx={s.shell}>
       <Box component="a" href="#main" sx={s.skipLink}>
         Skip to content
       </Box>
-      <Header overHero={isHome} />
+      <Header overHero={hasPageHero} />
       <Box
         component="main"
         id="main"
-        sx={{ ...s.main, ...(isHome ? {} : s.mainOffset) }}
+        sx={{ ...s.main, ...(hasPageHero ? {} : s.mainOffset) }}
       >
         {children}
       </Box>

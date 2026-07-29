@@ -1,6 +1,5 @@
-import Section from "@/components/common/Section/Section";
 import Seo from "@/components/common/Seo/Seo";
-import Testimonials from "@/components/common/Testimonials/Testimonials";
+import Section from "@/components/common/Section/Section";
 import CtaBanner from "@/components/common/CtaBanner/CtaBanner";
 import Awards from "@/components/common/Awards/Awards";
 import HomeHero from "./HomeHero";
@@ -9,6 +8,7 @@ import HomeStatement from "./HomeStatement";
 import HomeProcess from "./HomeProcess";
 import HomeServices from "./HomeServices";
 import HomeGalleryStrip from "./HomeGalleryStrip";
+import HomeReviews from "./HomeReviews";
 
 export default function Home() {
   return (
@@ -21,20 +21,15 @@ export default function Home() {
       />
       <HomeHero />
       <HomeWelcome />
-      {/* Terracotta → blue → sand → cream → sage: the page steps through the
-          accent palette rather than alternating one colour with cream. */}
+      <HomeServices />
       <HomeStatement />
       <HomeProcess />
+      <HomeReviews />
       <HomeGalleryStrip />
-      <HomeServices />
-      {/* Sage is dark enough that Testimonials' cream-on-dark styling holds. */}
-      <Section bg="sage" roundedTop roundedBottom>
-        <Testimonials />
-      </Section>
       <Section tight>
         <Awards eyebrow="Awards + recognition" />
       </Section>
-      <Section bg="ochreSoft" roundedTop>
+      <Section bg="ochreSoft">
         <CtaBanner />
       </Section>
     </>

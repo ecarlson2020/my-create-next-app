@@ -14,6 +14,14 @@ export default function Footer() {
   return (
     <Box component="footer" sx={s.root}>
       <Container maxWidth="lg">
+        <Box sx={s.invitation}>
+          <Typography component="p" sx={s.invitationEyebrow}>
+            Utah + destination weddings
+          </Typography>
+          <Typography component="p" sx={s.invitationTitle}>
+            Let&apos;s make it unforgettable.
+          </Typography>
+        </Box>
         <Box sx={s.top}>
           <Box>
             <Box component="span" sx={s.wordmarkTop} display="block">

@@ -1,17 +1,13 @@
-import { ARCH, CIRCLE, RADIUS_CARD } from "@/theme";
+import { RADIUS_TILE } from "@/theme";
 
 /**
- * The strip alternates arch, circle and rounded-card frames rather than
- * repeating one tile shape — this is the section that shows the shape
- * vocabulary all at once.
+ * The strip uses a restrained mix of editorial arches and square corners.
  */
 export const TILE_SHAPES = [
-  { radius: ARCH, ratio: "3 / 4" },
-  { radius: CIRCLE, ratio: "1 / 1" },
-  { radius: `${RADIUS_CARD}px`, ratio: "3 / 4" },
-  { radius: ARCH, ratio: "3 / 4" },
-  { radius: CIRCLE, ratio: "1 / 1" },
-  { radius: `${RADIUS_CARD}px`, ratio: "3 / 4" },
+  { radius: "80px 80px 4px 4px", ratio: "3 / 4" },
+  { radius: `${RADIUS_TILE}px 4px ${RADIUS_TILE}px 4px`, ratio: "3 / 4" },
+  { radius: `4px ${RADIUS_TILE}px 4px ${RADIUS_TILE}px`, ratio: "3 / 4" },
+  { radius: "4px 4px 80px 80px", ratio: "3 / 4" },
 ] as const;
 
 export const homeGalleryStripStyles = {
@@ -26,9 +22,9 @@ export const homeGalleryStripStyles = {
   strip: {
     display: "grid",
     gridAutoFlow: { xs: "column", md: "row" },
-    gridAutoColumns: { xs: "58%", sm: "36%", md: "auto" },
-    gridTemplateColumns: { xs: "none", md: "repeat(6, 1fr)" },
-    gap: { xs: 1.5, md: 2 },
+    gridAutoColumns: { xs: "72%", sm: "43%", md: "auto" },
+    gridTemplateColumns: { xs: "none", md: "repeat(4, 1fr)" },
+    gap: { xs: 2, md: 2.5 },
     alignItems: "center",
     overflowX: { xs: "auto", md: "visible" },
     scrollSnapType: { xs: "x mandatory", md: "none" },
@@ -55,6 +51,6 @@ export const homeGalleryStripStyles = {
   // Nudges every other tile down so the row reads as a scatter rather than a
   // ruler-straight line.
   tileOffset: {
-    mt: { xs: 0, md: 5 },
+    mt: { xs: 0, md: 7 },
   },
 } as const;
