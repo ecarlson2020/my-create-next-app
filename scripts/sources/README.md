@@ -29,7 +29,6 @@ work the team did not do. Keep that boundary.
 
 | What | Why |
 |---|---|
-| Headshots of Peter and Emily (portrait, ≥1000px) | Save as `team-peter.jpg` / `team-emily.jpg`. Until they arrive, `/team` renders a typographic monogram card (`PK` / `ET`) instead — deliberate-looking, but real portraits are better. |
 | A high-resolution or vector logo | The header currently uses the wordmark set in type. `logo.png` / `logo.webp` are generated from the Wix PNG, which is low-resolution. |
 | Photo credits per gallery image | Wedding photographers expect attribution and the current site omits it. The lightbox has room for a credit line. |
 | The official "Best of the Beehive" badge files | The footer currently renders the award as a typographic mark because the badges were not exposed on the live site. |

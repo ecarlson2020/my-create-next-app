@@ -25,9 +25,8 @@ export const teamMemberStyles = {
     overflow: "hidden",
     "& picture, & img": { width: "100%", height: "100%", objectFit: "cover" },
   },
-  // Stand-in shown until the client supplies headshots: a monogram set in the
-  // brand serif on a sand panel. Reads as a deliberate design choice rather than
-  // a missing image, which a grey placeholder box would not.
+  // Fallback if generated portrait assets are unavailable: a monogram set in
+  // the brand serif reads as a deliberate design choice, not a broken image.
   monogram: {
     position: "relative",
     width: "100%",

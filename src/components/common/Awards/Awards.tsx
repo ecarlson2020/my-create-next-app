@@ -13,9 +13,9 @@ interface AwardsProps {
 }
 
 /**
- * Every award and press badge the client displays, in their own order.
+ * Every award and press badge the client displays, in recognition order.
  *
- * Two of the five are "featured in" press badges rather than awards, so the
+ * Three of the six are "featured in" press badges rather than awards, so the
  * default eyebrow says "Recognition" — calling the row awards would overstate
  * it. The artwork belongs to each awarding body and is rendered unmodified; the
  * only adaptation is a cream tile on dark sections. The year is part of every
@@ -49,7 +49,7 @@ export default function Awards({
             <OptimizedImage
               name={award.image}
               alt={award.alt}
-              sizes="120px"
+              sizes="140px"
               style={s.image}
             />
           </Box>

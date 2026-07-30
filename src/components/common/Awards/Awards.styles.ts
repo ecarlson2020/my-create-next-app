@@ -23,11 +23,11 @@ export const awardsStyles = {
     alignItems: "center",
     gap: { xs: 3.5, md: 6 },
   },
-  // The five badges are a square, a portrait certificate and a circle. Sizing
+  // The six badges are squares, a portrait certificate and a circle. Sizing
   // by height with `contain` puts them on a common optical baseline instead of
   // letting the certificate tower over the rest.
   badge: {
-    height: { xs: 62, md: 84 },
+    height: { xs: 84, md: 112 },
     display: "flex",
     alignItems: "center",
     flexShrink: 0,
@@ -50,6 +50,6 @@ export const awardsStyles = {
     gap: 1.5,
   },
   badgeCompact: {
-    height: 44,
+    height: { xs: 50, md: 56 },
   },
 } as const;

@@ -9,6 +9,16 @@ test("home hero renders the headline and inquire CTA", async ({ page }) => {
   await expect(
     page.getByRole("main").getByRole("link", { name: "Inquire" }).first(),
   ).toBeVisible();
+
+  const scriptLine = page.getByText("Artfully planned.", { exact: true });
+  const romanLine = page.getByText("Beautifully lived.", { exact: true });
+  const [scriptBox, romanBox] = await Promise.all([
+    scriptLine.boundingBox(),
+    romanLine.boundingBox(),
+  ]);
+  expect(scriptBox).not.toBeNull();
+  expect(romanBox).not.toBeNull();
+  expect(scriptBox!.y + scriptBox!.height).toBeLessThanOrEqual(romanBox!.y);
 });
 
 test("home hero image actually loads", async ({ page }) => {

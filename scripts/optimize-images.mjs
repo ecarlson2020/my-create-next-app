@@ -122,6 +122,20 @@ const FEATURES = {
   "blog-timeline": { id: "591962_2eee17a1e2bc4b06bc6d5bea052c544b", maxW: 1600 },
 };
 
+// Current team portraits from the client's Wix media library. Kept separate
+// from FEATURES because these depict the people behind the business rather than
+// portfolio work, but they go through the same local responsive-image pipeline.
+const TEAM = {
+  "team-peter": {
+    url: `${WIX}/591962_ada306faa96a45dc8d4a5d28fa13c456~mv2.jpg/v1/fill/w_812,h_1082,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_9269.jpg`,
+    maxW: 1000,
+  },
+  "team-emily": {
+    url: `${WIX}/591962_860c91af919c43a6958de07d679c109a~mv2.jpg/v1/fill/w_812,h_1082,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_9028_edited.jpg`,
+    maxW: 1000,
+  },
+};
+
 /**
  * AI-generated textures and abstract details, dropped into scripts/sources/ by
  * hand. Deliberately limited to backgrounds and non-representational detail —
@@ -171,15 +185,11 @@ const GENERATED = [
     maxW: 1600,
   },
   { key: "bg-404", file: "scripts/sources/bg-404.png", maxW: 1200 },
-  // Real headshots, once the client supplies them. TeamMember falls back to a
-  // typographic monogram card while these are absent.
-  { key: "team-peter", file: "scripts/sources/team-peter.jpg", maxW: 1000 },
-  { key: "team-emily", file: "scripts/sources/team-emily.jpg", maxW: 1000 },
 ];
 
 /**
- * Every award and press badge the client displays. All five sit together in one
- * strip on their current home page.
+ * Every award and press badge the client displays. All six sit together in one
+ * recognition strip.
  *
  * These are each awarding body's own artwork, mostly on a transparent
  * background, so they take the `transparent` path (PNG fallback, no JPEG) —
@@ -196,6 +206,10 @@ const BADGES = {
   "award-knot-2025": {
     id: "fab39b_175e37d499a5455fa9de9a31461b9e5f",
     ext: "png",
+    maxW: 400,
+  },
+  "award-rocky-mountain-bride-2026": {
+    url: "https://www.rockymountainbride.com/wp-content/uploads/2026/01/2026-Badges.png",
     maxW: 400,
   },
   "award-weddingwire-2025": {
@@ -231,10 +245,15 @@ const CONTENT = [
     maxW,
     og: NEEDS_OG_CROP(key),
   })),
-  ...Object.entries(BADGES).map(([key, { id, ext, maxW }]) => ({
+  ...Object.entries(TEAM).map(([key, { url, maxW }]) => ({
     key,
-    url: media(id, ext),
+    url,
     maxW,
+  })),
+  ...Object.entries(BADGES).map(([key, badge]) => ({
+    key,
+    url: "url" in badge ? badge.url : media(badge.id, badge.ext),
+    maxW: badge.maxW,
     transparent: true,
   })),
   ...GALLERY.map((id, i) => ({

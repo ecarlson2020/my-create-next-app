@@ -29,7 +29,9 @@ test("process page renders all five steps", async ({ page }) => {
   }
 });
 
-test("team page names both team members", async ({ page }) => {
+test("team page names both team members and loads their portraits", async ({
+  page,
+}) => {
   await page.goto("/team");
   await expect(
     page.getByRole("heading", { name: "Peter Ktestakis" }),
@@ -42,6 +44,19 @@ test("team page names both team members", async ({ page }) => {
     page.getByText("Owner + Lead Planner", { exact: true }),
   ).toBeVisible();
   await expect(page.getByText("Lead Designer", { exact: true })).toBeVisible();
+
+  for (const alt of [
+    "Peter Ktestakis, owner and lead planner at Planned by Peter",
+    "Emily Twohig, lead designer at Planned by Peter",
+  ]) {
+    const portrait = page.getByAltText(alt);
+    await expect(portrait).toBeVisible();
+    await expect
+      .poll(() =>
+        portrait.evaluate((image: HTMLImageElement) => image.naturalWidth),
+      )
+      .toBeGreaterThan(100);
+  }
 });
 
 test("gallery renders the full set and opens a lightbox", async ({ page }) => {
@@ -62,16 +77,17 @@ test("gallery renders the full set and opens a lightbox", async ({ page }) => {
   await expect(dialog).toBeHidden();
 });
 
-// Every badge the client displays — all five must survive the migration.
+// Every badge the client displays must render real, decoded pixels.
 const BADGES = [
   "The Knot Best of Weddings 2026 award badge",
+  "Rocky Mountain Bride 2026 featured vendor badge",
   "The Knot Best of Weddings 2025 award badge",
   "WeddingWire Couples' Choice Awards 2025 certificate",
   "Utah Valley Bride 2025 — as featured in",
   "Rocky Mountain Bride 2025 featured vendor badge",
 ];
 
-test("all five award and press badges render and load", async ({ page }) => {
+test("all six award and press badges render and load", async ({ page }) => {
   await page.goto("/");
   for (const alt of BADGES) {
     const badge = page.getByRole("img", { name: alt }).first();

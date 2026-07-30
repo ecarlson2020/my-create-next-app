@@ -2189,5 +2189,72 @@
       }
     ],
     "fallback": "/images/award-rocky-mountain-bride-2025-160.png"
+  },
+  "team-peter": {
+    "width": 800,
+    "height": 1066,
+    "avif": [
+      {
+        "w": 400,
+        "src": "/images/team-peter-400.avif"
+      },
+      {
+        "w": 800,
+        "src": "/images/team-peter-800.avif"
+      }
+    ],
+    "webp": [
+      {
+        "w": 400,
+        "src": "/images/team-peter-400.webp"
+      },
+      {
+        "w": 800,
+        "src": "/images/team-peter-800.webp"
+      }
+    ],
+    "fallback": "/images/team-peter-800.jpg"
+  },
+  "team-emily": {
+    "width": 800,
+    "height": 1066,
+    "avif": [
+      {
+        "w": 400,
+        "src": "/images/team-emily-400.avif"
+      },
+      {
+        "w": 800,
+        "src": "/images/team-emily-800.avif"
+      }
+    ],
+    "webp": [
+      {
+        "w": 400,
+        "src": "/images/team-emily-400.webp"
+      },
+      {
+        "w": 800,
+        "src": "/images/team-emily-800.webp"
+      }
+    ],
+    "fallback": "/images/team-emily-800.jpg"
+  },
+  "award-rocky-mountain-bride-2026": {
+    "width": 400,
+    "height": 400,
+    "avif": [
+      {
+        "w": 400,
+        "src": "/images/award-rocky-mountain-bride-2026-400.avif"
+      }
+    ],
+    "webp": [
+      {
+        "w": 400,
+        "src": "/images/award-rocky-mountain-bride-2026-400.webp"
+      }
+    ],
+    "fallback": "/images/award-rocky-mountain-bride-2026-400.png"
   }
 }

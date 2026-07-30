@@ -48,9 +48,9 @@ export interface Award {
 }
 
 /**
- * Every badge the client displays, in the order they appear on their current
- * home page. These are each body's own artwork and wording — don't paraphrase
- * the names or promote a feature into an award.
+ * Every badge displayed in the recognition strip. These are each body's own
+ * artwork and wording — don't paraphrase the names or promote a feature into an
+ * award.
  */
 export const awards: Award[] = [
   {
@@ -59,6 +59,13 @@ export const awards: Award[] = [
     image: "award-knot-2026",
     alt: "The Knot Best of Weddings 2026 award badge",
     kind: "award",
+  },
+  {
+    name: "Rocky Mountain Bride",
+    year: "2026",
+    image: "award-rocky-mountain-bride-2026",
+    alt: "Rocky Mountain Bride 2026 featured vendor badge",
+    kind: "feature",
   },
   {
     name: "The Knot Best of Weddings",

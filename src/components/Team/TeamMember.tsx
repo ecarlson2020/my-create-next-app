@@ -15,8 +15,8 @@ export default function TeamMember({
   member,
   reversed = false,
 }: TeamMemberProps) {
-  // Headshots haven't been supplied yet. Rather than ship a broken image or a
-  // stock photo of someone who isn't Peter or Emily, fall back to a monogram.
+  // Keep a deliberate monogram fallback if generated portrait assets are ever
+  // missing rather than shipping a broken image.
   const portrait = hasImage(member.image);
 
   return (

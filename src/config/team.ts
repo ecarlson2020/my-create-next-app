@@ -1,10 +1,9 @@
 export interface TeamMember {
   name: string;
-  /** Monogram shown when no headshot has been supplied yet. */
+  /** Monogram shown if the generated headshot assets are unavailable. */
   initials: string;
   role: string;
-  /** Manifest key. Absent from the manifest until the client sends a photo, in
-   *  which case TeamMember renders a typographic monogram card instead. */
+  /** Manifest key for the responsive portrait assets. */
   image: string;
   imageAlt: string;
   bio: string[];
