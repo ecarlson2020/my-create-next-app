@@ -1,4 +1,4 @@
-const stagingDomain = "test4.evrocamedia";
+const stagingDomain = "test2.evrocamedia";
 // TODO: update the production domain
 const productionDomain = "something";
 // TODO: update the port

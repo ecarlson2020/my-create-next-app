@@ -16,12 +16,6 @@
     "e2e-debug": "playwright test --ui"
   },
   "dependencies": {
-    "@emotion/cache": "^11.14.0",
-    "@emotion/react": "^11.14.0",
-    "@emotion/server": "^11.11.0",
-    "@emotion/styled": "^11.14.1",
-    "@mui/icons-material": "^7.3.11",
-    "@mui/material": "^7.3.11",
     "next": "^15.5.4",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
@@ -39,7 +33,6 @@
     "eslint-plugin-prettier": "^5.5.4",
     "eslint-webpack-plugin": "^5.0.2",
     "prettier": "^3.6.2",
-    "sharp": "^0.35.3",
     "typescript": "^5.9.3",
     "unimported": "^1.31.1"
   }

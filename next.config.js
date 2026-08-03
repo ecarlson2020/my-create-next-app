@@ -21,16 +21,6 @@ if (!MY_ENV_MODES.includes(process.env.MY_ENV)) {
 
 module.exports = {
   output: "export",
-  reactStrictMode: true,
-  // A static export has no image optimization server; images are pre-rendered to
-  // AVIF/WebP by scripts/optimize-images.mjs and served as plain assets through
-  // <OptimizedImage>.
-  images: { unoptimized: true },
-  // Tree-shake MUI barrel imports so only the components actually used ship in
-  // the bundle.
-  experimental: {
-    optimizePackageImports: ["@mui/material", "@mui/icons-material"],
-  },
   env: {
     MY_ENV: process.env.MY_ENV,
   },
