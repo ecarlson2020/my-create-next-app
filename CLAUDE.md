@@ -5,7 +5,3 @@
 > this project.
 >
 > **Do not skip this. Do not proceed without reading `AGENTS.md` first.**
-
-## Code Reviews
-
-When reviewing code, output the findings as a list of issues categorized by severity.

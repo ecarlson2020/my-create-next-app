@@ -199,3 +199,8 @@ npm run fix
 ```
 
 This ensures all code is properly formatted and linted according to the project's standards. It runs prettier, `next lint --fix`, `tsc`, `unimported`, the API lint/test/build, and then the e2e suite — except on the Pi, where e2e is skipped (see "E2E Testing" above).
+
+## Code Reviews
+
+When reviewing code, hunting for bugs, or looking for refactoring opportunities,
+output the findings as a list of issues categorized by severity.
