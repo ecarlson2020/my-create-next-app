@@ -21,6 +21,11 @@ if (!MY_ENV_MODES.includes(process.env.MY_ENV)) {
 
 module.exports = {
   output: "export",
+  // Isolate the dev server's build dir from production builds. `next dev`
+  // (MY_ENV=development) and `next build` (staging/production) otherwise share
+  // .next; a build run while `npm run ui` is up overwrites files the live dev
+  // server holds open, and every request 500s until .next is wiped.
+  distDir: process.env.MY_ENV === "development" ? ".next-dev" : ".next",
   env: {
     MY_ENV: process.env.MY_ENV,
   },
