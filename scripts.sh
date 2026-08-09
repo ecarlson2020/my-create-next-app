@@ -195,8 +195,13 @@ function wait-for-api {
 
 # Restart the prod API, daemonized (nohup + disown) so it survives this script
 # exiting — important for an api-only deploy that returns immediately. kill-prod
-# already tolerates an empty port (|| true). Output goes to
+# already tolerates an empty port (|| true). Output is APPENDED to
 # ~/logs/$PRODUCTION_WEBSITE.log.
+#
+# Appended, not truncated: redeploying is the first thing you reach for while
+# investigating a production error, and with `>` that wiped the stack trace you
+# were about to read. The log therefore grows across deploys — see the header
+# line written below for where each restart begins.
 function deploy-api {
   # Validate BEFORE kill-prod, not after: the API reads its secrets from .env at
   # boot (api/src/env.ts), so a deploy that cannot possibly start must not take
@@ -214,8 +219,10 @@ function deploy-api {
   # Pipe stdout+stderr through a read-loop that stamps each line with the local
   # time. The whole pipeline is wrapped in `nohup bash -c` so both the server and
   # the timestamping reader survive this script (and any SSH session) exiting.
+  printf '\n===== deploy %s =====\n' "$(date '+%Y-%m-%d %H:%M:%S')" \
+    >> ~/logs/$PRODUCTION_WEBSITE.log
   nohup bash -c 'npm run prod 2>&1 | while IFS= read -r line; do printf "[%s] %s\n" "$(date "+%Y-%m-%d %H:%M:%S")" "$line"; done' \
-    > ~/logs/$PRODUCTION_WEBSITE.log 2>&1 &
+    >> ~/logs/$PRODUCTION_WEBSITE.log 2>&1 &
   disown
   cd ..
   # Blocks until the server is actually up, so a failed deploy exits non-zero

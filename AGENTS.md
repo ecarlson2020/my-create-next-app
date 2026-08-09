@@ -91,6 +91,67 @@ api/src/routes/
 - **Validate inputs up front** and return `400` with `{ error: "<field> is required" }` for missing/invalid params or body fields.
 - **Status codes:** `200` success, `201` resource created, `400` bad request, `401` unauthenticated, `403` forbidden, `404` not found, `500` server error.
 
+## How the API is Served
+
+The API is **not** exposed on a public port. Apache terminates TLS for the site
+and proxies `/api/` through to the Express server over the loopback interface,
+so every browser call is same-origin:
+
+```
+https://<domain>/api/contact  ->  Apache  ->  127.0.0.1:<prodPort>/contact
+```
+
+That is why `api/src/server.ts` binds `IS_PROD ? "127.0.0.1" : "0.0.0.0"`,
+speaks plain HTTP, and reads no certificate: nothing outside the box can reach
+the port, and there is no router port forward for it. Only Apache reads
+`~/cert/*`. An absolute `https://<domain>:<port>` — what this used to be — is
+unreachable from any network that allows only 80/443, such as corporate wifi,
+guest wifi, and some mobile carriers, and it fails there silently.
+
+The matching block lives in `~/sites-enabled/<domain>.com.conf` inside its
+`:443` VirtualHost. `ras.sh <site> <api-port>` generates it for a new site:
+
+```apache
+ProxyPreserveHost On
+RequestHeader set X-Forwarded-Proto https
+ProxyPass        /api/ http://127.0.0.1:<prodPort>/
+ProxyPassReverse /api/ http://127.0.0.1:<prodPort>/
+```
+
+**The public URL is always `/api/...`** — that is what the route tables above
+describe. How Express *mounts* those routes is a separate choice, and the vhost
+must mirror it:
+
+- **Strip** (the default, and what the template does): Express mounts bare
+  paths (`app.post("/contact", …)`), and the trailing slashes above strip the
+  prefix, so a request for `/api/contact` arrives as `/contact`.
+- **Pass through**: Express mounts under `/api` (`app.post("/api/contact", …)`)
+  and the upstream must end in `/api/` as well —
+  `http://127.0.0.1:<prodPort>/api/`.
+
+Mismatch either way and every route 404s.
+
+Three consequences to know before adding anything:
+
+- **`API_URL` is relative in production** — `"/api"`, or `""` in a repo whose
+  routes are already mounted under `/api`. Anything building a URL that a
+  *third party* will fetch (a Stripe `success_url`, a link in an outgoing
+  email) must use **`API_URL_ABSOLUTE`** instead. Stripe rejects a relative
+  `success_url` outright with `url_invalid`.
+- **CORS applies only off production.** Same-origin requests never trigger it,
+  so the middleware is wrapped in `if (!IS_PROD)`. Dev, staging, and the e2e
+  suite run the frontend and the API on different ports and still need it.
+- **`express-session` with a `secure` cookie needs `app.set("trust proxy", 1)`.**
+  The request reaches Express over plain HTTP, so `req.secure` is false and
+  express-session silently refuses to set the cookie — logins fail with nothing
+  in any log. The vhost sets `X-Forwarded-Proto` for exactly this.
+
+The API's stdout and stderr land in `~/logs/<PRODUCTION_WEBSITE>.log`, appended
+across deploys and stamped with the local time; each restart begins at a
+`===== deploy … =====` marker. It appends rather than truncates because
+redeploying is the first thing you reach for while investigating an error, and
+truncating destroyed the trace you were about to read.
+
 ## Environment Variables
 
 Secrets live in `.env` at the repository root (gitignored). Only secrets shared
