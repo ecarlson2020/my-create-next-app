@@ -9,7 +9,7 @@ import cors from "cors";
 import { initDB } from "./utils/coreUtils";
 // end points
 import { testRoute } from "./routes/test";
-import { IS_PROD, PORT } from "@shared/constants/sharedConstants";
+import { IS_DEV, PORT } from "@shared/constants/sharedConstants";
 
 /**
  *
@@ -25,11 +25,11 @@ const app = express();
 initDB();
 
 app.use(express.json());
-// Production is same-origin: Apache proxies /api/ to this server on the site's
-// own origin, so the browser never applies CORS and these headers would go
-// unused. Dev and staging run the frontend and the API on different ports and
-// still need them, as does the e2e suite.
-if (!IS_PROD) {
+// Production and staging are both same-origin: Apache proxies /api/ to this
+// server on the site's own origin, so the browser never applies CORS and these
+// headers would go unused. Only dev runs the frontend and the API on different
+// ports and still needs them, as does the e2e suite.
+if (IS_DEV) {
   app.use(cors());
 }
 
@@ -58,7 +58,7 @@ app.get("/test/list", testRoute);
 // before any express-session with a `secure` cookie (otherwise req.secure is
 // false behind the proxy and the session cookie is silently never set), and
 // API_URL_ABSOLUTE for anything building a URL a third party will fetch.
-const host = IS_PROD ? "127.0.0.1" : "0.0.0.0";
+const host = IS_DEV ? "0.0.0.0" : "127.0.0.1";
 const httpServer = http.createServer(app);
 httpServer.listen(PORT, host, () => {
   // eslint-disable-next-line no-console

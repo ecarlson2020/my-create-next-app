@@ -16,21 +16,12 @@ export const WEB_URL = IS_PROD
   : isStaging
     ? `https://${stagingDomain}.com`
     : "http://localhost:5001";
-// Production talks to the API on its own origin: Apache proxies /api/ through
-// to the Express server on 127.0.0.1:<prodPort> (see the vhost in
-// ~/sites-enabled), which is why the API binds loopback and speaks plain HTTP.
-// An absolute https://host:port would be unreachable from any network that
-// allows only 80/443 — corporate wifi, guest wifi, some mobile carriers — and
-// would fail silently there.
-//
-// Staging and dev keep an explicit host:port: neither has a proxy in front of
-// it, so a relative path would resolve against the page origin and 404.
-export const API_URL = IS_PROD
-  ? "/api"
-  : isStaging
-    ? `https://${stagingDomain}.com:${PORT}`
-    : `http://localhost:${PORT}`;
+// Staging is proxied exactly like production: Apache serves /api/ on the
+// staging vhost too (~/sites-enabled/testN.evrocamedia.com.conf), so both
+// use the relative path on their own origin. Only dev is unproxied, which
+// is why it alone needs an explicit host:port.
+export const API_URL = IS_DEV ? `http://localhost:${PORT}` : "/api";
 // Absolute form, for server-side callers that cannot use a relative path —
-// Stripe, for one, rejects a relative success_url with `url_invalid`. Only
-// production differs.
-export const API_URL_ABSOLUTE = IS_PROD ? `${WEB_URL}/api` : API_URL;
+// Stripe rejects a relative success_url with `url_invalid`. Dev's API_URL is
+// already absolute, so only the proxied environments differ.
+export const API_URL_ABSOLUTE = IS_DEV ? API_URL : `${WEB_URL}/api`;
