@@ -103,10 +103,10 @@ https://<domain>/api/contact  ->  Apache  ->  127.0.0.1:<prodPort>/contact
 
 That is why `api/src/server.ts` binds `IS_PROD ? "127.0.0.1" : "0.0.0.0"`,
 speaks plain HTTP, and reads no certificate: nothing outside the box can reach
-the port, and there is no router port forward for it. Only Apache reads
-`~/cert/*`. An absolute `https://<domain>:<port>` — what this used to be — is
-unreachable from any network that allows only 80/443, such as corporate wifi,
-guest wifi, and some mobile carriers, and it fails there silently.
+the port. Only Apache reads `~/cert/*`. An absolute `https://<domain>:<port>`
+— what this used to be — is unreachable from any network that allows only
+80/443, such as corporate wifi, guest wifi, and some mobile carriers, and it
+fails there silently.
 
 The matching block lives in `~/sites-enabled/<domain>.com.conf` inside its
 `:443` VirtualHost. `ras.sh <site> <api-port>` generates it for a new site:

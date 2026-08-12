@@ -14,8 +14,8 @@ import { IS_DEV, PORT } from "@shared/constants/sharedConstants";
 /**
  *
  * IMPORTANT: this server is reached at https://<domain>/api/, proxied by
- * Apache. It is NOT exposed directly, so no router port forwarding is needed
- * — see the listen call at the bottom of this file for the whole story.
+ * Apache. It is NOT exposed directly — see the listen call at the bottom of
+ * this file for the whole story.
  *
  */
 
