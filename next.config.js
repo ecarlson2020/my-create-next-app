@@ -1,5 +1,3 @@
-const ESLintPlugin = require("eslint-webpack-plugin");
-
 // MY_ENV is inlined into the bundle by the `env` block below, so whatever it is
 // at build time is frozen into the static export. Unset, `sharedConstants`
 // derives IS_DEV === true and the deployed site would point at localhost URLs.
@@ -30,21 +28,4 @@ module.exports = {
     MY_ENV: process.env.MY_ENV,
   },
   transpilePackages: ["@mui/x-data-grid", "@mui/x-date-pickers"],
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      config.plugins.push(
-        new ESLintPlugin({
-          files: "src/**/*.(js|jsx|ts|tsx)",
-          extensions: [".js", ".jsx", ".ts", ".tsx"],
-          overrideConfigFile: ".eslintrc.js",
-          emitError: true,
-          emitWarning: true,
-          failOnError: false,
-          failOnWarning: false,
-        }),
-      );
-    }
-    // Important: return the modified config
-    return config;
-  },
 };
