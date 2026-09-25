@@ -10,6 +10,7 @@ import { initDB } from "./utils/coreUtils";
 // end points
 import { testRoute } from "./routes/test";
 import { IS_DEV, PORT } from "@shared/constants/sharedConstants";
+import { errorHandler } from "./utils/errorHandler";
 
 /**
  *
@@ -35,6 +36,10 @@ if (IS_DEV) {
 
 // endpoints
 app.get("/test/list", testRoute);
+
+// Must come after every route: Express only passes an error to handlers
+// registered after the one that raised it. See utils/errorHandler.ts.
+app.use(errorHandler);
 
 // Apache terminates TLS and proxies /api/ here over loopback, so this server
 // speaks plain HTTP and never reads a certificate. Production binds 127.0.0.1

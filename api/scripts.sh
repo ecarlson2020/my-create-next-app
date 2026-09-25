@@ -18,7 +18,10 @@ function staging {
 
 function prod {
   npm run build
-  MY_ENV=production node ./dist/api/src/server.js
+  # NODE_ENV goes on this line only. Exported for the whole function it would
+  # reach the `npm i` inside build, which then skips devDependencies (tsc).
+  # Express needs it to keep stack traces out of its error responses.
+  MY_ENV=production NODE_ENV=production node ./dist/api/src/server.js
 }
 
 function build {
