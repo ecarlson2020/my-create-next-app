@@ -77,13 +77,28 @@ function api {
   npm run dev
 }
 
+# container_name is global across compose projects, so a mysql_dev started
+# from another repo blocks this one. Remove it; its data stays in that repo's
+# volume and comes back the next time `npm run db` runs there.
+function free-db-containers {
+  for c in mysql_dev phpmyadmin_dev; do
+    owner=$(docker inspect -f '{{index .Config.Labels "com.docker.compose.project"}}' "$c" 2>/dev/null || true)
+    if [ -n "$owner" ] && [ "$owner" != "$(basename "$PWD")" ]; then
+      echo "Removing $c (started from $owner)"
+      docker rm -f "$c" >/dev/null
+    fi
+  done
+}
+
 function db {
+  free-db-containers
   docker-compose up -d mysql
   docker-compose up -d phpmyadmin
 }
 
-# Truncate this app's dev tables. All sites share the `evroca_db_dev` dev
-# database with per-app table prefixes, so list only this project's tables here.
+# Truncate this app's dev tables. Each repo has its own dev database volume, but
+# tables keep a per-app prefix because prod shares one `evroca_db` across sites;
+# list only this project's tables here.
 function db-truncate {
   docker exec -i mysql_dev mariadb -uroot -proot_password evroca_db_dev <<-EOSQL
     -- TRUNCATE TABLE <prefix>_example;
