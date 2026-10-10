@@ -66,8 +66,8 @@ function e2e {
 }
 
 function ui {
-  validate-env development
   npm i
+  validate-env development
   MY_ENV=development next dev -p 5001
 }
 
