@@ -1,10 +1,10 @@
 -- Optional: Seed data for development
 -- This file runs after migrations
 
--- Example: Insert a test user
+-- Example: Insert a test row
 -- Uncomment to use:
--- INSERT INTO users (email, username, password_hash, first_name, last_name)
+-- INSERT INTO test_table (name)
 -- VALUES
---   ('test@example.com', 'testuser', '$2a$10$...', 'Test', 'User');
+--   ('Test row');
 
 -- Add your seed data here

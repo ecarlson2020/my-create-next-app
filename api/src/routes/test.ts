@@ -3,12 +3,9 @@ import { RowDataPacket } from "mysql2";
 // utils
 import { sql } from "../utils/coreUtils";
 
-interface User extends RowDataPacket {
+interface TestRow extends RowDataPacket {
   id: number;
-  email: string;
-  username: string;
-  first_name: string;
-  last_name: string;
+  name: string;
   created_at: Date;
 }
 
@@ -17,9 +14,9 @@ export const testRoute = async (
   res: Response,
 ): Promise<void> => {
   try {
-    // Test query to get all users from the database
-    const rows = await sql<User>(
-      `SELECT id, email, username, first_name, last_name, created_at FROM users`,
+    // Test query to get all rows from the example test_table
+    const rows = await sql<TestRow>(
+      `SELECT id, name, created_at FROM test_table`,
       [],
     );
 

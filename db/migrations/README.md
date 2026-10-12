@@ -32,4 +32,4 @@ docker exec -i mysql_container mysql -u root -p database_name < db/migrations/YO
 
 ## Example
 
-See `001_create_users_table.sql` for an example migration.
+See `001_create_test_table.sql` for an example migration.
