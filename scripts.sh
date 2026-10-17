@@ -19,7 +19,20 @@ function lint {
   MY_ENV=development next lint --max-warnings 0 $lint_dirs
 }
 
+# `npm run fix -- --skip-e2e` runs everything except the Playwright suite.
+# Without the `--`, npm keeps the flag for itself and exposes it as
+# npm_config_skip_e2e instead of passing it through, so honour that form too.
+# Options are parsed up front so a typo fails now rather than after the build.
 function fix {
+  skip_e2e=false
+  [ -n "${npm_config_skip_e2e:-}" ] && skip_e2e=true
+  for arg in "$@"; do
+    case "$arg" in
+      --skip-e2e) skip_e2e=true ;;
+      *) echo "Error: unknown fix option '$arg'" >&2; exit 1 ;;
+    esac
+  done
+
   npm run pretty-fix
   MY_ENV=development next lint --fix $lint_dirs
   npx tsc
@@ -38,7 +51,9 @@ function fix {
   # Read the model via tr rather than grep: /proc/device-tree/model ends in a
   # NUL byte, which makes grep treat it as binary and report no match.
   pi_model=$( { tr -d '\0' < /proc/device-tree/model; } 2>/dev/null || true)
-  if [ "${FORCE_E2E:-}" != "1" ] && [[ $pi_model == *"Raspberry Pi"* ]]; then
+  if $skip_e2e; then
+    echo "Skipping e2e: --skip-e2e passed."
+  elif [ "${FORCE_E2E:-}" != "1" ] && [[ $pi_model == *"Raspberry Pi"* ]]; then
     echo "Skipping e2e: $pi_model detected (production web server)."
     echo "Run e2e on a dev machine, or use FORCE_E2E=1 npm run fix to override."
   else

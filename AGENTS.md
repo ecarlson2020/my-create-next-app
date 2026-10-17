@@ -247,6 +247,12 @@ override deliberately with:
 FORCE_E2E=1 npm run fix
 ```
 
+To skip e2e on any machine (e.g. a quick format/lint/type-check pass), run:
+
+```bash
+npm run fix -- --skip-e2e
+```
+
 Calling `npm run e2e` directly is never skipped — the guard lives only in `fix`.
 So a change made on the Pi has *not* been e2e-tested unless you say so
 explicitly; verify it somewhere else before treating it as covered.
