@@ -19,18 +19,74 @@
 - **Data Transformation Layer:** Transform complex database results into frontend-friendly formats within the API layer to keep the client-side logic lean and focused on presentation.
 - **Colocated Styles with Shared Extraction:** All styles use MUI `sx` props (no CSS modules). Style objects are plain inferred objects (no `SxProps<Theme>` annotation) exported from `.styles.ts` files. Three rules govern placement: (1) styles used by exactly one component live in `ComponentName.styles.ts` alongside that component; (2) styles used by 2+ components in the same folder live in `shared.styles.ts` at that folder level — no component may import from another component's `.styles.ts`, only from its own and `shared.styles.ts`; (3) if a component only uses shared styles and has none of its own, no dedicated `.styles.ts` is created for it.
 
-## Component Structure
+## Directory Structure
 
-The React components are structured in a modular and hierarchical way within `src/components/`.
+This layout is required, not a suggestion. Directories are nested, never
+flat: a directory holding dozens of loose files is a bug to fix, not a style.
+When adding a file, put it where the rules below say, and when a directory
+starts to fill up, split it.
 
-### Organization Principles
+### Components
 
-- **Directory-Based Components:** When a component grows beyond a single file or has sub-components used only within it, it's organized as a directory.
-  - Example: `src/components/About/` contains `About.tsx` (the main component) along with `AboutHeroSection.tsx`, `AboutUsSection.tsx`, and `PartnersSection.tsx`.
-- **Main Component File:** The primary entry point for a directory-based component usually has the same name as the directory (e.g., `About.tsx` inside `src/components/About/`).
-- **Sub-Components:** Small, internal sub-components that are not needed elsewhere are kept in the same directory as the main component.
-- **Common Components:** Shared components used across multiple features are located in `src/components/common/`. These also follow the directory-based structure when complex (e.g., `src/components/common/BookingPage/`).
-- **Page-Component Separation:** Files in `src/pages/` are thin wrappers responsible for routing, SEO metadata, and rendering a single top-level component from `src/components/`.
+The tree of directories under `src/components/` mirrors the tree of
+components on screen.
+
+- **A component lives in the directory of the component that renders it.**
+  `Home` renders `MainContent`, which renders `Cart`, which renders
+  `CartRow`, so the row is `Home/MainContent/Cart/CartRow.tsx`. Never drop a
+  component at the top of `src/components/` or of a feature because it is
+  quicker.
+- **A component that owns anything is a directory named for it.** Once it
+  renders components of its own, or has its own hook or helper, it becomes
+  `Name/Name.tsx` with its `Name.styles.ts`, and what it owns sits inside:
+  `About/` holds `About.tsx`, `AboutHeroSection.tsx` and
+  `PartnersSection.tsx`. A leaf (a component and at most its own
+  `.styles.ts`) is a file beside its parent's, not a directory of its own.
+- **Something shared lives in the nearest directory that holds all its
+  users.** A hook used by `Cart` and `CartRow` sits in `Cart/`; a dialog
+  opened from two of `MainContent`'s branches sits in `MainContent/`.
+- **A directory's shared components go in a `common/` folder inside it, its
+  hooks in a `hooks/` folder** once there are more than two or three of
+  either. `src/components/common/` is the same rule at the top: components
+  used across features (e.g. `src/components/common/BookingPage/`).
+- **Pages are thin.** Files in `src/pages/` handle routing, SEO metadata and
+  rendering a single top-level component from `src/components/`.
+
+A representative slice:
+
+```
+src/components/
+  common/                    used across features
+  Home/
+    Home.tsx
+    Home.styles.ts
+    shared.styles.ts         styles two or more of Home's components use
+    common/                  components several of Home's branches use
+    hooks/                   Home's hooks, once there are several
+    TopMenu/
+      TopMenu.tsx
+      SearchBar.tsx          a leaf: just the component and its styles
+      AccountDrawer/
+        AccountDrawer.tsx
+        AccountRow.tsx
+    MainContent/
+      MainContent.tsx
+      Cart/
+        Cart.tsx
+        CartRow.tsx
+        useCartTotals.ts     Cart's and CartRow's
+```
+
+Moving a component is an import rewrite, not a reason to leave it where it
+is. Imports within a component's own subtree are relative (`./`, `../`);
+one that would climb three or more levels uses the `@/` alias instead.
+
+### Everything else under `src/`
+
+`src/hooks/`, `src/utils/`, `src/config/` and `shared/` follow the same
+idea: group by feature (`src/hooks/queries/cart/`) rather than leaving one
+flat folder, and a family of two or more files named `<family>.<part>.ts`
+gets a directory named for the family, which any new member joins.
 
 ## API Endpoints
 
@@ -46,6 +102,7 @@ This layout is required, not a suggestion. Follow it for every new endpoint.
 - **Singular vs plural separates item from collection**, as sibling directories. `admin/coupons/get.ts` serves the list (`GET /api/admin/coupons`); `admin/coupon/create.ts` and `admin/coupon/delete.ts` serve the single-resource writes. Same split for `appointments/` vs `appointment/` and `inquiries/` vs `inquiry/`.
 - **The export name is the file path flattened to camelCase.** `admin/coupon/create.ts` exports `adminCouponCreate`; `gallery/picnic/get.ts` exports `galleryPicnicGet`. Always a named `export const` — no default exports. A handler's name should tell you its file and its URL without looking either up.
 - **Helpers sit beside the routes they serve, named for their feature:** `<feature>.utils.ts`, `<feature>.types.ts`, `<feature>.middleware.ts` — e.g. `booking/booking.utils.ts`, `admin/admin.middleware.ts`. Split further when one file gets broad: `checkout/success/` holds a single route (`get.ts`) beside `checkoutSuccess.database.ts`, `checkoutSuccess.email.ts`, `checkoutSuccess.types.ts`, and `checkoutSuccess.utils.ts`. Helper files may export as many symbols as they need — the one-per-file rule applies to route handlers only.
+- **Group a family of helpers into a directory of its own** once a route directory fills with them, even when the family serves no route, e.g. `<feature>/<family>/` holding `<family>.utils.ts` and `<family>.database.ts`. The files take the directory's name as their prefix. A helper every feature uses goes in `api/src/utils/` instead.
 - **Central registration in `server.ts`:** Every route is wired up in `api/src/server.ts` (imported at the top, registered with `app.<method>(path, ...middleware, handler)`). Keep the registrations grouped with the existing comment banners (`// API endpoints`, `// Admin endpoints`).
 - **Protected routes use `requireAuth`:** Admin endpoints take the session-based `requireAuth` middleware before the handler (e.g. `app.get("/api/admin/coupons", requireAuth, adminCouponsGet)`).
 - **Path naming:** All routes are prefixed with `/api`. Use `/api/<feature>/<action>` and `:id` params (e.g. `/api/inquiry/glamping`, `/api/admin/appointment/:id`). The HTTP verb conveys intent: `GET` to read, `POST` to create, `PATCH`/`PUT` to update, `DELETE` to remove.
