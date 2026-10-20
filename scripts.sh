@@ -270,18 +270,8 @@ function deploy-ui {
   validate-env production
   require_pi
   npm run build-prod
-  # Images uploaded on the live site (written straight into the webapps dir by
-  # the API) aren't in the repo, so `out` doesn't have them and the swap below
-  # would drop them. Pull them into public/images so `git status` lists them
-  # for committing, and merge them into this build so the site keeps them. No
-  # second deploy-ui is needed: just commit/push the new images afterwards.
-  # This runs after the build, right before the swap, so nothing uploaded
-  # during the (slow) build is missed.
   npm run grab-images-prod
   website_location="/home/ecarlson10/webapps/$PRODUCTION_WEBSITE"
-  if [ -d "$website_location/images" ]; then
-    rsync -aE "$website_location/images/" out/images/
-  fi
   rm -rf "$website_location"
   mv out "$website_location"
   git status
