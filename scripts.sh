@@ -282,14 +282,8 @@ function deploy-ui {
   if [ -d "$website_location/images" ]; then
     rsync -aE "$website_location/images/" out/images/
   fi
-  # Sync into place rather than rm -rf + mv: the site never disappears
-  # mid-deploy, and the API's upload dir is never missing (an upload landing in
-  # that gap would recreate it, and `mv` would then nest `out` inside it).
-  # --delete-after keeps the old build's files until the new ones are all in.
-  # images/ is protected from --delete so an upload made after the merge above
-  # isn't removed; the next deploy's grab picks it up.
-  rsync -a --delete-after --filter='P /images/**' out/ "$website_location/"
-  rm -rf out
+  rm -rf "$website_location"
+  mv out "$website_location"
   git status
 }
 
