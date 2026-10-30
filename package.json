@@ -27,6 +27,7 @@
   "devDependencies": {
     "@next/env": "^15.5.4",
     "@playwright/test": "^1.59.1",
+    "@types/node": "20.17.6",
     "@types/react": "19.2.2",
     "@typescript-eslint/eslint-plugin": "^8.47.0",
     "@typescript-eslint/parser": "^8.47.0",
@@ -35,11 +36,8 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-prettier": "^5.5.4",
+    "knip": "^6.44.0",
     "prettier": "^3.6.2",
-    "typescript": "^5.9.3",
-    "unimported": "^1.31.1"
-  },
-  "overrides": {
-    "simple-git": "^4.0.2"
+    "typescript": "^5.9.3"
   }
 }

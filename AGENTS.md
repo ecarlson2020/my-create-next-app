@@ -241,7 +241,7 @@ Three pieces enforce this, and all three ship with the template:
    const gmailPassword = IS_ETHEREAL ? null : requireEnv("GMAIL_PASSWORD");
    ```
 
-   This file is listed in `api/.unimportedrc.json` under `ignoreUnimported`
+   This file is listed in `knip.json` under the `api` workspace's `ignoreFiles`
    because a fresh project has no secrets yet. Remove that entry once something
    imports it.
 
@@ -322,7 +322,9 @@ After making any code modifications, run:
 npm run fix
 ```
 
-This ensures all code is properly formatted and linted according to the project's standards. It runs prettier, `next lint --fix`, `tsc`, `unimported`, the API lint/test/build, and then the e2e suite — except on the Pi, where e2e is skipped (see "E2E Testing" above).
+This ensures all code is properly formatted and linted according to the project's standards. It runs prettier, `next lint --fix`, `tsc`, `knip`, the API lint/test/build, and then the e2e suite — except on the Pi, where e2e is skipped (see "E2E Testing" above).
+
+`knip` checks the site and `api/` in one run (they are the two workspaces in `knip.json`) and fails on unused files, unused or unlisted dependencies, and unresolved imports. Unused exports and types are reported as warnings only. It cannot see what `scripts.sh` runs, so a dependency used only from there belongs in that workspace's `ignoreDependencies`, and a script run only from there belongs in its `entry`.
 
 ## Code Reviews
 

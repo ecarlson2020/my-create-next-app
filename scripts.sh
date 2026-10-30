@@ -36,10 +36,10 @@ function fix {
   npm run pretty-fix
   MY_ENV=development next lint --fix $lint_dirs
   npx tsc
-  npx unimported
+  # One run covers both the site and api/ — see the workspaces in knip.json.
+  npx knip
   cd api
   npm run lint
-  npx unimported
   npm run test
   npm run build
 

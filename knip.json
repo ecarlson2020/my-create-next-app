@@ -1,0 +1,29 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "workspaces": {
+    ".": {
+      "entry": ["scripts/*.mjs"],
+      "ignoreDependencies": [
+        "@typescript-eslint/eslint-plugin",
+        "@typescript-eslint/parser",
+        "eslint-config-next",
+        "eslint-config-prettier",
+        "eslint-plugin-prettier",
+        "prettier"
+      ]
+    },
+    "api": {
+      "entry": ["src/server.ts", "src/testServer.ts"],
+      "ignoreFiles": ["src/utils/requireEnv.ts"],
+      "ignoreDependencies": ["tsc-alias", "tsx"]
+    }
+  },
+  "rules": {
+    "exports": "warn",
+    "types": "warn",
+    "nsExports": "warn",
+    "nsTypes": "warn",
+    "enumMembers": "warn",
+    "duplicates": "warn"
+  }
+}
