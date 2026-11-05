@@ -173,4 +173,7 @@ same way. So:
 
 ## Code Reviews
 
-List findings as issues grouped by severity.
+When reviewing code, hunting for bugs, or looking for refactoring opportunities,
+output the findings as a list of issues categorized by severity. When applicable,
+include a short summary of the fix and steps to reproduce the issue alongside
+each respective issue.
