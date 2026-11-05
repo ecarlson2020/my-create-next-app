@@ -9,6 +9,7 @@ const dbPassword = IS_DEV
 // Database connection pool
 let pool: Pool | null = null;
 
+/** @public template database helper */
 export const initDB = (): Pool => {
   if (pool) {
     return pool;
@@ -52,6 +53,7 @@ export const initDB = (): Pool => {
   return pool;
 };
 
+/** @public template database helper */
 export const sql = async <T extends RowDataPacket>(
   query: string,
   fields?: unknown[],

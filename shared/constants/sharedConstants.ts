@@ -10,7 +10,9 @@ const isStaging = process.env.MY_ENV === "staging";
 export const IS_PROD = process.env.MY_ENV === "production";
 export const IS_DEV = !IS_PROD && !isStaging;
 export const PORT = IS_PROD ? prodPort : devPort;
+/** @public template constant */
 export const DOMAIN = IS_PROD ? productionDomain : stagingDomain;
+/** @public template constant */
 export const WEB_URL = IS_PROD
   ? `https://${productionDomain}.com`
   : isStaging
@@ -20,8 +22,10 @@ export const WEB_URL = IS_PROD
 // staging vhost too (~/sites-enabled/testN.evrocamedia.com.conf), so both
 // use the relative path on their own origin. Only dev is unproxied, which
 // is why it alone needs an explicit host:port.
+/** @public template constant */
 export const API_URL = IS_DEV ? `http://localhost:${PORT}` : "/api";
 // Absolute form, for server-side callers that cannot use a relative path —
 // Stripe rejects a relative success_url with `url_invalid`. Dev's API_URL is
 // already absolute, so only the proxied environments differ.
+/** @public template constant */
 export const API_URL_ABSOLUTE = IS_DEV ? API_URL : `${WEB_URL}/api`;
